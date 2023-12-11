@@ -1,0 +1,17 @@
+digraph "threshold_gui_support.set_Tk_var"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="threshold_gui_support.set\l_Tk_var",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="threshold_gui.create\l_Toplevel1",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacethreshold__gui.html#aa00562df268a354142e1bfa29960509b",tooltip=" "];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="threshold_gui.vp_start_gui",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacethreshold__gui.html#a1fd22e85c7774dc9710c45a1e5093183",tooltip=" "];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="threshold_gui_support.destroy\l_window",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacethreshold__gui__support.html#a47d782b7662e19472e683be95e274831",tooltip=" "];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="threshold_gui.ToolTip.hide",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classthreshold__gui_1_1_tool_tip.html#aafe9821676b74a21e23021a7ca931f01",tooltip=" "];
+}

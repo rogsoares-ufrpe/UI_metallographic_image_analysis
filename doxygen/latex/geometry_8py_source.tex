@@ -1,0 +1,155 @@
+\doxysection{geometry.\+py}
+\hypertarget{geometry_8py_source}{}\label{geometry_8py_source}\index{source/geometry.py@{source/geometry.py}}
+\mbox{\hyperlink{geometry_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00001}\mbox{\hyperlink{namespacegeometry}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00003}00003\ \textcolor{stringliteral}{UNIVERSIDADE\ FEDERAL\ RURAL\ DE\ PERNAMBUCO\ -\/\ UFRPE}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00004}00004\ \textcolor{stringliteral}{UNIDADE\ ACADÊMICA\ DO\ CABO\ DE\ SANTO\ AGOSTINHO\ -\/\ UACSA}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00005}00005\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00006}00006\ \textcolor{stringliteral}{@author(s):}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ \ \ Rogério\ Soares\ (rogerio.soaress@ufrpe.br)}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00009}00009\ \textcolor{stringliteral}{Created\ on\ Fri\ Apr\ 17\ 22:24:12\ 2020}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00010}00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00012}00012\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00013}00013\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00016}\mbox{\hyperlink{namespacegeometry_a3810f7a6ff126e4f50d2b797f4cb4138}{00016}}\ yellow\ =\ (0,\ 255,\ 255)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00017}\mbox{\hyperlink{namespacegeometry_aaebd3123accff100cab426aa3adf8ab0}{00017}}\ blue\ =\ (255,\ 0,\ 0)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00018}\mbox{\hyperlink{namespacegeometry_a4e28443b33ca697c2085ab28333830ca}{00018}}\ black\ =\ (0,\ 0,\ 0)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00019}00019\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00021}\mbox{\hyperlink{namespacegeometry_a63586790039014d66a1dac8a443cdba6}{00021}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_a63586790039014d66a1dac8a443cdba6}{circunference\_conttour\_test}}(cnt,\ center,\ radius):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00022}00022\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Returns\ -\/1,\ 0\ or\ 1\ if\ contour\ is\ outside,\ intercepted\ or\ inside\ circunference"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00023}00023\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00024}00024\ \ \ \ \ check\ =\ np.array([\textcolor{keyword}{False},\ \textcolor{keyword}{False},\ \textcolor{keyword}{False},\ \textcolor{keyword}{False}])}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00025}00025\ \ \ \ \ \textcolor{comment}{\#\ Let\ (x,y)\ be\ the\ top-\/left\ coordinate\ of\ the\ rectangle\ and\ (w,h)\ be\ its\ width\ and\ height.}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00026}00026\ \ \ \ \ x,\ y,\ w,\ h\ =\ cv2.boundingRect(cnt)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00027}00027\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00028}00028\ \ \ \ \ bx1\_p1\ =\ (x,\ y)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00029}00029\ \ \ \ \ bx1\_p2\ =\ (x+w,\ y+h)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00030}00030\ \ \ \ \ d1\ =\ \mbox{\hyperlink{namespacegeometry_a5a90328c3de3b971d35f5de7aeef63ab}{dist}}(bx1\_p1,\ center)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00031}00031\ \ \ \ \ d2\ =\ \mbox{\hyperlink{namespacegeometry_a5a90328c3de3b971d35f5de7aeef63ab}{dist}}(bx1\_p2,\ center)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00032}00032\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00033}00033\ \ \ \ \ bx2\_p1\ =\ (x+w,\ y)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00034}00034\ \ \ \ \ bx2\_p2\ =\ (x,\ y+h)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00035}00035\ \ \ \ \ d3\ =\ \mbox{\hyperlink{namespacegeometry_a5a90328c3de3b971d35f5de7aeef63ab}{dist}}(bx2\_p1,\ center)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00036}00036\ \ \ \ \ d4\ =\ \mbox{\hyperlink{namespacegeometry_a5a90328c3de3b971d35f5de7aeef63ab}{dist}}(bx2\_p2,\ center)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00038}00038\ \ \ \ \ \textcolor{comment}{\#\ Box\ 1:\ top\ left\ corner\ and\ botton\ right\ corner\ are\ outside\ and\ inside\ circle,\ respectively.}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00039}00039\ \ \ \ \ check[0]\ =\ \ d1\ >\ radius\ \textcolor{keywordflow}{and}\ \ d2\ <\ radius\ \textcolor{keywordflow}{or}\ d1\ <\ radius\ \textcolor{keywordflow}{and}\ d2\ >\ radius}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00041}00041\ \ \ \ \ \textcolor{comment}{\#\ Box\ 2:\ top\ right\ corner\ and\ botton\ left\ corner\ are\ outside\ and\ inside\ circle,\ respectively.}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ check[0]:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ check[1]\ =\ \ d1\ >\ radius\ and\ \ d2\ <\ radius\ or\ d1\ <\ radius\ and\ \ d2\ >\ radius}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ check[1]\ =\ \ d3\ >\ radius\ \textcolor{keywordflow}{and}\ \ d4\ <\ radius\ \textcolor{keywordflow}{or}\ d3\ <\ radius\ \textcolor{keywordflow}{and}\ \ d4\ >\ radius}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00046}00046\ \ \ \ \ \textcolor{comment}{\#\ check\ if\ one\ of\ the\ box\ situations\ is\ true\ (grain\ is\ intercepted)}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{if}\ check[0]\ \textcolor{keywordflow}{or}\ check[1]\ \textcolor{keywordflow}{and}\ \mbox{\hyperlink{namespacegeometry_ab11d035705d1147c5b2c42d65eb1be78}{line\_segment\_intercept}}(cnt,\ center,\ radius):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ bool\_array\ =\ np.array([d1\ <\ radius,\ d2\ <\ radius,\ d3\ <\ radius,\ d4\ <\ radius])}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.count\_nonzero(bool\_array)\ >=\ 3\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ \mbox{\hyperlink{namespacegeometry_ab11d035705d1147c5b2c42d65eb1be78}{line\_segment\_intercept}}(cnt,\ center,\ radius):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00057}\mbox{\hyperlink{namespacegeometry_ade53d777c0fa5cc3c1fbb2f15bcf5034}{00057}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_ade53d777c0fa5cc3c1fbb2f15bcf5034}{draw\_circle2}}(circunference,\ window,\ offset=True):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Draws\ a\ circle\ over\ Canvas,\ not\ over\ image."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ radius\ =\ circunference[0]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ center\ =\ circunference[1]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ delta\ =\ 55}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ offset:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ delta=0}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ x0\ =\ center[0]\ -\/\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ y0\ =\ center[1]\ -\/\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ x1\ =\ center[0]\ +\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ y1\ =\ center[1]\ +\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ window.Canvas1.create\_oval(x0,\ y0,\ x1,\ y1,\ width=2,\ outline=\textcolor{stringliteral}{"{}red"{}})}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00071}\mbox{\hyperlink{namespacegeometry_a0dfbd6536ab171c06d3a938b4203b093}{00071}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_a0dfbd6536ab171c06d3a938b4203b093}{draw\_circle}}(center,\ radius,\ window,\ offset=True):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Draws\ a\ circle\ over\ Canvas,\ not\ over\ image."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ delta\ =\ 55}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ offset:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ delta=0}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ x0\ =\ center[0]\ -\/\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ y0\ =\ center[1]\ -\/\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ x1\ =\ center[0]\ +\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ y1\ =\ center[1]\ +\ radius\ +\ delta}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ window.Canvas1.create\_oval(x0,\ y0,\ x1,\ y1,\ width=2,\ outline=\textcolor{stringliteral}{"{}red"{}})}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00083}\mbox{\hyperlink{namespacegeometry_ab11d035705d1147c5b2c42d65eb1be78}{00083}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_ab11d035705d1147c5b2c42d65eb1be78}{line\_segment\_intercept}}(cnt,\ center,\ radius):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ isIntercept\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ length\ =\ len(cnt)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pos\ \textcolor{keywordflow}{in}\ range(length-\/1):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ pt1\ =\ cnt[pos][0]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ pt2\ =\ cnt[pos+1][0]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ isIntercept\ =\ \mbox{\hyperlink{namespacegeometry_a6c125e8b553b16534810148d2f48fd8d}{line\_circle\_intercept}}(pt1,\ pt2,\ center,\ radius)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isIntercept:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ isIntercept}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00094}00094\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00095}00095\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00096}\mbox{\hyperlink{namespacegeometry_a6c125e8b553b16534810148d2f48fd8d}{00096}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_a6c125e8b553b16534810148d2f48fd8d}{line\_circle\_intercept}}(pt1,\ pt2,\ center,\ radius):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00097}00097\ \ \ \ \ isIntercept\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00098}00098\ \ \ \ \ x0\ =\ center[0]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00099}00099\ \ \ \ \ y0\ =\ center[1]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00100}00100\ \ \ \ \ R\ =\ radius}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00101}00101\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00102}00102\ \ \ \ \ x1\ =\ pt1[0]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00103}00103\ \ \ \ \ y1\ =\ pt1[1]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00104}00104\ \ \ \ \ x2\ =\ pt2[0]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00105}00105\ \ \ \ \ y2\ =\ pt2[1]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00106}00106\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00107}00107\ \ \ \ \ a\ =\ x1\ -\/\ x2}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00108}00108\ \ \ \ \ b\ =\ x2\ -\/\ x0}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00109}00109\ \ \ \ \ c\ =\ y1\ -\/\ y2}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00110}00110\ \ \ \ \ d\ =\ y2\ -\/\ y0}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00111}00111\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00112}00112\ \ \ \ \ A\ =\ a**2\ +\ c**2}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00113}00113\ \ \ \ \ B\ =\ 2*(a*b+c*d)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00114}00114\ \ \ \ \ C\ =\ b**2\ +\ d**2\ -\/\ R**2}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00115}00115\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00116}00116\ \ \ \ \ delta\ =\ B**2\ -\/\ 4.*A*C}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{if}\ delta\ >\ 0:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ t1\ =\ (-\/B\ +\ np.sqrt(delta))/(2.*A)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ t2\ =\ (-\/B\ -\/\ np.sqrt(delta))/(2.*A)}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ 0\ <=\ t1\ <=\ 1\ \textcolor{keywordflow}{or}\ 0\ <=\ t2\ <=\ 1:}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ isIntercept\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00123}00123\ \ \ \ \ \textcolor{keywordflow}{return}\ isIntercept}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00126}00126\ \textcolor{comment}{\#\ def\ draw\_intercepting\_lines(nlines,\ line\_length,\ width,\ height):}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00127}00127\ \textcolor{comment}{\#\ \ \ \ \ "{}"{}"{}Draw\ horizontal\ lines\ over\ image"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00128}00128\ \textcolor{comment}{\#\ \ \ \ \ h\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00129}00129\ \textcolor{comment}{\#\ \ \ \ \ delta\_h\ =\ int(height/(nlines+1))}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00130}00130\ \textcolor{comment}{\#\ \ \ \ \ for\ i\ in\ range(nlines):}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00131}00131\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ h\ =\ h\ +\ delta\_h}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00132}00132\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ x0\ =\ int(0.5*(width\ -\/\ line\_length))\ +\ 55}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00133}00133\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ y0\ =\ h\ +\ 55}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00134}00134\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ x1\ =\ int(0.5*(width\ +\ line\_length))\ +\ 55}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00135}00135\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ y1\ =\ h\ +\ 55}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00136}00136\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ \#\ window.Canvas1.create\_line(x0,\ y0,\ x1,\ y1,\ width=2,\ fill="{}red"{})}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00139}\mbox{\hyperlink{namespacegeometry_a51d59920c6e3955e96f154a2c008a946}{00139}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_a51d59920c6e3955e96f154a2c008a946}{draw\_intercepting\_lines}}(start\_points,\ end\_points,\ window):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00140}00140\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Draw\ horizontal\ lines\ over\ image"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(\ len(start\_points)\ ):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ pt1\ =\ start\_points[i]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ pt2\ =\ end\_points[i]}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ window.Canvas1.create\_line(pt1[0],\ pt1[1],\ pt2[0],\ pt2[1],\ width=2,\ fill=\textcolor{stringliteral}{"{}red"{}})}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00147}\mbox{\hyperlink{namespacegeometry_a5a90328c3de3b971d35f5de7aeef63ab}{00147}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegeometry_a5a90328c3de3b971d35f5de7aeef63ab}{dist}}(p1,\ p2):}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{return}\ np.sqrt(\ (p1[0]-\/p2[0])**2\ +\ (p1[1]-\/p2[1])**2\ )}
+\DoxyCodeLine{\Hypertarget{geometry_8py_source_l00149}00149\ }
+
+\end{DoxyCode}

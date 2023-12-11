@@ -7,8 +7,6 @@ import tkinter as tk
 from tkinter import messagebox as msgbox
 from tkinter import filedialog
 
-
-
 # Python
 import numpy as np
 import canvas
@@ -27,10 +25,8 @@ import ScaleWinDialog as swd
 import draw_double_circular_pattern as draw_pattern
 import phases_analysis as p_analysis
 
-
 image_analyzer = mdia.MDIA()    # object for Metallographic Image Analysis class
 image_prop = iam.IAM()          # object for Image dimension properties
-
 
 def set_Tk_var():
     global MA_RB_variable
@@ -51,12 +47,15 @@ def set_Tk_var():
     global scale_btn
     scale_btn = tk.IntVar()
 
-
 def about():
-    msgbox.showinfo('Universidade Federal Rural de Pernambuco',
-                'MDIA is developed by UACSA-UFRPE Mechanical and Material Engineering '
-                'research group.\n\nContact e-mail: '
-                'rogerio.soaress@ufrpe.br\n2019')
+    msgbox.showinfo('About MDIA',
+                    'Institution:\n'
+                    'Universidade Federal Rural de Pernambuco\n'
+                    'Unidade Acadêmica do Cabo de Santo Agostinho\n'
+                    '\n\n'
+                    'MDIA is developed by Prof. Rogério Soares\n'
+                    'e-mail: rogerio.soaress@ufrpe.br\n'
+                    '2023')
 
 def quit_app():
     dialog = msgbox.askyesno('Confirm exit', 'Are you sure you want to exit MDIA?')
@@ -65,7 +64,6 @@ def quit_app():
 
 def showmessage(widget):
     msgbox.showinfo("Radio Button event", "You just clicked on Heyn's procedure")
-
 
 def init(top, gui, *args, **kwargs):
     global w, top_level, root
@@ -77,13 +75,11 @@ def init(top, gui, *args, **kwargs):
     w.Entry_line_length.insert(0,"100")
     w.Entry_Magnification.insert(0,"75")
 
-
 def destroy_window():
     # Function which closes the window.
     global top_level
     top_level.destroy()
     top_level = None
-
 
 def load_file():
     """Load image file for edge segmentation"""
@@ -106,7 +102,6 @@ def find_grains():
         image_analyzer.draw_contours(fill_contours_chkbox.get())
         image_analyzer.set_image_for_canvas(image_analyzer.image_cv)
         canvas.update(w, image_analyzer)
-
 
 def image_segmentation_procedure():
     """Command function for Apply button related to which radiobutton was choosed: Grains or Phases"""
@@ -149,13 +144,11 @@ def metallographic_procedures():
     # elif procedure==4:
     #     under_construction()
 
-
     # convert area from square pixels to square micrometer
     ratio = float(1/image_prop.ratio)**2 # pixel/um
     the_list = ratio*np.array(grain_list, dtype=float)
 
     gstat.plot_stat(the_list, root, win_title=title)
-
 
 def statistics():
     # converts from pixels to mm2
@@ -163,18 +156,15 @@ def statistics():
     # x = image_analyzer.grains_area
     # gstat.plot_stat(root, x)
 
-
 def run():
     """Performs a statistical analysis over metallographic image using PLanimetric Jeffries procedure"""
     vec, n = jeffries.run_jeffries_analysis(image_analyzer, w, image_prop)
     gstat.plot_stat(vec, root, n_bins=n)
 
-
-
 def image_data_set():
     """Take parameters for correct analysis: Magnification, scale, units"""
 
-    # read data from window dialog
+    # read data from Scale Window Dialog
     scale_win = swd.SWD(root, w.Canvas1)
     root.bind("<Motion>", lambda e: scale_win.callback_movement(e))
     root.bind("<Button-1>", lambda e: scale_win.callback_click(e))
@@ -187,7 +177,6 @@ def image_data_set():
     if scale_btn.get()==0:
         image_prop.er = 25400.0*image_prop.er
     image_prop.set_ratio()
-
 
     # define some parameters
     image_prop.ha = image_prop.height/image_prop.ratio*image_prop.M
@@ -204,12 +193,10 @@ def image_data_set():
     txt = "Scale: " + "{:.1f}".format(image_prop.er) + u'''\u03BC'''+'''m'''
     w.Label5.configure(text=txt)
 
-
 def save_image_analysis():
     print("save image analysis")
     path = filedialog.asksaveasfile()
     image_prop.save(path.name, image_analyzer.image_original)
-
 
 def load_image_analysis():
     print("save image analysis")
@@ -220,47 +207,64 @@ def load_image_analysis():
     image_analyzer.load_image(path,loaded_from_analysis=True, img=image_prop.image_original)
     canvas.setup(w, image_analyzer, image_prop)
 
-
 def image_filter(the_filter):
     image_analyzer.set_image_filter(the_filter)
     image_analyzer.apply_filter_smooth_algorithms()
     image_analyzer.set_image_for_canvas(image_analyzer.image_filtered)
     canvas.update(w, image_analyzer)
 
-
 def show_filtered_image():
     image_analyzer.set_image_for_canvas(image_analyzer.image_gray)
     # canvas_window.create(image_analyzer.image_canvas, image_analyzer.width, image_analyzer.height)
-
 
 # def open_algorithm_window():
 #     global w, top_level, root
 #     # algorithm_window.create_AlgorithmWindow_Toplevel(root, top_level)
 
-def draw_histogram():
-    gray = image_analyzer.image_gray
-    if not image_analyzer.image_gray_exists:
-        gray = mdia.cv2.cvtColor(image_analyzer.image_original, mdia.cv2.COLOR_BGR2RGB)
+# def draw_histogram():
+#     gray = image_analyzer.image_gray
+#     if not image_analyzer.image_gray_exists:
+#         gray = mdia.cv2.cvtColor(image_analyzer.image_original, mdia.cv2.COLOR_BGR2RGB)
 
-    mdia.plt.hist(gray.ravel(), 256, [0, 256])
-    mdia.plt.title('Histogram of original image in gray e_r.\n Filter: ' + image_analyzer.get_filter_name())
-    mdia.plt.show()
+#     mdia.plt.hist(gray.ravel(), 256, [0, 256])
+#     mdia.plt.title('Histogram of original image in gray e_r.\n Filter: ' + image_analyzer.get_filter_name())
+#     mdia.plt.show()
 
+def create_histogram():
+    """Creates a histogram for a specific data like grains or other structures sizes"""
+    image_analyzer.grains_histogram()    
 
 def metallografic_phases_analysis():
     p_analysis.start(root, w, w.Canvas1, image_analyzer)
-
 
 def insert_circular_pattern():
     width, height = image_analyzer.get_image_dimensions()
     draw_pattern.circular(root, w.Canvas1, width, height)
 
+def draw_histogram(*args):
+    if _debug:
+        print('gui_main_support.draw_histogram')
+        for arg in args:
+            print ('    another arg:', arg)
+        sys.stdout.flush()
+
+def grains_histogram(*args):
+    if _debug:
+        print('gui_main_support.grains_histogram')
+        for arg in args:
+            print ('    another arg:', arg)
+        sys.stdout.flush()
+
+def open_algorithm_window(*args):
+    if _debug:
+        print('gui_main_support.open_algorithm_window')
+        for arg in args:
+            print ('    another arg:', arg)
+        sys.stdout.flush()
+
 if __name__ == '__main__':
     import gui_main
     gui_main.vp_start_gui()
-
-
-
 
 # def callback(event):
 #     pos1 = event.x-55
@@ -274,9 +278,13 @@ if __name__ == '__main__':
 #         mean = int(np.sum(pixels_list)/len(pixels_list))
 #         print("(%d, %d) => pixel: %d, size: %d, mean: %d" % (pos1, pos2, pixel, len(pixels_list), mean))
 
-
 # def pickup_pixel():
 #     root.bind("<Button-1>", callback)
 
 #     global pixels_list
 #     pixels_list = []
+
+
+
+
+

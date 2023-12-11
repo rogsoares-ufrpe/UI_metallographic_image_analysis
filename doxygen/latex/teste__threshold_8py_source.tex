@@ -1,0 +1,53 @@
+\doxysection{teste\+\_\+threshold.\+py}
+\hypertarget{teste__threshold_8py_source}{}\label{teste__threshold_8py_source}\index{source/teste\_threshold.py@{source/teste\_threshold.py}}
+\mbox{\hyperlink{teste__threshold_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00001}\mbox{\hyperlink{namespaceteste__threshold}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Sat\ Jun\ 13\ 19:32:31\ 2020}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ roger}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00008}00008\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00009}00009\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00010}00010\ \textcolor{keyword}{import}\ matplotlib.pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00013}\mbox{\hyperlink{namespaceteste__threshold_aa7ccff3d076ea952182b3481521d507f}{00013}}\ filename\ =\ \textcolor{stringliteral}{"{}Fig2b.jpg"{}}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00014}\mbox{\hyperlink{namespaceteste__threshold_a529b3a7a33e8acad1c311b7da1acccc6}{00014}}\ img\ =\ cv2.imread(filename)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00015}00015\ img\ =\ cv2.cvtColor(img,\ cv2.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00017}\mbox{\hyperlink{namespaceteste__threshold_adf7d03fb52b90e0ad8e37ee3c3f9d25d}{00017}}\ h,\ w\ =\ img.shape}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00018}00018\ \textcolor{comment}{\#\ print(img.shape)}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00020}\mbox{\hyperlink{namespaceteste__threshold_a50e61e5cdb3435085dd10fdec56026c5}{00020}}\ row\ =\ int(1.05*h/2)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00021}\mbox{\hyperlink{namespaceteste__threshold_ac0b3f1a96f6707e1265946d1c507d62f}{00021}}\ start\ =\ (0,\ row)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00022}\mbox{\hyperlink{namespaceteste__threshold_aae9d3b2d6e4e665ec5880964bfb9ba62}{00022}}\ end\ =\ (w,\ row)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00023}\mbox{\hyperlink{namespaceteste__threshold_a78ee4d651658c2289f999f77b54296fb}{00023}}\ thickness\ =\ 1}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00024}\mbox{\hyperlink{namespaceteste__threshold_a21e165d5c2d9095b95fa5f884fd48114}{00024}}\ line\_type\ =\ 8}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00025}00025\ cv2.line(img,\ start,\ end,\ (0,\ 175,\ 175),\ thickness,\ line\_type)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00028}\mbox{\hyperlink{namespaceteste__threshold_aff875e29bef98d02de19c5bf3cd7613a}{00028}}\ pixels\ =\ img[row+1,\ :]}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00029}\mbox{\hyperlink{namespaceteste__threshold_a4f8e134431a59ccedddeb2032891759a}{00029}}\ px\ =\ np.zeros(len(pixels))}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00030}00030\ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(len(pixels)):}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00031}00031\ \ \ \ \ px[i]\ =\ int(pixels[i])}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00033}\mbox{\hyperlink{namespaceteste__threshold_abb702018b4052ee45c44869f22d3f1e7}{00033}}\ length\ =\ len(px)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00034}\mbox{\hyperlink{namespaceteste__threshold_a40494aa8932e26cc723738695ab9be1e}{00034}}\ diff\_values\ =\ np.zeros(length-\/1)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00035}00035\ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(length-\/1):}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00036}00036\ \ \ \ \ diff\_values[i]\ =\ px[i+1]\ -\/\ px[i]}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00037}00037\ \ \ \ \ \textcolor{comment}{\#\ print("{}pixels[\%d]\ =\ \%d,\ pixels[\%d]\ =\ \%d"{}\ \%\ (i+1,\ px[i+1],\ i,\ px[i]))}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00039}00039\ \textcolor{comment}{\#\ print(px[:length])}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00040}00040\ \textcolor{comment}{\#\ print(diff\_values)}}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00042}\mbox{\hyperlink{namespaceteste__threshold_a3310c846854cad62188af2d17ae99cca}{00042}}\ plt.plot(diff\_values,\ \textcolor{stringliteral}{'kd'},\ \ markersize=2)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00043}00043\ plt.xscale(\textcolor{stringliteral}{"{}log"{}})}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00044}00044\ plt.show()}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00046}00046\ cv2.imshow(\textcolor{stringliteral}{"{}Thresholded\ image"{}},img)}
+\DoxyCodeLine{\Hypertarget{teste__threshold_8py_source_l00047}00047\ cv2.waitKey(0)}
+
+\end{DoxyCode}

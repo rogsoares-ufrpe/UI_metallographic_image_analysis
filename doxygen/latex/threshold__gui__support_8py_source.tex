@@ -1,0 +1,132 @@
+\doxysection{threshold\+\_\+gui\+\_\+support.\+py}
+\hypertarget{threshold__gui__support_8py_source}{}\label{threshold__gui__support_8py_source}\index{source/threshold\_gui\_support.py@{source/threshold\_gui\_support.py}}
+\mbox{\hyperlink{threshold__gui__support_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00001}\mbox{\hyperlink{namespacethreshold__gui__support}{00001}}\ \textcolor{comment}{\#!\ /usr/bin/env\ python}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00002}00002\ \textcolor{comment}{\#\ \ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00003}00003\ \textcolor{comment}{\#}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00004}00004\ \textcolor{comment}{\#\ Support\ module\ generated\ by\ PAGE\ version\ 5.1}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00005}00005\ \textcolor{comment}{\#\ \ in\ conjunction\ with\ Tcl\ version\ 8.6}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00006}00006\ \textcolor{comment}{\#\ \ \ \ May\ 29,\ 2020\ 08:42:08\ PM\ -\/03\ \ platform:\ Windows\ NT}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00007}00007\ \textcolor{comment}{\#\ \ \ \ May\ 29,\ 2020\ 09:22:43\ PM\ -\/03\ \ platform:\ Windows\ NT}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00008}00008\ \textcolor{comment}{\#\ \ \ \ May\ 29,\ 2020\ 09:29:26\ PM\ -\/03\ \ platform:\ Windows\ NT}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00009}00009\ \textcolor{comment}{\#\ \ \ \ May\ 29,\ 2020\ 09:36:20\ PM\ -\/03\ \ platform:\ Windows\ NT}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00011}00011\ \textcolor{keyword}{import}\ sys}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00012}00012\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00013}00013\ \textcolor{keyword}{import}\ cv2\ \textcolor{keyword}{as}\ cv}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00014}00014\ \textcolor{keyword}{import}\ tkinter\ \textcolor{keyword}{as}\ tk}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00015}00015\ \textcolor{keyword}{import}\ matplotlib.pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00016}00016\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ Image}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00017}00017\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ ImageTk}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00020}\mbox{\hyperlink{namespacethreshold__gui__support_a64201a92ac066f0b1983545ca5b50e0e}{00020}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a64201a92ac066f0b1983545ca5b50e0e}{set\_Tk\_var}}():}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{global}\ scalevar2}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00022}00022\ \ \ \ \ scalevar2\ =\ tk.IntVar()}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{global}\ scalevar1}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00024}00024\ \ \ \ \ scalevar1\ =\ tk.IntVar()}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{global}\ open\_win\_var}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00027}00027\ \ \ \ \ open\_win\_var\ =\ tk.BooleanVar()}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00029}00029\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00030}\mbox{\hyperlink{namespacethreshold__gui__support_a675ca3e8fcd0a8e01e8a67683affd1b3}{00030}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a675ca3e8fcd0a8e01e8a67683affd1b3}{init}}(root,\ gui,\ top,\ *args,\ **kwargs):}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00031}00031\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{global}\ MainWindow,\ w,\ TopLevel}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00033}00033\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00034}00034\ \ \ \ \ MainWindow\ =\ root\ \ \textcolor{comment}{\#\ MainWindow\ app:\ is\ the\ parent}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00035}00035\ \ \ \ \ w\ =\ gui\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ gui\ window:\ child\ from\ MainWindow}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00036}00036\ \ \ \ \ TopLevel\ =\ top\ \ \ \ \ \textcolor{comment}{\#\ TopLevel\ app:\ shapes\ gui\ window}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00037}00037\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00038}00038\ \ \ \ \ TopLevel.Scale\_Threshold.set(0)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00039}00039\ \ \ \ \ TopLevel.Scale\_Maxvalue.set(255)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00042}00042\ \ \ \ \ \textcolor{comment}{\#\ tell\ MainWindow\ (TopLevel)\ it\ must\ be\ opened}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00043}00043\ \ \ \ \ open\_win\_var.set(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00044}00044\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00045}00045\ \ \ \ \ \textcolor{comment}{\#\ define\ parameters}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{global}\ thresh,\ maxval}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00047}00047\ \ \ \ \ thresh\ =\ int(0)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00048}00048\ \ \ \ \ maxval\ =\ int(255)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00049}00049\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00050}00050\ \ \ \ \ \textcolor{comment}{\#\ very\ if\ window\ is\ to\ be\ closed\ or\ not}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{global}\ isopened}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00052}00052\ \ \ \ \ isopened\ =\ \textcolor{keyword}{True}\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00054}\mbox{\hyperlink{namespacethreshold__gui__support_a671af5fb960b407798818c4e46e89543}{00054}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a671af5fb960b407798818c4e46e89543}{get\_threshold}}(v):}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{global}\ thresh}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00056}00056\ \ \ \ \ thresh\ =\ int(v)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00057}00057\ \ \ \ \ open\_win\_var.set(\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00058}00058\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00059}00059\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00060}\mbox{\hyperlink{namespacethreshold__gui__support_a852726bf9457e6a689580ad063636b51}{00060}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a852726bf9457e6a689580ad063636b51}{get\_maxval}}(v):}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{global}\ maxval}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00062}00062\ \ \ \ \ maxval\ =\ int(v)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00063}00063\ \ \ \ \ open\_win\_var.set(\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00066}\mbox{\hyperlink{namespacethreshold__gui__support_ac085948967cedaa2244636b3f11da961}{00066}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_ac085948967cedaa2244636b3f11da961}{is\_opened}}():}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00067}00067\ \ \ \ \ \textcolor{comment}{\#\ if\ Ok\ button\ was\ not\ pushed,\ set\ for\ another\ waiting\ moment\ to\ get\ values}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{if}\ isopened:}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ open\_win\_var.set(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ isopened}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00073}00073\ \textcolor{comment}{\#\ an\ order\ to\ close\ the\ window}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00074}\mbox{\hyperlink{namespacethreshold__gui__support_a709e216877325382379c0df457b690d9}{00074}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a709e216877325382379c0df457b690d9}{stop\_process}}():}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{global}\ isopened}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00076}00076\ \ \ \ \ isopened\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00077}00077\ \ \ \ \ open\_win\_var.set(\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00078}00078\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00080}\mbox{\hyperlink{namespacethreshold__gui__support_a5b8817e540ef001a2f78dfca98e13b4f}{00080}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a5b8817e540ef001a2f78dfca98e13b4f}{get\_parameters}}():}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00081}00081\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Hold\ on\ program\ while\ data\ is\ obtained."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00082}00082\ \ \ \ \ MainWindow.wait\_variable(open\_win\_var)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{return}\ thresh,\ maxval}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00086}\mbox{\hyperlink{namespacethreshold__gui__support_a727a4f8309db42a3e524c021d25671eb}{00086}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a727a4f8309db42a3e524c021d25671eb}{create\_histogram\_plot}}(img):}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00087}00087\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}A\ histogram\ of\ the\ gray\ image\ is\ plotted\ on\ canvas\ from\ the\ gui\ windows.}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00088}00088\ \textcolor{stringliteral}{\ \ \ \ It\ guides\ user\ chose\ the\ must\ suitable\ thresholded\ values"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00089}00089\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00090}00090\ \ \ \ \ hist\_img\ =\ cv.calcHist([img],[0],\textcolor{keywordtype}{None},[256],[0,256])}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00091}00091\ \ \ \ \ \textcolor{comment}{\#\ print(hist\_img.shape)}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00092}00092\ \ \ \ \ plt.plot(hist\_img)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00093}00093\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00094}00094\ \ \ \ \ plt.fill\_between(np.arange(0,\ 256),\ hist\_img[:,0])}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00095}00095\ \ \ \ \ \textcolor{comment}{\#\ plt.yscale('symlog')}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00096}00096\ \ \ \ \ plt.xticks(np.arange(0,\ 256,\ step=25))}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00097}00097\ \ \ \ \ plt.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00098}00098\ \ \ \ \ plt.savefig(\textcolor{stringliteral}{"{}Graph"{}},\ dpi=100)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00099}00099\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00100}00100\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00101}00101\ \ \ \ \ \textcolor{comment}{\#\ print("{}Acumulado:\ \%d\ -\/\ \%d\ "{}\ \%\ (np.sum(hist\_img[0:150]),\ np.sum(hist\_img[151:255]))\ )}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00104}\mbox{\hyperlink{namespacethreshold__gui__support_aaed5493f05bcd7c51ece965df43f004b}{00104}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_aaed5493f05bcd7c51ece965df43f004b}{load\_threshold\_histogram}}():}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00105}00105\ \ \ \ \ \textcolor{comment}{\#\ set\ img\ as\ a\ global\ variable\ to\ not\ lose\ the\ image\ reference}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{global}\ img}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00107}00107\ \ \ \ \ img\ =\ ImageTk.PhotoImage(Image.open(\textcolor{stringliteral}{"{}Graph.png"{}}))}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00108}00108\ \ \ \ \ TopLevel.Canvas.create\_image(0,\ 0,\ anchor=tk.NW,\ image=img)}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00109}00109\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00111}\mbox{\hyperlink{namespacethreshold__gui__support_a47d782b7662e19472e683be95e274831}{00111}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacethreshold__gui__support_a47d782b7662e19472e683be95e274831}{destroy\_window}}():}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00112}00112\ \ \ \ \ \textcolor{comment}{\#\ Function\ which\ closes\ the\ window.}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00113}00113\ \ \ \ \ \textcolor{keyword}{global}\ w}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00114}00114\ \ \ \ \ w.destroy()}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00115}00115\ \ \ \ \ w\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00116}00116\ \ \ \ \ TopLevel\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00119}00119\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{'\_\_main\_\_'}:}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00120}00120\ \ \ \ \ \textcolor{keyword}{import}\ threshold\_gui}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00121}00121\ \ \ \ \ \mbox{\hyperlink{namespacethreshold__gui_a1fd22e85c7774dc9710c45a1e5093183}{threshold\_gui.vp\_start\_gui}}()}
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{threshold__gui__support_8py_source_l00126}00126\ }
+
+\end{DoxyCode}

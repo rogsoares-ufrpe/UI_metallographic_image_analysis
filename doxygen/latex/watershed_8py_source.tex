@@ -1,0 +1,145 @@
+\doxysection{watershed.\+py}
+\hypertarget{watershed_8py_source}{}\label{watershed_8py_source}\index{source/watershed.py@{source/watershed.py}}
+\mbox{\hyperlink{watershed_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00001}\mbox{\hyperlink{namespacewatershed}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Sun\ Jun\ 21\ 17:37:12\ 2020}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ roger}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00009}00009\ \textcolor{keyword}{from}\ \_\_future\_\_\ \textcolor{keyword}{import}\ print\_function}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00010}00010\ \textcolor{keyword}{import}\ cv2\ \textcolor{keyword}{as}\ cv}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00011}00011\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00012}00012\ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00013}00013\ \textcolor{keyword}{import}\ random\ \textcolor{keyword}{as}\ rng}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00014}00014\ rng.seed(12345)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00016}00016\ \textcolor{comment}{\#\ Load\ the\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00017}\mbox{\hyperlink{namespacewatershed_a36bca336caa2f6153e23565236b69a92}{00017}}\ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{'Code\ for\ Image\ Segmentation\ with\ Distance\ Transform\ and\ Watershed\ Algorithm.\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ Sample\ code\ showing\ how\ to\ segment\ overlapping\ objects\ using\ Laplacian\ filtering,\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ in\ addition\ to\ Watershed\ and\ Distance\ Transformation'})}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00020}\mbox{\hyperlink{namespacewatershed_aebb7ce3dd8b166d0379017d93cc1965a}{00020}}\ parser.add\_argument(\textcolor{stringliteral}{'-\/-\/input'},\ help=\textcolor{stringliteral}{'Path\ to\ input\ image.'},\ default=\textcolor{stringliteral}{'Fig2b-\/cut.jpg'})}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00021}\mbox{\hyperlink{namespacewatershed_aa38cf430e38c3fd8840726784a1d82d9}{00021}}\ args\ =\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00022}\mbox{\hyperlink{namespacewatershed_ad7cd07b1b516ecc6e4249fcada99438e}{00022}}\ src\ =\ cv.imread(cv.samples.findFile(args.input))}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00023}00023\ \textcolor{keywordflow}{if}\ src\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00024}00024\ \ \ \ \ print(\textcolor{stringliteral}{'Could\ not\ open\ or\ find\ the\ image:'},\ args.input)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00025}00025\ \ \ \ \ exit(0)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00026}00026\ \textcolor{comment}{\#\ Show\ source\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00030}00030\ \textcolor{comment}{\#\ Change\ the\ background\ from\ white\ to\ black,\ since\ that\ will\ help\ later\ to\ extract}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00031}00031\ \textcolor{comment}{\#\ better\ results\ during\ the\ use\ of\ Distance\ Transform}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00032}\mbox{\hyperlink{namespacewatershed_a5d865b94d09d5a6f989eb07528ebb021}{00032}}\ src[np.all(src\ ==\ 255,\ axis=2)]\ =\ 0}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00033}00033\ \textcolor{comment}{\#\ Show\ output\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00036}00036\ \textcolor{comment}{\#\ Create\ a\ kernel\ that\ we\ will\ use\ to\ sharpen\ our\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00037}00037\ \textcolor{comment}{\#\ an\ approximation\ of\ second\ derivative,\ a\ quite\ strong\ kernel}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00038}\mbox{\hyperlink{namespacewatershed_a23a5d1b5badcd41d0247ffd5978500cd}{00038}}\ kernel\ =\ np.array([[1,\ 1,\ 1],\ [1,\ -\/8,\ 1],\ [1,\ 1,\ 1]],\ dtype=np.float32)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00040}00040\ \textcolor{comment}{\#\ do\ the\ laplacian\ filtering\ as\ it\ is}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00041}00041\ \textcolor{comment}{\#\ well,\ we\ need\ to\ convert\ everything\ in\ something\ more\ deeper\ then\ CV\_8U}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00042}00042\ \textcolor{comment}{\#\ because\ the\ kernel\ has\ some\ negative\ values,}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00043}00043\ \textcolor{comment}{\#\ and\ we\ can\ expect\ in\ general\ to\ have\ a\ Laplacian\ image\ with\ negative\ values}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00044}00044\ \textcolor{comment}{\#\ BUT\ a\ 8bits\ unsigned\ int\ (the\ one\ we\ are\ working\ with)\ can\ contain\ values\ from\ 0\ to\ 255}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00045}00045\ \textcolor{comment}{\#\ so\ the\ possible\ negative\ number\ will\ be\ truncated}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00046}\mbox{\hyperlink{namespacewatershed_a6d88d68f95207f78e8dd108729cc97fc}{00046}}\ imgLaplacian\ =\ cv.filter2D(src,\ cv.CV\_32F,\ kernel)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00047}\mbox{\hyperlink{namespacewatershed_a51c24365accd44d20b736ce785c416ac}{00047}}\ sharp\ =\ np.float32(src)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00048}\mbox{\hyperlink{namespacewatershed_a070ba026eb710cac7ff0f05e8ef7fe59}{00048}}\ imgResult\ =\ sharp\ -\/\ imgLaplacian}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00050}00050\ \textcolor{comment}{\#\ convert\ back\ to\ 8bits\ gray\ scale}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00051}00051\ imgResult\ =\ np.clip(imgResult,\ 0,\ 255)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00052}00052\ imgResult\ =\ imgResult.astype(\textcolor{stringliteral}{'uint8'})}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00053}00053\ imgLaplacian\ =\ np.clip(imgLaplacian,\ 0,\ 255)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00054}00054\ imgLaplacian\ =\ np.uint8(imgLaplacian)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00060}00060\ \textcolor{comment}{\#\ Create\ binary\ image\ from\ source\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00061}\mbox{\hyperlink{namespacewatershed_aaa9d487873a9bc6149d8c395568e5cbe}{00061}}\ bw\ =\ cv.cvtColor(imgResult,\ cv.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00062}\mbox{\hyperlink{namespacewatershed_ac3acf0dc7d7f5484244b782a688c1459}{00062}}\ \_,\ bw\ =\ cv.threshold(bw,\ 40,\ 255,\ cv.THRESH\_BINARY\ |\ cv.THRESH\_OTSU)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00063}00063\ \textcolor{comment}{\#cv.imshow('Binary\ Image',\ bw)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00066}00066\ \textcolor{comment}{\#\ Perform\ the\ distance\ transform\ algorithm}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00067}\mbox{\hyperlink{namespacewatershed_a83e74989b47a4d7484254f6639b2ec54}{00067}}\ dist\ =\ cv.distanceTransform(bw,\ cv.DIST\_L2,\ 3)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00069}00069\ \textcolor{comment}{\#\ Normalize\ the\ distance\ image\ for\ range\ =\ \{0.0,\ 1.0\}}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00070}00070\ \textcolor{comment}{\#\ so\ we\ can\ visualize\ and\ threshold\ it}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00071}00071\ cv.normalize(dist,\ dist,\ 0,\ 1.0,\ cv.NORM\_MINMAX)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00072}00072\ \textcolor{comment}{\#cv.imshow('Distance\ Transform\ Image',\ dist)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00075}00075\ \textcolor{comment}{\#\ Threshold\ to\ obtain\ the\ peaks}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00076}00076\ \textcolor{comment}{\#\ This\ will\ be\ the\ markers\ for\ the\ foreground\ objects}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00077}00077\ \_,\ dist\ =\ cv.threshold(dist,\ 0.4,\ 1.0,\ cv.THRESH\_BINARY)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00080}00080\ \textcolor{comment}{\#\ Dilate\ a\ bit\ the\ dist\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00081}\mbox{\hyperlink{namespacewatershed_a08024696175d39bea09439e8e5a0c2af}{00081}}\ kernel1\ =\ np.ones((3,3),\ dtype=np.uint8)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00082}00082\ dist\ =\ cv.dilate(dist,\ kernel1)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00083}00083\ \textcolor{comment}{\#cv.imshow('Peaks',\ dist)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00086}00086\ \textcolor{comment}{\#\ Create\ the\ CV\_8U\ version\ of\ the\ distance\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00087}00087\ \textcolor{comment}{\#\ It\ is\ needed\ for\ findContours()}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00088}\mbox{\hyperlink{namespacewatershed_a685beb9795339ab192bf05884d75686c}{00088}}\ dist\_8u\ =\ dist.astype(\textcolor{stringliteral}{'uint8'})}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00090}00090\ \textcolor{comment}{\#\ Find\ total\ markers}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00091}\mbox{\hyperlink{namespacewatershed_a190816f063a29ddc33c9cfd9c9bc21ac}{00091}}\ contours,\ \_\ =\ cv.findContours(dist\_8u,\ cv.RETR\_EXTERNAL,\ cv.CHAIN\_APPROX\_SIMPLE)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00093}00093\ \textcolor{comment}{\#\ Create\ the\ marker\ image\ for\ the\ watershed\ algorithm}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00094}\mbox{\hyperlink{namespacewatershed_a39cd3ebb029239f4e949a4fb61e44b16}{00094}}\ markers\ =\ np.zeros(dist.shape,\ dtype=np.int32)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00096}00096\ \textcolor{comment}{\#\ Draw\ the\ foreground\ markers}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00097}00097\ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(len(contours)):}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00098}00098\ \ \ \ \ cv.drawContours(markers,\ contours,\ i,\ (i+1),\ -\/1)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00100}00100\ print(markers.dtype)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00101}00101\ print(imgResult.dtype)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00103}00103\ \textcolor{comment}{\#\ Draw\ the\ background\ marker}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00104}00104\ cv.circle(markers,\ (5,5),\ 3,\ (255,255,255),\ -\/1)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00105}00105\ \textcolor{comment}{\#\ cv.imshow('Markers',\ markers*10000)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00107}00107\ \textcolor{comment}{\#\ Perform\ the\ watershed\ algorithm}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00108}00108\ cv.watershed(imgResult,\ markers)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00110}00110\ \textcolor{comment}{\#mark\ =\ np.zeros(markers.shape,\ dtype=np.uint8)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00111}\mbox{\hyperlink{namespacewatershed_a6bd0f229dcbc9c0820b6c9c1ebe7811b}{00111}}\ mark\ =\ markers.astype(\textcolor{stringliteral}{'uint8'})}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00112}00112\ mark\ =\ cv.bitwise\_not(mark)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00114}00114\ \textcolor{comment}{\#\ uncomment\ this\ if\ you\ want\ to\ see\ how\ the\ mark}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00115}00115\ \textcolor{comment}{\#\ image\ looks\ like\ at\ that\ point}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00116}00116\ \textcolor{comment}{\#cv.imshow('Markers\_v2',\ mark)}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00117}00117\ \textcolor{comment}{\#\ Generate\ random\ colors}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00118}\mbox{\hyperlink{namespacewatershed_abd33a4abc403c059b78cc4fbbd42cdf2}{00118}}\ colors\ =\ []}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00119}00119\ \textcolor{keywordflow}{for}\ contour\ \textcolor{keywordflow}{in}\ contours:}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00120}00120\ \ \ \ \ colors.append((rng.randint(0,256),\ rng.randint(0,256),\ rng.randint(0,256)))}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00122}00122\ \textcolor{comment}{\#\ Create\ the\ result\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00123}\mbox{\hyperlink{namespacewatershed_a69699a6dfa0cd54f953ad76380821fb9}{00123}}\ dst\ =\ np.zeros((markers.shape[0],\ markers.shape[1],\ 3),\ dtype=np.uint8)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00125}00125\ \textcolor{comment}{\#\ Fill\ labeled\ objects\ with\ random\ colors}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00126}00126\ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(markers.shape[0]):}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00127}00127\ \ \ \ \ \textcolor{keywordflow}{for}\ j\ \textcolor{keywordflow}{in}\ range(markers.shape[1]):}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00128}\mbox{\hyperlink{namespacewatershed_a17b0807864f05e19ec1b46c6f1cafc1f}{00128}}\ \ \ \ \ \ \ \ \ index\ =\ markers[i,j]}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ index\ >\ 0\ \textcolor{keywordflow}{and}\ index\ <=\ len(contours):}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ dst[i,j,:]\ =\ colors[index-\/1]}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00132}00132\ \textcolor{comment}{\#\ Visualize\ the\ final\ image}}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00133}00133\ cv.imshow(\textcolor{stringliteral}{'Final\ Result'},\ dst)}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00139}00139\ cv.waitKey()}
+\DoxyCodeLine{\Hypertarget{watershed_8py_source_l00140}00140\ }
+
+\end{DoxyCode}

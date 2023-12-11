@@ -1,0 +1,247 @@
+\doxysection{phases\+\_\+analysis.\+py}
+\hypertarget{phases__analysis_8py_source}{}\label{phases__analysis_8py_source}\index{source/phases\_analysis.py@{source/phases\_analysis.py}}
+\mbox{\hyperlink{phases__analysis_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00001}\mbox{\hyperlink{namespacephases__analysis}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Tue\ May\ 26\ 23:57:25\ 2020}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ roger}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00008}00008\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00009}00009\ \textcolor{keyword}{import}\ cv2\ \textcolor{keyword}{as}\ cv}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00011}00011\ \textcolor{keyword}{import}\ draw\_double\_circular\_pattern\ \textcolor{keyword}{as}\ pattern}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00012}00012\ \textcolor{keyword}{import}\ canvas\ \textcolor{keyword}{as}\ cnvs}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00013}00013\ \textcolor{keyword}{import}\ threshold\_gui\ \textcolor{keyword}{as}\ thresh\_gui}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00014}00014\ \textcolor{keyword}{import}\ threshold\_gui\_support\ \textcolor{keyword}{as}\ thresh\_support}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00017}\mbox{\hyperlink{classphases__analysis_1_1_c_i_m}{00017}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classphases__analysis_1_1_c_i_m}{CIM}}:}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00018}00018\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}confidence\_interval\_multiplier"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \#\ TABLE\ 1\ 95\ \%\ Confidence\ Interval\ Multipliers}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00020}00020\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00021}\mbox{\hyperlink{classphases__analysis_1_1_c_i_m_a3f497518442dfcc6806d64aa0e778b9f}{00021}}\ \textcolor{stringliteral}{\ \ \ \ def\ \_\_init\_\_(self):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00022}00022\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \#\ From\ 5\ to\ 39\ fields}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00024}\mbox{\hyperlink{classphases__analysis_1_1_c_i_m_a21ad8242d6743eb1bf0062e6da513636}{00024}}\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ self.table\ =\ np.array([0,0,0,0,0,2.776,2.571,2.447,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.365,\ 2.306,2.262,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.228,\ 2.201,\ 2.179,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.160,\ 2.145,\ 2.131,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.120,\ 2.110,\ 2.101,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.093,\ 2.086,\ 2.080,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00030}00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.074,\ 2.069,\ 2.064,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.060,\ 2.056,\ 2.052,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.048,\ 2.045])}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00033}00033\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00034}\mbox{\hyperlink{classphases__analysis_1_1_c_i_m_a318133e5b6842621be835fc9a6c313ad}{00034}}\ \textcolor{stringliteral}{\ \ \ \ def\ get(self,\ n\_fields):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00035}00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ if\ n\_fields\ <\ 29:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00036}00036\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ return\ self.table[n\_fields]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00037}00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ else:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00038}00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ if\ 30\ <\ n\_fileds\ <=\ 40:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00039}00039\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ 2.020}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00040}00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ if\ 40\ <\ n\_fields\ <=60:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ 2.000}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00042}00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ else:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00043}00043\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ 1.960}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00044}00044\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00045}00045\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00046}\mbox{\hyperlink{namespacephases__analysis_a87603df7102e2c80f38d271f474030fc}{00046}}\ \textcolor{stringliteral}{def\ start(root,\ window,\ canvas,\ image\_analyzer):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00047}00047\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ track\ =\ pattern.SinglePixel(root,\ image\_analyzer.image\_gray)\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00049}00049\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00050}00050\ \textcolor{stringliteral}{\ \ \ \ \#\ image\_analyzer.set\_image\_for\_canvas(image\_analyzer.image\_gray)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ \#\ cnvs.update(window,\ image\_analyzer)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00052}00052\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00053}00053\ \textcolor{stringliteral}{\ \ \ \ \#\ open\ window\ to\ create\ a\ binary\ window\ adjusting\ threshold\ values}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ \#\ thresh\_gui.create\_Toplevel1(root)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00055}00055\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ \#\ thresh\_support.create\_histogram\_plot(image\_analyzer.image\_gray)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00057}00057\ \textcolor{stringliteral}{\ \ \ \ \#\ thresh\_support.load\_threshold\_histogram()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00058}00058\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ \#\ image\_cv\ =\ np.zeros(image\_analyzer.image\_gray.shape,\ np.uint8)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ \#\ counter\ =\ 1}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ \#\ for\ k\ in\ [2,\ 4,\ 8,\ 16,\ 32,\ 64]:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ delta\_w\ =\ int(image\_analyzer.width/k)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ delta\_h\ =\ int(image\_analyzer.height/k)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ img\ =\ np.zeros((delta\_h,\ delta\_w),\ np.uint8)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00065}00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ for\ i\ in\ range(k):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ from\_h\ =\ i*delta\_h}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00068}00068\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ to\_h\ =\ from\_h\ +\ delta\_h}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00069}00069\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ for\ j\ in\ range(k):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00070}00070\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ from\_w\ =\ j*delta\_w}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00071}00071\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ to\_w\ =\ from\_w\ +\ delta\_w}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00072}00072\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ img\ =\ image\_analyzer.image\_gray[from\_h:to\_h,\ from\_w:to\_w]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00073}00073\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00074}00074\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ perform\ an\ histogram\ equalization\ for\ better\ contrast}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00075}00075\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ img\ =\ cv.equalizeHist(img)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00076}00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00077}00077\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ apply\ the\ threshold\ Otsu:\ thresh\ is\ set\ to\ 0\ but\ it´s\ doesn´t\ matter}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Otsu’s\ algorithm\ tries\ to\ find\ a\ threshold\ value\ (t)\ which\ minimizes\ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00079}00079\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ the\ weighted\ within-\/class\ variance}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00080}00080\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Otsu's\ thresholding\ after\ Gaussian\ filtering}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ img\ =\ cv.GaussianBlur(img,\ (5,5),\ 0)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00082}00082\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ ret,\ img\ =\ cv.threshold(img,\ 0,\ 255,\ cv.THRESH\_OTSU)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00083}00083\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ transpose\ block\ image\ to\ main\ frame}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00085}00085\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \ \ \ \ image\_cv[from\_h:to\_h,\ from\_w:to\_w]\ =\ img}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00086}00086\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00087}00087\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ cv.imwrite("{}output-\/"{}\ +\ str(counter)\ +\ "{}.jpg"{},\ image\_cv)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00088}00088\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ counter\ +=\ 1}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00089}00089\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00090}00090\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ create\ a\ CLAHE\ object\ (Arguments\ are\ optional).}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00091}00091\ \textcolor{stringliteral}{\ \ \ \ \#\ clahe\ =\ cv.createCLAHE(clipLimit=2.0,\ tileGridSize=(8,8))}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00092}00092\ \textcolor{stringliteral}{\ \ \ \ \#\ blur\ =\ cv.GaussianBlur(image\_analyzer.image\_gray,\ (5,5),\ 0)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00093}00093\ \textcolor{stringliteral}{\ \ \ \ \#\ cl1\ =\ clahe.apply(blur)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00094}00094\ \textcolor{stringliteral}{\ \ \ \ \#\ cv.imwrite('clahe\_image\_gray.jpg',cl1)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00095}00095\ \textcolor{stringliteral}{\ \ \ \ \#\ print("{}Done!"{})}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00096}00096\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00097}00097\ \textcolor{stringliteral}{\ \ \ \ \#\ image\_analyzer.set\_image\_for\_canvas(image\_cv)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00098}00098\ \textcolor{stringliteral}{\ \ \ \ \#\ cnvs.update(window,\ image\_analyzer)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00099}00099\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00100}00100\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00101}00101\ \textcolor{stringliteral}{\#\ \#\ update\ binary\ image\ as\ user\ is\ setting\ parameters\ for\ threshold}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00102}00102\ \textcolor{stringliteral}{\ \ \ \ \#\ while\ thresh\_support.is\_opened():}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00103}00103\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00104}00104\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ this\ function\ also\ sets\ a\ waiting\ point.\ one\ 'while'\ loop\ is\ only}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00105}00105\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ completed\ when\ a\ different\ value\ for\ threshold\ is\ chosed.\ Otherwise,}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00106}00106\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ any\ image\ update\ is\ performed}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00107}00107\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ thresh,\ maxval\ =\ thresh\_support.get\_parameters()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00108}00108\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}thresh:\ \%d,\ maxval:\ \%d"{}\ \%\ (thresh,\ maxval))}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00109}00109\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00110}00110\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ numblocks\ =\ 2**thresh\ +\ 1}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00111}00111\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}Num\ blocks:\ "{},\ numblocks)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00112}00112\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00113}00113\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ delta\_w\ =\ int(image\_analyzer.width/numblocks)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00114}00114\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ delta\_h\ =\ int(image\_analyzer.height/numblocks)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00115}00115\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ last\_delta\_w\ =\ image\_analyzer.width\ -\/\ \ (numblocks-\/1)*delta\_w}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00116}00116\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ last\_delta\_h\ =\ image\_analyzer.height\ -\/\ \ (numblocks-\/1)*delta\_h}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00117}00117\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00118}00118\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ for\ i\ in\ range(numblocks):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00119}00119\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ for\ j\ in\ range\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00120}00120\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ \#\ take\ a\ block\ from\ gray\ image}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00121}00121\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ from\_w\ =\ i*delta\_w}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00122}00122\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ to\_w\ =\ from\_w\ +\ delta\_w}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00123}00123\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ from\_h\ =\ i*delta\_h}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00124}00124\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ to\_h\ =\ from\_h\ +\ delta\_h}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00125}00125\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \ \ \ \ img\ =\ image\_analyzer.image\_gray[from\_w:to\_w,\ from\_h:to\_h]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00126}00126\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00127}00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00128}00128\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00129}00129\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ apply\ image\ filters\ to\ obtain\ a\ binary\ image\ (black-\/white)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00130}00130\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ image\_analyzer.create\_binary\_image(image\_analyzer.image\_gray,\ thresh,\ maxval)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00131}00131\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00132}00132\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ image\_analyzer.binary\_image\ =\ image\_analyzer.image\_cv.copy()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00133}00133\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ image\_analyzer.binary\_image[\ image\_analyzer.binary\_image\ >=\ maxval]\ =\ 255}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00134}00134\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ image\_analyzer.binary\_image[\ image\_analyzer.binary\_image\ <=\ thresh]\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00135}00135\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00136}00136\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ \#\ Get\ a\ tuple\ of\ unique\ values\ \&\ their\ frequency\ in\ numpy\ array}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00137}00137\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ uniqueValues,\ occurCount\ =\ np.unique(image\_analyzer.binary\_image,\ return\_counts=True)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00138}00138\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00139}00139\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ if\ len(uniqueValues)==2:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00140}00140\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \ \ \ \ print("{}Unique\ Values\ :\ "{}\ ,\ uniqueValues)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00141}00141\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \ \ \ \ print("{}Occurrence\ Count\ :\ "{},\ occurCount)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00142}00142\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \ \ \ \ white\_perc\ =\ 100*occurCount[1]/(occurCount[0]+occurCount[1])}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00143}00143\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \ \ \ \ black\_perc\ =\ 100*occurCount[0]/(occurCount[0]+occurCount[1])}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00144}00144\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \ \ \ \ print("{}Black:\ \%.2f\%\%,\ White:\ \%.2f\%\%"{}\ \%\ (black\_perc,\ white\_perc))}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00145}00145\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00146}00146\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00147}00147\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ perform\ transparency\ between\ threshold\ image\ and\ the\ original\ one\ in\ gray\ scale}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00148}00148\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ img\ =\ image\_analyzer.binary\_image.copy()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00149}00149\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ output\ =\ image\_analyzer.image\_gray.copy()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00150}00150\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ \#\ output\ =\ cv.addWeighted(img,\ alpha,\ output,\ 1-\/alpha,\ 0,\ output)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00151}00151\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00152}00152\ \textcolor{stringliteral}{\ \ \ \ \#\ after\ thrsehold\ values\ has\ been\ choose,\ close\ window}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00153}00153\ \textcolor{stringliteral}{\ \ \ \ \#\ thresh\_support.destroy\_window()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00154}00154\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00155}00155\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00156}00156\ \textcolor{stringliteral}{\ \ \ \ \#\ print("{}Threshold:\ "{},\ thresh)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00157}00157\ \textcolor{stringliteral}{\ \ \ \ \#\ width,\ height\ =\ image\_analyzer.get\_image\_dimensions()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00158}00158\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00159}00159\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00160}00160\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ apply\ geometric\ pattern\ over\ binary-\/image\ to\ extract\ the\ respective\ pixels\ values}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00161}00161\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ returns\ only\ the\ number\ of\ pixels\ of\ one\ phase.\ We\ are\ supposing\ a\ two-\/phase\ micrographic\ image.}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00162}00162\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00163}00163\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ ASTM\ Designation:\ E-\/562\ "{}}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00164}00164\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ This\ test\ method\ may\ be\ used\ to\ determine\ the\ volume\ fraction\ of\ constituents\ in\ an\ opaque}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00165}00165\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ specimen\ using\ a\ polished,\ planar\ cross\ section\ by\ the\ manual\ point\ count\ procedure"{}}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00166}00166\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00167}00167\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \#\ each\ phase\ of\ a\ two-\/phase\ micrographic\ image\ is\ represented\ by\ one\ color\ (black/white)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00168}00168\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00169}00169\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ n\ =\ number\ of\ fields\ counted.}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00170}00170\ \textcolor{stringliteral}{\ \ \ \ \#\ n\ =\ 15}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00171}00171\ \textcolor{stringliteral}{\ \ \ \ \#\ print("{}Number\ of\ field:\ "{},n)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00172}00172\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00173}00173\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ Pp(i)\ =\ Pi/Pt\ x\ 100\ =\ percentage\ of\ grid\ points,\ in\ the\ constituent\ observed\ on\ the\ i\ th\ field.}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00174}00174\ \textcolor{stringliteral}{\ \ \ \ \#\ Pp\ =\ np.zeros(\ shape=(n+1),\ dtype=float)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00175}00175\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00176}00176\ \textcolor{stringliteral}{\ \ \ \ \#\ \#\ Pt\ =\ total\ number\ of\ points\ in\ the\ test\ grid.\ Here,\ we\ are\ using\ two\ concentric\ circunferences}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00177}00177\ \textcolor{stringliteral}{\ \ \ \ \#\ Pt\ =\ 24}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00178}00178\ \textcolor{stringliteral}{\ \ \ \ \#\ grid\_size\ =\ Pt}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00179}00179\ \textcolor{stringliteral}{\ \ \ \ \#\ print("{}Number\ of\ grid\ points:\ "{},\ Pt)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00180}00180\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00181}00181\ \textcolor{stringliteral}{\ \ \ \ \#\ for\ i\ in\ range(1,\ n+1):}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00182}00182\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00183}00183\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ coordinates\ of\ binary\ image\ where\ the\ circular\ pattern\ is\ located}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00184}00184\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ coords\ =\ pattern.get\_coordinates(root,\ canvas,\ width,\ height,\ grid\_size)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00185}00185\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00186}00186\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ rows\ =\ coords[:,1]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00187}00187\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ cols\ =\ coords[:,0]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00188}00188\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ pixels\ =\ image\_analyzer.binary\_image[rows,\ cols]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00189}00189\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ print(pixels)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00190}00190\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00191}00191\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ Get\ a\ tuple\ of\ unique\ values\ \&\ their\ frequency\ in\ numpy\ array}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00192}00192\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ uniqueValues,\ occurCount\ =\ np.unique(pixels,\ return\_counts=True)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00193}00193\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ print("{}Unique\ Values\ :\ "{}\ ,\ uniqueValues)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00194}00194\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ print("{}Occurrence\ Count\ :\ "{},\ occurCount)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00195}00195\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00196}00196\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ Pi\ =\ point\ count\ on\ the\ ith\ field.}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00197}00197\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ Pi\ =\ occurCount[1]}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00198}00198\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00199}00199\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ Pp[i]\ =\ Pi/Pt\ *\ 100}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00200}00200\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ print("{}Percentage:\ "{},\ Pp[i])}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00201}00201\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00202}00202\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00203}00203\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ the\ average,\ Pp\_avg}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00204}00204\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ Pp\_avg\ =\ np.mean(Pp)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00205}00205\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}avg:\ "{},\ Pp\_avg)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00206}00206\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00207}00207\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ The\ standard\ deviation\ is\ the\ square\ root\ of\ the\ average\ of\ the\ squared}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00208}00208\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ deviations\ from\ the\ mean,\ i.e.,\ std\ =\ sqrt(mean(abs(x\ -\/\ x.mean())**2)).}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00209}00209\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ The\ average\ squared\ deviation\ is\ normally\ calculated\ as\ x.sum()\ /\ N,\ where}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00210}00210\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ N\ =\ len(x).\ If,\ however,\ ddof\ is\ specified,\ the\ divisor\ N\ -\/\ ddof\ is\ used}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00211}00211\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ instead.\ In\ standard\ statistical\ practice,\ ddof=1\ provides\ an\ unbiased}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00212}00212\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ estimator\ of\ the\ variance\ of\ the\ infinite\ population.\ ddof=0\ provides\ a}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00213}00213\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ maximum\ likelihood\ estimate\ of\ the\ variance\ for\ normally\ distributed}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00214}00214\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ variables.}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00215}00215\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ ddof:\ Means\ Delta\ Degrees\ of\ Freedom.\ The\ divisor\ used\ in\ calculations}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00216}00216\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ is\ N\ -\/\ ddof,\ where\ N\ represents\ the\ number\ of\ elements.\ By\ default\ ddof}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00217}00217\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ is\ zero.}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00218}00218\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ s\ =\ np.std(Pp,\ ddof=1)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00219}00219\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}STD:\ "{},s)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00220}00220\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00221}00221\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00222}00222\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ t\ -\/\ multiplier}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00223}00223\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ multiplier\ =\ CIM()}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00224}00224\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ t\ =\ multiplier.get(n)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00225}00225\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}t\ =\ "{},t)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00226}00226\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00227}00227\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ the\ 95\ \%\ confidence\ interval:\ CI}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00228}00228\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ CI\ =\ t\ *\ s/np.sqrt(n)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00229}00229\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}95\ \%\ confidence\ interval\ (CI):\ "{},\ CI)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00230}00230\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00231}00231\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ The\ volume\ percentage\ estimate\ is\ given\ as:}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00232}00232\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ V\_v\ =\ (Pp\_avg-\/CI,\ Pp\_avg\ +\ CI)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00233}00233\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}Phase\ A:\ \%.2f\%\%\ +/-\/\ \%.2f"{}\ \%\ (Pp\_avg,\ CI))}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00234}00234\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}Phase\ B:\ \%.2f\%\%\ +/-\/\ \%.2f"{}\ \%\ (100-\/Pp\_avg,\ CI))}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00235}00235\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00236}00236\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ \#\ An\ estimate\ of\ the\ \%\ relative\ accuracy\ associated\ with\ the\ estimate}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00237}00237\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ RA\ =\ CI\ /\ Pp\_avg\ *\ 100}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00238}00238\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}Percentual\ relative\ accuracy:\ \%.2f\%\%\ "{}\ \%\ RA)}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00239}00239\ \textcolor{stringliteral}{\ \ \ \ \#\ \ \ \ \ print("{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{})}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00240}00240\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{phases__analysis_8py_source_l00241}00241\ \textcolor{stringliteral}{}}
+
+\end{DoxyCode}

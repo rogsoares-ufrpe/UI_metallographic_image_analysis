@@ -1,5 +1,6 @@
 
 from tkinter import *
+import tkinter as tk
 from tkinter.ttk import *
 from PIL import ImageTk, Image
 import cv2
@@ -8,15 +9,17 @@ import scale_entry_window as sew
 
 class SWD: 
     """ SWD: sacle Window Dialog"""
-    def __init__(self, master, canvas): 
-        self.master = master 
+    def __init__(self, root, canvas): 
+        self.root = root 
+        self.Window = None
+        self.Entry = None
         self.x0 = 0
         self.y0 = 0
         self.first_click = False
         self.second_click = False
         
-        self.var = BooleanVar()
-        self.var.set(False)
+        self.wait_variable = BooleanVar()
+        self.wait_variable.set(False)
     
         self.x1 = 0
         self.y1 = 0
@@ -40,18 +43,19 @@ class SWD:
             self.canvas.coords(self.line, self.x0, self.y0, self.x1, self.y0)
         
     
-    def set_and_close(self, win, entry):
-        s = entry.get()
+    def set_and_close(self):
+        s = self.Entry.get()
         self.scale = float(s)
-        self.var.set(True)
-        win.destroy()
-        win = None
+        self.wait_variable.set(True)
+        self.Window.destroy()
+        self.Window = None
         
         
     def get(self):
         """Hold on program while data is obtained. self.scale and self.pixel_length
         are not availabel when this function is called"""
-        self.master.wait_variable(self.var)
+        self.root.wait_variable(self.wait_variable)
+        
         return self.scale, self.pixel_length
     
         
@@ -72,28 +76,30 @@ class SWD:
        
         
     def open_dialog(self):
-        # win, top = sew.create_EntryWindows(self.master)
+        # win, top = sew.create_EntryWindows(self.root)
         # top.Button.configure(command=lambda: self.get_and_close(top))
-        win = Toplevel(self.master)
-        win.title("Set scale")
-        win.geometry("234x85+679+310")
-        win.minsize(120, 1)
-        win.maxsize(1924, 1061)
-        win.resizable(1, 1)
-        label1 = Label(win, text="Value = ").grid(row=0, padx=10, pady=10)
-        entry = Entry(win, width=12)
-        entry.grid(row=0, column=1, sticky=W)
-        label2 = Label(win, text= u'''\u03BC'''+'''m''').grid(row=0, column=2, padx=10, pady=10, sticky=E)
-        btn = Button(win, text="OK", command=lambda: self.set_and_close(win, entry))
+        # global win
+        
+        self.Window = tk.Toplevel(self.root)
+        self.Window.title("Set scale")
+        self.Window.geometry("234x85+679+310")
+        self.Window.minsize(120, 1)
+        self.Window.maxsize(1924, 1061)
+        self.Window.resizable(1, 1)
+        label1 = tk.Label(self.Window, text="Value = ").grid(row=0, padx=10, pady=10)
+        self.Entry = tk.Entry(self.Window, width=12)
+        self.Entry.grid(row=0, column=1, sticky=W)
+        label2 = tk.Label(self.Window, text= u'''\u03BC'''+'''m''').grid(row=0, column=2, padx=10, pady=10, sticky=E)
+        btn = tk.Button(self.Window, text="OK", command=self.set_and_close)
         btn.grid(row=2, column=1, padx=0, pady=5)
             
             
     
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    master = Tk() 
-    gfg = GFG(master)
-    master.bind("<Motion>", lambda e: gfg.callback_movement(e))
-    master.bind("<Button-1>", lambda e: gfg.callback_click(e))
-    mainloop()
+#     root = Tk() 
+#     gfg = GFG(root)
+#     root.bind("<Motion>", lambda e: gfg.callback_movement(e))
+#     root.bind("<Button-1>", lambda e: gfg.callback_click(e))
+#     mainloop()
     

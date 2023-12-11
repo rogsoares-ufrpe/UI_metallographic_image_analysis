@@ -1,0 +1,90 @@
+\doxysection{phase\+\_\+detection\+\_\+test.\+py}
+\hypertarget{phase__detection__test_8py_source}{}\label{phase__detection__test_8py_source}\index{source/phase\_detection\_test.py@{source/phase\_detection\_test.py}}
+\mbox{\hyperlink{phase__detection__test_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00001}\mbox{\hyperlink{namespacephase__detection__test}{00001}}\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00002}00002\ \textcolor{keyword}{import}\ matplotlib.pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00003}00003\ \textcolor{keyword}{import}\ cv2\ \textcolor{keyword}{as}\ cv}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00006}00006\ \textcolor{comment}{\#\ read\ image}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00007}00007\ \textcolor{comment}{\#\ img\ =\ cv.imread('images/reference\_volume\_fraction/Fig2b-\/aux.jpg')}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00008}00008\ \textcolor{comment}{\#\ img\ =\ cv.imread('images/reference\_volume\_fraction/Fig2c.jpg')}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00010}\mbox{\hyperlink{namespacephase__detection__test_a0a73f32f0d9d132e5f1a4864dbee8df4}{00010}}\ img\ =\ np.zeros((100,\ 100,\ 3),\ dtype=np.uint8)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00011}00011\ print(img.shape)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00013}00013\ img[:,:,2]=255}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00016}00016\ \textcolor{comment}{\#\ converte\ image\ to\ gray\ scale}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00017}00017\ img\ =\ cv.cvtColor(img,\ cv.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00019}00019\ \textcolor{comment}{\#\ remove\ noises\ from\ the\ thresholded\ image}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00020}\mbox{\hyperlink{namespacephase__detection__test_a97739cf7158dfaf9fb98cfc38fdd60fc}{00020}}\ kernel\ =\ np.ones((5,5),np.float32)/25}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00021}\mbox{\hyperlink{namespacephase__detection__test_a85f6bffbc939a52a096cff345355df0c}{00021}}\ median\ =\ cv.medianBlur(img,7)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00023}00023\ \textcolor{comment}{\#\ calculate\ histogram\ of\ original\ gray\ scaled\ image\ before\ and\ after\ noise\ reduction}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00024}\mbox{\hyperlink{namespacephase__detection__test_aa983b72c2bc07a85d256e3b708687d96}{00024}}\ hist\_img\ =\ cv.calcHist([img],[0],\textcolor{keywordtype}{None},[256],[0,256])}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00025}\mbox{\hyperlink{namespacephase__detection__test_a17ca4d70d66bcac021797f26be40122f}{00025}}\ hist\_median\ =\ cv.calcHist([median],[0],\textcolor{keywordtype}{None},[256],[0,256])}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00028}00028\ \textcolor{comment}{\#\ apply\ threshold\ over\ filtered\ image}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00029}\mbox{\hyperlink{namespacephase__detection__test_a48c0338cd3dba7233d020520254ed192}{00029}}\ ret,\ thres\_image\ =\ cv.threshold(img,115,255,cv.THRESH\_BINARY)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00032}00032\ \textcolor{comment}{\#\ calculates\ histogram\ and\ normalize\ it}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00033}\mbox{\hyperlink{namespacephase__detection__test_a3bc33c9acfdb5bca7280ca682e71c878}{00033}}\ hist\_th\ =\ cv.calcHist([thres\_image],[0],\textcolor{keywordtype}{None},[256],[0,256])}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00034}\mbox{\hyperlink{namespacephase__detection__test_a682c7f6b7c69195c7ddd797be9f09722}{00034}}\ hist\_thres\ =\ 100*hist\_th/np.sum(hist\_th)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00036}00036\ \textcolor{comment}{\#\ calculate\ percentage}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00037}\mbox{\hyperlink{namespacephase__detection__test_a468484f8abe6044e8d5fd1985c15ad53}{00037}}\ fase1\ =\ hist\_thres[0]}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00038}\mbox{\hyperlink{namespacephase__detection__test_a64a6e183749c604e665896263fa198f5}{00038}}\ fase2\ =\ 100-\/fase1}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00039}00039\ print(\textcolor{stringliteral}{"{}\ Fases:\ \%.2f\%\%,\ \%.2f\%\%\ "{}}\ \%\ (fase1,\ fase2))}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00042}\mbox{\hyperlink{namespacephase__detection__test_a55698d2ab4a2630e4a77fb40e1238954}{00042}}\ fig1\ =\ plt.figure(dpi=300)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00044}00044\ \textcolor{comment}{\#\ plot\ original\ gray\ scales\ before\ filter}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00045}\mbox{\hyperlink{namespacephase__detection__test_a0642e743eec0445a9c222acf09b5395b}{00045}}\ ax1\ =\ fig1.add\_subplot(221)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00046}00046\ ax1.imshow(img,\ \textcolor{stringliteral}{'gray'})}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00047}00047\ ax1.axis(\textcolor{stringliteral}{'off'})\ \ \textcolor{comment}{\#\ clear\ x-\/axis\ and\ y-\/axis}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00048}\mbox{\hyperlink{namespacephase__detection__test_a9dc742ea39cdd111984b072466c20e66}{00048}}\ ax1.set\_title(\textcolor{stringliteral}{"{}Original"{}},\ fontsize=5)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00050}00050\ \textcolor{comment}{\#\ plot\ original\ image\ filtered\ (noise\ reduction)}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00051}\mbox{\hyperlink{namespacephase__detection__test_a1ac834e0d8fc0fe9626c7e628150387a}{00051}}\ ax3\ =\ fig1.add\_subplot(222)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00052}00052\ ax3.imshow(median,\ \textcolor{stringliteral}{'gray'})}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00053}00053\ ax3.axis(\textcolor{stringliteral}{'off'})\ \ \textcolor{comment}{\#\ clear\ x-\/axis\ and\ y-\/axis}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00054}00054\ ax3.set\_title(\textcolor{stringliteral}{"{}Original:\ afetr\ filter"{}},\ fontsize=5)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00055}\mbox{\hyperlink{namespacephase__detection__test_aaf81a23806debc09a8f67b598376c03e}{00055}}\ ax3.tick\_params(labelsize=4)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00058}00058\ \textcolor{comment}{\#\ plot\ histograms}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00059}\mbox{\hyperlink{namespacephase__detection__test_a6c1ca649455316b6498a35988e0332e9}{00059}}\ ax4\ =\ fig1.add\_subplot(223)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00060}\mbox{\hyperlink{namespacephase__detection__test_a13272629611cc5c5e8cedb45f884b634}{00060}}\ ax4.plot(hist\_img,\ label=\textcolor{stringliteral}{"{}original"{}})}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00061}00061\ ax4.plot(hist\_median,\ label=\textcolor{stringliteral}{"{}filtered"{}})}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00062}00062\ ax4.legend(fontsize=5)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00063}00063\ \textcolor{comment}{\#\ ax4.set\_title("{}Threshold\ Img\ filtered"{},\ fontsize=5)}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00064}00064\ ax4.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00065}00065\ ax4.tick\_params(labelsize=4)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00067}00067\ \textcolor{comment}{\#\ plot\ thrseholdes\ image}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00068}\mbox{\hyperlink{namespacephase__detection__test_a670c07a77b310e19191f9661ee833a03}{00068}}\ ax2\ =\ fig1.add\_subplot(224)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00069}00069\ ax2.imshow(thres\_image,\ \textcolor{stringliteral}{'gray'})}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00070}00070\ ax2.axis(\textcolor{stringliteral}{'off'})\ \ \textcolor{comment}{\#\ clear\ x-\/axis\ and\ y-\/axis}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00071}00071\ ax2.set\_title(\textcolor{stringliteral}{"{}Thresholded\ Img"{}},\ fontsize=5)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00072}\mbox{\hyperlink{namespacephase__detection__test_a8732264b9d3c465817f589da911c6fcc}{00072}}\ font\ =\ \{\textcolor{stringliteral}{'family'}:\ \textcolor{stringliteral}{'serif'},}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'color'}:\ \ \textcolor{stringliteral}{'darkred'},}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'weight'}:\ \textcolor{stringliteral}{'normal'},}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'size'}:\ 6,}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00078}\mbox{\hyperlink{namespacephase__detection__test_ab3b352f6708b385d8a54c69c6afad98f}{00078}}\ ax2.text(400,\ 1500,\ \textcolor{stringliteral}{r'\$\(\backslash\)alpha:\$'}+\textcolor{stringliteral}{'\{:.2f\}\%'}.format(fase1[0])\ +\ \textcolor{stringliteral}{r'\ \ \$\(\backslash\)beta:\$'}+\textcolor{stringliteral}{'\{:.2f\}\%'}.format(fase2[0]),\ fontdict=font)}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00083}00083\ \textcolor{comment}{\#\ SFI}}
+\DoxyCodeLine{\Hypertarget{phase__detection__test_8py_source_l00084}00084\ plt.show()}
+
+\end{DoxyCode}

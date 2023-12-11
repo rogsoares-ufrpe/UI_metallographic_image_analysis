@@ -1,0 +1,59 @@
+\doxysection{source/sliders.py File Reference}
+\hypertarget{sliders_8py}{}\label{sliders_8py}\index{source/sliders.py@{source/sliders.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacesliders}{sliders}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacesliders_a1efb86e79a8cdec08e1e046d9c4179a7}{sliders.\+update}} (val)
+\item 
+\mbox{\hyperlink{namespacesliders_a825a70afa73deb279fbed2faed343505}{sliders.\+reset}} (event)
+\item 
+\mbox{\hyperlink{namespacesliders_abda03427a6dc17f040bfed33e1caf48c}{sliders.\+colorfunc}} (label)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacesliders_aa29121269b61c7990e4bcecca8b7ed1d}{sliders.\+fig}}
+\item 
+\mbox{\hyperlink{namespacesliders_a219545d64ce7c36f17a2cb83854637bd}{sliders.\+ax}}
+\item 
+\mbox{\hyperlink{namespacesliders_a1bdb6c6c89775e7fe801db862c2758e8}{sliders.\+left}}
+\item 
+\mbox{\hyperlink{namespacesliders_a6ba7017418f2c98333b3cbfeb7a480d3}{sliders.\+bottom}}
+\item 
+\mbox{\hyperlink{namespacesliders_a87eb43c07bb02acf4981097494692df3}{sliders.\+t}} = np.\+arange(0.\+0, 1.\+0, 0.\+001)
+\item 
+int \mbox{\hyperlink{namespacesliders_a0b36f000c95fcedc8f41a08ceaa7eaf4}{sliders.\+a0}} = 5
+\item 
+int \mbox{\hyperlink{namespacesliders_a6daa87979bf88ecc17ac86ee1d723f62}{sliders.\+f0}} = 3
+\item 
+float \mbox{\hyperlink{namespacesliders_aa100a72b315621eae57ddcdfa20a8009}{sliders.\+delta\+\_\+f}} = 5.\+0
+\item 
+int \mbox{\hyperlink{namespacesliders_a20149a09b1609e9548c728c431f05e20}{sliders.\+s}} = \mbox{\hyperlink{namespacesliders_a0b36f000c95fcedc8f41a08ceaa7eaf4}{a0}} \texorpdfstring{$\ast$}{*} np.\+sin(2 \texorpdfstring{$\ast$}{*} np.\+pi \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacesliders_a6daa87979bf88ecc17ac86ee1d723f62}{f0}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacesliders_a87eb43c07bb02acf4981097494692df3}{t}})
+\item 
+\mbox{\hyperlink{namespacesliders_aa9a8972e5772f34722664dc06880d8df}{sliders.\+lw}}
+\item 
+\mbox{\hyperlink{namespacesliders_aca8993b9f02f14f6aaac01795f970561}{sliders.\+x}}
+\item 
+str \mbox{\hyperlink{namespacesliders_a86178a44d091426ff0d3f61104396206}{sliders.\+axcolor}} = \textquotesingle{}lightgoldenrodyellow\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespacesliders_a095a7b96abde8a4994ddc3796ade00df}{sliders.\+axfreq}} = plt.\+axes(\mbox{[}0.\+25, 0.\+1, 0.\+65, 0.\+03\mbox{]}, facecolor=\mbox{\hyperlink{namespacesliders_a86178a44d091426ff0d3f61104396206}{axcolor}})
+\item 
+\mbox{\hyperlink{namespacesliders_a83cd4f7fdef51bed141ac4935d4c2e17}{sliders.\+axamp}} = plt.\+axes(\mbox{[}0.\+25, 0.\+15, 0.\+65, 0.\+03\mbox{]}, facecolor=\mbox{\hyperlink{namespacesliders_a86178a44d091426ff0d3f61104396206}{axcolor}})
+\item 
+\mbox{\hyperlink{namespacesliders_a013fb8e333eacae634999c7374a0195a}{sliders.\+sfreq}} = Slider(\mbox{\hyperlink{namespacesliders_a095a7b96abde8a4994ddc3796ade00df}{axfreq}}, \textquotesingle{}Freq\textquotesingle{}, 0.\+1, 30.\+0, valinit=\mbox{\hyperlink{namespacesliders_a6daa87979bf88ecc17ac86ee1d723f62}{f0}}, valstep=\mbox{\hyperlink{namespacesliders_aa100a72b315621eae57ddcdfa20a8009}{delta\+\_\+f}})
+\item 
+\mbox{\hyperlink{namespacesliders_aeadab8f82ed474ab5cbe87d299c2930e}{sliders.\+samp}} = Slider(\mbox{\hyperlink{namespacesliders_a83cd4f7fdef51bed141ac4935d4c2e17}{axamp}}, \textquotesingle{}Amp\textquotesingle{}, 0.\+1, 10.\+0, valinit=\mbox{\hyperlink{namespacesliders_a0b36f000c95fcedc8f41a08ceaa7eaf4}{a0}})
+\item 
+\mbox{\hyperlink{namespacesliders_a8a16382dc604f199f7e1c5cdcd048c37}{sliders.\+resetax}} = plt.\+axes(\mbox{[}0.\+8, 0.\+025, 0.\+1, 0.\+04\mbox{]})
+\item 
+\mbox{\hyperlink{namespacesliders_a8ef633f838cb85655aa1f0896ab8426d}{sliders.\+button}} = Button(\mbox{\hyperlink{namespacesliders_a8a16382dc604f199f7e1c5cdcd048c37}{resetax}}, \textquotesingle{}Reset\textquotesingle{}, color=\mbox{\hyperlink{namespacesliders_a86178a44d091426ff0d3f61104396206}{axcolor}}, hovercolor=\textquotesingle{}0.\+975\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacesliders_a2b4ed555c406668fb2c3ed3cd29cd1f7}{sliders.\+rax}} = plt.\+axes(\mbox{[}0.\+025, 0.\+5, 0.\+15, 0.\+15\mbox{]}, facecolor=\mbox{\hyperlink{namespacesliders_a86178a44d091426ff0d3f61104396206}{axcolor}})
+\item 
+\mbox{\hyperlink{namespacesliders_a3b74c8aa54a22abd6921ec3a595c1b7a}{sliders.\+radio}} = Radio\+Buttons(\mbox{\hyperlink{namespacesliders_a2b4ed555c406668fb2c3ed3cd29cd1f7}{rax}}, (\textquotesingle{}red\textquotesingle{}, \textquotesingle{}blue\textquotesingle{}, \textquotesingle{}green\textquotesingle{}), active=0)
+\end{DoxyCompactItemize}

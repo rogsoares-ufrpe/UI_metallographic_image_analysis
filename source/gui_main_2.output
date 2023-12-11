@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\roger\OneDrive\UFRPE\PESQUISA\Projeto - Analise de imagens metalograficas\Git\gui\UI_metallographic_image_analysis\source\gui_main_2.py", line 17, in <module>
+    import gui_main_2_support
+  File "C:\Users\roger\OneDrive\UFRPE\PESQUISA\Projeto - Analise de imagens metalograficas\Git\gui\UI_metallographic_image_analysis\source\gui_main_2_support.py", line 13, in <module>
+    from tabulate import tabulate
+ModuleNotFoundError: No module named 'tabulate'

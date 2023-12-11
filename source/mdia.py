@@ -25,7 +25,32 @@ class Colors:
 
 
 class MDIA:
-    """ MDIA: digital metallographic image analyzer """
+    """ MDIA: digital metallographic image analyzer 
+    
+    Lista de funções da classe MDIA
+    --------------------------------------------------------------------------
+    
+    Algoritmos de tratamento de imagem
+    --------------------------------------------------------------------------
+    def set_parameters(self, param):
+    def get_filter_name(self):
+    def set_image_filter(self, the_filter):
+    def create_binary_image(self, img_gray, thresh=150, maxval=255):
+    def get_image_dimensions(self):
+    def load_image(self, path_to_image, loaded_from_analysis=False, img=None):
+    def resize(self):
+    def set_image_for_canvas(self, img):
+    def get_orinal_image_grayscale(self):
+    def apply_filter_smooth_algorithms(self): 
+        
+    Algoritmos de segmentação de imagem
+    --------------------------------------------------------------------------
+    def find_grains(self):
+    def draw_contours(self, isFilled):
+    def grains_histogram(self):
+    
+        
+    """
 
     def __init__(self):
         self.image_cv = None        # segmentation over original image
@@ -218,7 +243,7 @@ class MDIA:
 
         "Guarrantees correct image update everytime some modification is required."
         self.image_cv = np.copy(self.image_original)
-
+        print("Number of grains: ", counter)
 
     def is_segmented(self):
         """Returns true if image grains have already been segmented."""
@@ -284,8 +309,7 @@ class MDIA:
         plt.show()
 
 
-    def apply_filter_smooth_algorithms(self):
-        
+    def apply_filter_smooth_algorithms(self):        
        
         print("Filter applied: ", self.filter_name)
         if self.filter_name == "Gaussian blur":

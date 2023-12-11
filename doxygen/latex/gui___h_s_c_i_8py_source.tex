@@ -1,0 +1,246 @@
+\doxysection{gui\+\_\+\+HSCI.\+py}
+\hypertarget{gui___h_s_c_i_8py_source}{}\label{gui___h_s_c_i_8py_source}\index{source/gui\_HSCI.py@{source/gui\_HSCI.py}}
+\mbox{\hyperlink{gui___h_s_c_i_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00001}\mbox{\hyperlink{namespacegui___h_s_c_i}{00001}}\ \textcolor{keyword}{import}\ tkinter\ \textcolor{keyword}{as}\ tk}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00002}00002\ \textcolor{keyword}{from}\ tkinter\ \textcolor{keyword}{import}\ messagebox\ \textcolor{keyword}{as}\ msgbox}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00003}00003\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00005}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard}{00005}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard}{Hilliard}}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00006}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a54f811fefbc63fb696d748ccf770837d}{00006}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a54f811fefbc63fb696d748ccf770837d}{\_\_init\_\_}}(self,\ width,\ height):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00007}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a6a760676bede1e2c6b10b8f61cdf4cf4}{00007}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a6a760676bede1e2c6b10b8f61cdf4cf4}{radius}}\ =\ 0.0}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00008}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_ad25513ce13754267de2cd3e0e64165e0}{00008}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_ad25513ce13754267de2cd3e0e64165e0}{width}}\ =\ width}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00009}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_aaae6457ad8b4966223f8ec69c4279cd4}{00009}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_aaae6457ad8b4966223f8ec69c4279cd4}{height}}\ =\ height}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00010}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a0b129340f9fa888718ab089e52bc4e6c}{00010}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a0b129340f9fa888718ab089e52bc4e6c}{r\_pixels}}\ =\ 0}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00012}00012\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00013}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_af8c5b490ef3c34ac0d8746117c1c2b12}{00013}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_af8c5b490ef3c34ac0d8746117c1c2b12}{set\_radius}}(self,\ top):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00014}00014\ \ \ \ \ \ \ \ \ value\ =\ float(top.Entry1.get())}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00015}00015\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a6a760676bede1e2c6b10b8f61cdf4cf4}{radius}}\ =\ value}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00016}00016\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a0b129340f9fa888718ab089e52bc4e6c}{r\_pixels}}\ =\ \ int(2.83464566929133*self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a6a760676bede1e2c6b10b8f61cdf4cf4}{radius}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print("{}radius:\ "{},\ self.radius)}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00018}00018\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ min\_value\ =\ np.minimum(self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_ad25513ce13754267de2cd3e0e64165e0}{width}},\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_aaae6457ad8b4966223f8ec69c4279cd4}{height}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ lim\ =\ int(min\_value/2)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a0b129340f9fa888718ab089e52bc4e6c}{r\_pixels}}\ >\ lim:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ msgbox.showerror(\textcolor{stringliteral}{"{}Radius\ error\ value"{}},\textcolor{stringliteral}{"{}It\ must\ be\ less\ than\ "{}}\ +\ str(\textcolor{stringliteral}{'\{:.2f\}'}.format(lim/2.83464566929133))\ +\ \textcolor{stringliteral}{"{}mm"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ top.w.destroy()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ top.w\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00027}\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a2798885c4589677d566b5ceae4b2b1e5}{00027}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a2798885c4589677d566b5ceae4b2b1e5}{get\_radius}}(self):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}"{}Return\ circunference\ radius\ in\ mm"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_hilliard_a0b129340f9fa888718ab089e52bc4e6c}{r\_pixels}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00032}\mbox{\hyperlink{namespacegui___h_s_c_i_ad0dbb765ad33f5b827c77ed4867927ab}{00032}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegui___h_s_c_i_ad0dbb765ad33f5b827c77ed4867927ab}{create\_Toplevel\_HSCP}}(root,\ hilliard,\ *args,\ **kwargs):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00033}00033\ \ \ \ \ top\ =\ \mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p}{Toplevel\_HSCP}}(hilliard)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ top}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00037}\mbox{\hyperlink{namespacegui___h_s_c_i_afdca39989998996c34bdd24e56b219f6}{00037}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacegui___h_s_c_i_afdca39989998996c34bdd24e56b219f6}{destroy\_Toplevel\_HSCP}}():}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{global}\ w}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00039}00039\ \ \ \ \ w.destroy()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00040}00040\ \ \ \ \ w\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00043}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p}{00043}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p}{Toplevel\_HSCP}}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00044}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_aa1839faa135e49367281209e1f751c20}{00044}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_aa1839faa135e49367281209e1f751c20}{\_\_init\_\_}}(self,\ ext,\ top=None):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00045}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a728d0a21186bb30123392e01e9c958cc}{00045}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a728d0a21186bb30123392e01e9c958cc}{w}}\ =\ tk.Toplevel()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ top\ =\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a728d0a21186bb30123392e01e9c958cc}{w}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''This\ class\ configures\ and\ populates\ the\ toplevel\ window.}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ top\ is\ the\ toplevel\ containing\ window.'''}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \_bgcolor\ =\ \textcolor{stringliteral}{'\#d9d9d9'}\ \ \textcolor{comment}{\#\ X11\ color:\ 'gray85'}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \_fgcolor\ =\ \textcolor{stringliteral}{'\#000000'}\ \ \textcolor{comment}{\#\ X11\ color:\ 'black'}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \_compcolor\ =\ \textcolor{stringliteral}{'\#d9d9d9'}\ \textcolor{comment}{\#\ X11\ color:\ 'gray85'}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \_ana1color\ =\ \textcolor{stringliteral}{'\#d9d9d9'}\ \textcolor{comment}{\#\ X11\ color:\ 'gray85'}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \_ana2color\ =\ \textcolor{stringliteral}{'\#ececec'}\ \textcolor{comment}{\#\ Closest\ X11\ color:\ 'gray92'}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ top.geometry(\textcolor{stringliteral}{"{}340x105+731+396"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ top.minsize(120,\ 1)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ top.maxsize(1924,\ 1061)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ top.resizable(0,\ 0)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ top.title(\textcolor{stringliteral}{"{}Hilliard\ Single\ Circle\ Interecept"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ top.configure(background=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ top.configure(highlightbackground=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ top.configure(highlightcolor=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00064}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{00064}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}\ =\ tk.Label(top)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.place(relx=0.029,\ rely=0.19,\ height=21,\ width=143)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(activebackground=\textcolor{stringliteral}{"{}\#f9f9f9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(activeforeground=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(background=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(disabledforeground=\textcolor{stringliteral}{"{}\#a3a3a3"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(foreground=\textcolor{stringliteral}{"{}\#000000"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(highlightbackground=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(highlightcolor=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_ab3248ced4382035df7d15bb606420630}{Label1}}.configure(text=\textcolor{stringliteral}{'''Enter\ circunference\ radius'''})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00075}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{00075}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}\ =\ tk.Button(top)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.place(relx=0.353,\ rely=0.571,\ height=24,\ width=50)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(activebackground=\textcolor{stringliteral}{"{}\#ececec"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(activeforeground=\textcolor{stringliteral}{"{}\#000000"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(background=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(disabledforeground=\textcolor{stringliteral}{"{}\#a3a3a3"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(foreground=\textcolor{stringliteral}{"{}\#000000"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(highlightbackground=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(highlightcolor=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(pady=\textcolor{stringliteral}{"{}0"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(text=\textcolor{stringliteral}{'''OK'''})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a0b545f54d8c24a5313fd034d2e6a5e76}{Button\_radius}}.configure(command=\textcolor{keyword}{lambda}:\ ext.set\_radius(self))}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00088}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{00088}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}\ =\ tk.Entry(top)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.place(relx=0.471,\ rely=0.19,height=20,\ relwidth=0.129)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(background=\textcolor{stringliteral}{"{}white"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(disabledforeground=\textcolor{stringliteral}{"{}\#a3a3a3"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(font=\textcolor{stringliteral}{"{}-\/family\ \{Courier\ New\}\ -\/size\ 10"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(foreground=\textcolor{stringliteral}{"{}\#000000"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(highlightbackground=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(highlightcolor=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(insertbackground=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(selectbackground=\textcolor{stringliteral}{"{}\#c4c4c4"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}}.configure(selectforeground=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ tooltip\_font\ =\ \textcolor{stringliteral}{"{}-\/family\ \{Segoe\ UI\}\ -\/size\ 9"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip}{ToolTip}}(self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_abed87b877c69b88dbf39c38d82e1bcf2}{Entry1}},\ tooltip\_font,\ \textcolor{stringliteral}{'''Keep\ the\ same\ unit\ measurement\ applied\ for\ the\ image\ (in)\ or\ (mm)'''},\ delay=0.5)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00102}\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{00102}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}\ =\ tk.Button(top)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.place(relx=0.588,\ rely=0.571,\ height=24,\ width=50)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(activebackground=\textcolor{stringliteral}{"{}\#ececec"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(activeforeground=\textcolor{stringliteral}{"{}\#000000"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(background=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(disabledforeground=\textcolor{stringliteral}{"{}\#a3a3a3"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(foreground=\textcolor{stringliteral}{"{}\#000000"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(highlightbackground=\textcolor{stringliteral}{"{}\#d9d9d9"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(highlightcolor=\textcolor{stringliteral}{"{}black"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(pady=\textcolor{stringliteral}{"{}0"{}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_toplevel___h_s_c_p_a54b4c11059df0d66f971117511940302}{Button\_help}}.configure(text=\textcolor{stringliteral}{'''Help'''})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00114}00114\ \textcolor{comment}{\#\ ======================================================}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00115}00115\ \textcolor{comment}{\#\ Modified\ by\ Rozen\ to\ remove\ Tkinter\ import\ statements\ and\ to\ receive}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00116}00116\ \textcolor{comment}{\#\ the\ font\ as\ an\ argument.}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00117}00117\ \textcolor{comment}{\#\ ======================================================}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00118}00118\ \textcolor{comment}{\#\ Found\ the\ original\ code\ at:}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00119}00119\ \textcolor{comment}{\#\ http://code.activestate.com/recipes/576688-\/tooltip-\/for-\/tkinter/}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00120}00120\ \textcolor{comment}{\#\ ======================================================}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00122}00122\ \textcolor{keyword}{from}\ time\ \textcolor{keyword}{import}\ time,\ localtime,\ strftime}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00124}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip}{00124}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip}{ToolTip}}(tk.Toplevel):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00125}00125\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00126}00126\ \textcolor{stringliteral}{\ \ \ \ Provides\ a\ ToolTip\ widget\ for\ Tkinter.}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00127}00127\ \textcolor{stringliteral}{\ \ \ \ To\ apply\ a\ ToolTip\ to\ any\ Tkinter\ widget,\ simply\ pass\ the\ widget\ to\ the}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00128}00128\ \textcolor{stringliteral}{\ \ \ \ ToolTip\ constructor}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00129}00129\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00130}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_abc6ed9fa2aa2c3b9c1a8448c6cf359bd}{00130}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_abc6ed9fa2aa2c3b9c1a8448c6cf359bd}{\_\_init\_\_}}(self,\ wdgt,\ tooltip\_font,\ msg=None,\ msgFunc=None,}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ delay=1,\ follow=True):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00133}00133\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Initialize\ the\ ToolTip}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00134}00134\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00135}00135\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Arguments:}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00136}00136\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ wdgt:\ The\ widget\ this\ ToolTip\ is\ assigned\ to}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00137}00137\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ tooltip\_font:\ Font\ to\ be\ used}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00138}00138\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ msg:\ \ A\ static\ string\ message\ assigned\ to\ the\ ToolTip}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00139}00139\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ msgFunc:\ A\ function\ that\ retrieves\ a\ string\ to\ use\ as\ the\ ToolTip\ text}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00140}00140\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ delay:\ \ \ The\ delay\ in\ seconds\ before\ the\ ToolTip\ appears(may\ be\ float)}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00141}00141\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ follow:\ \ If\ True,\ the\ ToolTip\ follows\ motion,\ otherwise\ hides}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00142}00142\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00143}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3f0964c5a16850b75595cc5e2943038}{00143}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3f0964c5a16850b75595cc5e2943038}{wdgt}}\ =\ wdgt}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ parent\ of\ the\ ToolTip\ is\ the\ parent\ of\ the\ ToolTips\ widget}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00145}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a14a5494a63747cf9d519a68c4f0a9943}{00145}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a14a5494a63747cf9d519a68c4f0a9943}{parent}}\ =\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3f0964c5a16850b75595cc5e2943038}{wdgt}}.master}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initalise\ the\ Toplevel}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ tk.Toplevel.\_\_init\_\_(self,\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a14a5494a63747cf9d519a68c4f0a9943}{parent}},\ bg=\textcolor{stringliteral}{'black'},\ padx=1,\ pady=1)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Hide\ initially}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ self.withdraw()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ ToolTip\ Toplevel\ should\ have\ no\ frame\ or\ title\ bar}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ self.overrideredirect(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ msgVar\ will\ contain\ the\ text\ displayed\ by\ the\ ToolTip}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00154}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a3b1d055b0a22877f1f71e30ab687b356}{00154}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a3b1d055b0a22877f1f71e30ab687b356}{msgVar}}\ =\ tk.StringVar()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ msg\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a3b1d055b0a22877f1f71e30ab687b356}{msgVar}}.set(\textcolor{stringliteral}{'No\ message\ provided'})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a3b1d055b0a22877f1f71e30ab687b356}{msgVar}}.set(msg)}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00159}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3d778721613692a0d526a291d1cef41}{00159}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3d778721613692a0d526a291d1cef41}{msgFunc}}\ =\ msgFunc}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00160}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a46160ec16d09cfd5d543ef2ab0c9edb2}{00160}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a46160ec16d09cfd5d543ef2ab0c9edb2}{delay}}\ =\ delay}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00161}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_acb473a675b8ea8095c5ca15241c0da01}{00161}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_acb473a675b8ea8095c5ca15241c0da01}{follow}}\ =\ follow}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00162}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{00162}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ =\ 0}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00163}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aebbbf17dadbbe7065a8eeed7cac02076}{00163}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aebbbf17dadbbe7065a8eeed7cac02076}{lastMotion}}\ =\ 0}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ text\ of\ the\ ToolTip\ is\ displayed\ in\ a\ Message\ widget}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ tk.Message(self,\ textvariable=self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a3b1d055b0a22877f1f71e30ab687b356}{msgVar}},\ bg=\textcolor{stringliteral}{'\#FFFFDD'},}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ font=tooltip\_font,}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aspect=1000).grid()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ bindings\ to\ the\ widget.\ \ This\ will\ NOT\ override}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ bindings\ that\ the\ widget\ already\ has}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00171}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a877d4cec29b636e118456007985685d0}{00171}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3f0964c5a16850b75595cc5e2943038}{wdgt}}.bind(\textcolor{stringliteral}{'<Enter>'},\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a877d4cec29b636e118456007985685d0}{spawn}}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a8bfd2936ee58f176a5020f8c605fb746}{spawn}},\ \textcolor{stringliteral}{'+'})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00172}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a88f69cdc4ac4d6068e27b08b4106849b}{00172}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3f0964c5a16850b75595cc5e2943038}{wdgt}}.bind(\textcolor{stringliteral}{'<Leave>'},\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a88f69cdc4ac4d6068e27b08b4106849b}{hide}}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a6ccb6513e9a51213c6e36ce644b15a86}{hide}},\ \textcolor{stringliteral}{'+'})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00173}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a926bbda17d40ccd8c2649940aab0f26f}{00173}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3f0964c5a16850b75595cc5e2943038}{wdgt}}.bind(\textcolor{stringliteral}{'<Motion>'},\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a926bbda17d40ccd8c2649940aab0f26f}{move}}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a0854dd3167487c7bf9a1b4172600e7fe}{move}},\ \textcolor{stringliteral}{'+'})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00175}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a8bfd2936ee58f176a5020f8c605fb746}{00175}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a877d4cec29b636e118456007985685d0}{spawn}}(self,\ event=None):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00177}00177\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Spawn\ the\ ToolTip.\ \ This\ simply\ makes\ the\ ToolTip\ eligible\ for\ display.}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00178}00178\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Usually\ this\ is\ caused\ by\ entering\ the\ widget}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00179}00179\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00180}00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Arguments:}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00181}00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ event:\ The\ event\ that\ called\ this\ funciton}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00182}00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ =\ 1}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ after\ function\ takes\ a\ time\ argument\ in\ miliseconds}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00185}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a27327b0f4c5e0594f58bb9663e261caa}{00185}}\ \ \ \ \ \ \ \ \ self.after(int(self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a46160ec16d09cfd5d543ef2ab0c9edb2}{delay}}\ *\ 1000),\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a27327b0f4c5e0594f58bb9663e261caa}{show}}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aeea605c59ff613b0f8ee0b543bc53883}{show}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00187}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aeea605c59ff613b0f8ee0b543bc53883}{00187}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a27327b0f4c5e0594f58bb9663e261caa}{show}}(self):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00189}00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Displays\ the\ ToolTip\ if\ the\ time\ delay\ has\ been\ long\ enough}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00190}00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ ==\ 1\ \textcolor{keywordflow}{and}\ time()\ -\/\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aebbbf17dadbbe7065a8eeed7cac02076}{lastMotion}}\ >\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a46160ec16d09cfd5d543ef2ab0c9edb2}{delay}}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ =\ 2}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ ==\ 2:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ self.deiconify()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00196}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a0854dd3167487c7bf9a1b4172600e7fe}{00196}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a926bbda17d40ccd8c2649940aab0f26f}{move}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00197}00197\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00198}00198\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Processes\ motion\ within\ the\ widget.}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00199}00199\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Arguments:}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00200}00200\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ event:\ The\ event\ that\ called\ this\ function}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00201}00201\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aebbbf17dadbbe7065a8eeed7cac02076}{lastMotion}}\ =\ time()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ the\ follow\ flag\ is\ not\ set,\ motion\ within\ the}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ widget\ will\ make\ the\ ToolTip\ disappear}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_acb473a675b8ea8095c5ca15241c0da01}{follow}}\ \textcolor{keywordflow}{is}\ \textcolor{keyword}{False}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ self.withdraw()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ =\ 1}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Offset\ the\ ToolTip\ 10x10\ pixes\ southwest\ of\ the\ pointer}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ self.geometry(\textcolor{stringliteral}{'+\%i+\%i'}\ \%\ (event.x\_root+20,\ event.y\_root-\/10))}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ to\ call\ the\ message\ function.\ \ Will\ not\ change}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ the\ message\ if\ the\ message\ function\ is\ None\ or}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ the\ message\ function\ fails}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a3b1d055b0a22877f1f71e30ab687b356}{msgVar}}.set(self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa3d778721613692a0d526a291d1cef41}{msgFunc}}())}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ self.after(int(self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a46160ec16d09cfd5d543ef2ab0c9edb2}{delay}}\ *\ 1000),\ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a27327b0f4c5e0594f58bb9663e261caa}{show}}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aeea605c59ff613b0f8ee0b543bc53883}{show}})}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00221}\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a6ccb6513e9a51213c6e36ce644b15a86}{00221}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_a88f69cdc4ac4d6068e27b08b4106849b}{hide}}(self,\ event=None):}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00223}00223\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Hides\ the\ ToolTip.\ \ Usually\ this\ is\ caused\ by\ leaving\ the\ widget}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00224}00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Arguments:}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00225}00225\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ event:\ The\ event\ that\ called\ this\ function}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00226}00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classgui___h_s_c_i_1_1_tool_tip_aa0f34184e2140ed6320529c977336f07}{visible}}\ =\ 0}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ self.withdraw()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00230}00230\ \textcolor{comment}{\#\ ===========================================================}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00231}00231\ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ End\ of\ Class\ ToolTip}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00232}00232\ \textcolor{comment}{\#\ ===========================================================}}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00234}00234\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{'\_\_main\_\_'}:}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00235}00235\ \ \ \ \ vp\_start\_gui()}
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{gui___h_s_c_i_8py_source_l00240}00240\ }
+
+\end{DoxyCode}

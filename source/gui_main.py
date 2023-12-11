@@ -67,7 +67,7 @@ class MainWindow:
         self.style.map('.',background=
             [('selected', _compcolor), ('active',_ana2color)])
 
-        top.geometry("1200x710+479+110")
+        top.geometry("1200x710+200+35")
         top.minsize(166, 1)
         top.maxsize(1924, 1041)
         top.resizable(0, 0)
@@ -385,6 +385,11 @@ class MainWindow:
         self.Radiobutton5.configure(text='''Heyn''')
         self.Radiobutton5.configure(value="1")
         self.Radiobutton5.configure(variable=gui_main_support.RB_var_MP)
+        tooltip_font = "-family {Segoe UI} -size 9"
+        ToolTip(self.Radiobutton5, tooltip_font, '''Estimate the average grain size by counting the\n '''
+                                                 '''number of grains intercepted by one or more straight\n '''
+                                                 '''lines sufficiently long to yield at least 50 intercepts.''',
+                                                 delay=0.25)
 
         self.Radiobutton6 = tk.Radiobutton(self.Labelframe2)
         self.Radiobutton6.place(relx=0.044, rely=0.591, relheight=0.106
@@ -415,6 +420,7 @@ class MainWindow:
         self.Radiobutton2.configure(text='''Abrams Three-Circle''')
         self.Radiobutton2.configure(value="3")
         self.Radiobutton2.configure(variable=gui_main_support.RB_var_MP)
+
 
         self.Spinbox_number_lines = tk.Spinbox(self.Labelframe2, from_=1.0, to=10.0)
         self.Spinbox_number_lines.place(relx=0.614, rely=0.285, relheight=0.081
@@ -850,7 +856,6 @@ class ToolTip(tk.Toplevel):
 
 if __name__ == '__main__':
     vp_start_gui()
-
 
 
 

@@ -1,0 +1,114 @@
+\doxysection{move\+\_\+cross.\+py}
+\hypertarget{move__cross_8py_source}{}\label{move__cross_8py_source}\index{source/move\_cross.py@{source/move\_cross.py}}
+\mbox{\hyperlink{move__cross_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00001}\mbox{\hyperlink{namespacemove__cross}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Sat\ May\ 23\ 14:10:00\ 2020}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ roger}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00009}00009\ \textcolor{keyword}{import}\ tkinter\ \textcolor{keyword}{as}\ tk}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00010}00010\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00011}00011\ \textcolor{keyword}{import}\ math}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00015}\mbox{\hyperlink{classmove__cross_1_1_cross}{00015}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmove__cross_1_1_cross}{Cross}}:}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00017}\mbox{\hyperlink{classmove__cross_1_1_cross_afec934c480a89261d8b2b3d356655eac}{00017}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmove__cross_1_1_cross_afec934c480a89261d8b2b3d356655eac}{\_\_init\_\_}}(self,\ window,\ canvas,\ center,\ delta=10):}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ horizontal}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00019}\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{00019}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}}\ =\ center[0]\ -\/\ delta}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00020}\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{00020}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}\ =\ center[1]}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00021}\mbox{\hyperlink{classmove__cross_1_1_cross_ab628eaf8b5afdd38ae48c308ae7defe6}{00021}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab628eaf8b5afdd38ae48c308ae7defe6}{x1}}\ =\ center[0]\ +\ delta}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00022}\mbox{\hyperlink{classmove__cross_1_1_cross_a153ad08631bb8f0a98eeaf215e12f55e}{00022}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a153ad08631bb8f0a98eeaf215e12f55e}{y1}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ vertical}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00025}\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{00025}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{x2}}\ =\ center[0]}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00026}\mbox{\hyperlink{classmove__cross_1_1_cross_ab9036bc18430b827ad1d8cf677d6b361}{00026}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab9036bc18430b827ad1d8cf677d6b361}{y2}}\ =\ center[1]\ +\ delta}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00027}\mbox{\hyperlink{classmove__cross_1_1_cross_a9d9739dd045e128e3309e45a2acd6fd5}{00027}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a9d9739dd045e128e3309e45a2acd6fd5}{x3}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{x2}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00028}\mbox{\hyperlink{classmove__cross_1_1_cross_a16c7224f5784919b1c655135e49b3e7a}{00028}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a16c7224f5784919b1c655135e49b3e7a}{y3}}\ =\ center[1]\ -\/\ delta}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00030}\mbox{\hyperlink{classmove__cross_1_1_cross_ad29c99ff6728970c7cecb909ae0393d4}{00030}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ad29c99ff6728970c7cecb909ae0393d4}{delta}}\ =\ delta}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00031}\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{00031}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}\ =\ canvas}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00033}\mbox{\hyperlink{classmove__cross_1_1_cross_aa8b6f24d0d32256e25b23de59b1da6cb}{00033}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aa8b6f24d0d32256e25b23de59b1da6cb}{line1}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}.create\_line(self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab628eaf8b5afdd38ae48c308ae7defe6}{x1}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a153ad08631bb8f0a98eeaf215e12f55e}{y1}},\ width=2,\ fill=\textcolor{stringliteral}{'blue'})}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00034}\mbox{\hyperlink{classmove__cross_1_1_cross_af476170c0d8752b8e9dd31f1823635ea}{00034}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af476170c0d8752b8e9dd31f1823635ea}{line2}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}.create\_line(self.\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{x2}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab9036bc18430b827ad1d8cf677d6b361}{y2}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a9d9739dd045e128e3309e45a2acd6fd5}{x3}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a16c7224f5784919b1c655135e49b3e7a}{y3}},\ width=2,\ fill=\textcolor{stringliteral}{'blue'})}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00036}\mbox{\hyperlink{classmove__cross_1_1_cross_a33b1b747c406592147bfcb0bd362af2b}{00036}}\ \ \ \ \ \ \ \ \ window.bind(\textcolor{stringliteral}{"{}<B1-\/Motion>"{}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a33b1b747c406592147bfcb0bd362af2b}{move2}}\mbox{\hyperlink{classmove__cross_1_1_cross_a029d97126c19c3c34d4e2d36dea19a45}{move2}})}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00037}\mbox{\hyperlink{classmove__cross_1_1_cross_ad186682813c63194586a60943a7466df}{00037}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ad186682813c63194586a60943a7466df}{first\_movement}}\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00038}\mbox{\hyperlink{classmove__cross_1_1_cross_aa33bc27a61353ec5a3c84f957b56a29f}{00038}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aa33bc27a61353ec5a3c84f957b56a29f}{ex\_old}}\ =\ 0}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00039}\mbox{\hyperlink{classmove__cross_1_1_cross_a1a51688b66fe375ffdf1cf860997308c}{00039}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1a51688b66fe375ffdf1cf860997308c}{ey\_old}}\ =\ 0}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00042}\mbox{\hyperlink{classmove__cross_1_1_cross_ac5da194e6b4527ad8ae28dfa1828e7a2}{00042}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmove__cross_1_1_cross_ac5da194e6b4527ad8ae28dfa1828e7a2}{move}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ dx\ =\ event.x\ -\/\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ dy\ =\ event.y\ -\/\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}.\mbox{\hyperlink{classmove__cross_1_1_cross_ac5da194e6b4527ad8ae28dfa1828e7a2}{move}}(self.\mbox{\hyperlink{classmove__cross_1_1_cross_aa8b6f24d0d32256e25b23de59b1da6cb}{line1}},\ dx,\ dy)}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}.\mbox{\hyperlink{classmove__cross_1_1_cross_ac5da194e6b4527ad8ae28dfa1828e7a2}{move}}(self.\mbox{\hyperlink{classmove__cross_1_1_cross_af476170c0d8752b8e9dd31f1823635ea}{line2}},\ dx,\ dy)}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}}\ +\ dx}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}\ +\ dy}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print("{}dx\ =\ \%d,\ dy\ =\ \%d,\ x0\ =\ \%d,\ y0\ =\ \%d,\ click:\ \%d,\ \%d"{}\ \%\ (dx,dy,x0,y0,\ event.x,\ event.x))}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00052}00052\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00053}\mbox{\hyperlink{classmove__cross_1_1_cross_a029d97126c19c3c34d4e2d36dea19a45}{00053}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmove__cross_1_1_cross_a33b1b747c406592147bfcb0bd362af2b}{move2}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ad186682813c63194586a60943a7466df}{first\_movement}}:}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ dx\ =\ event.x\ -\/\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aa33bc27a61353ec5a3c84f957b56a29f}{ex\_old}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ dy\ =\ event.y\ -\/\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1a51688b66fe375ffdf1cf860997308c}{ey\_old}}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}}\ +\ dx}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}}\ +\ dy}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab628eaf8b5afdd38ae48c308ae7defe6}{x1}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab628eaf8b5afdd38ae48c308ae7defe6}{x1}}\ +\ dx}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a153ad08631bb8f0a98eeaf215e12f55e}{y1}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a153ad08631bb8f0a98eeaf215e12f55e}{y1}}\ +\ dy}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{x2}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{x2}}\ +\ dx}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab9036bc18430b827ad1d8cf677d6b361}{y2}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab9036bc18430b827ad1d8cf677d6b361}{y2}}\ +\ dy}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a9d9739dd045e128e3309e45a2acd6fd5}{x3}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a9d9739dd045e128e3309e45a2acd6fd5}{x3}}\ +\ dx}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a16c7224f5784919b1c655135e49b3e7a}{y3}}\ =\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a16c7224f5784919b1c655135e49b3e7a}{y3}}\ +\ dy}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ newxy1\ =\ [self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1c24a85e1a0169a89c732221156e9894}{x0}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aaacc873c9406a19cb3b56dbe084a140a}{y0}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab628eaf8b5afdd38ae48c308ae7defe6}{x1}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a153ad08631bb8f0a98eeaf215e12f55e}{y1}}]}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ newxy2\ =\ [self.\mbox{\hyperlink{classmove__cross_1_1_cross_ae094fe4ac58809ce0072f5529621a681}{x2}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ab9036bc18430b827ad1d8cf677d6b361}{y2}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a9d9739dd045e128e3309e45a2acd6fd5}{x3}},\ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a16c7224f5784919b1c655135e49b3e7a}{y3}}]}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}.coords(self.\mbox{\hyperlink{classmove__cross_1_1_cross_aa8b6f24d0d32256e25b23de59b1da6cb}{line1}},\ *newxy1)}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_af62a5630d9123bad2f543e6331a67d09}{canvas}}.coords(self.\mbox{\hyperlink{classmove__cross_1_1_cross_af476170c0d8752b8e9dd31f1823635ea}{line2}},\ *newxy2)}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_ad186682813c63194586a60943a7466df}{first\_movement}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_aa33bc27a61353ec5a3c84f957b56a29f}{ex\_old}}\ =\ event.x}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmove__cross_1_1_cross_a1a51688b66fe375ffdf1cf860997308c}{ey\_old}}\ =\ event.y}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00080}00080\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00082}\mbox{\hyperlink{namespacemove__cross_aac6521d6fa2912600ded7ce79b9c5d17}{00082}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemove__cross_aac6521d6fa2912600ded7ce79b9c5d17}{define\_circular\_pattern}}(window,\ canvas):}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00083}00083\ \ \ \ \ width=500}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00084}00084\ \ \ \ \ height=500}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00085}00085\ \ \ \ \ radius\ =\ 100}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00086}00086\ \ \ \ \ center\ =\ (int(width/2),\ int(height/2))}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00087}00087\ \ \ \ \ num\_points\ =\ 8}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00088}00088\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00089}00089\ \ \ \ \ teta\ =\ 0\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00090}00090\ \ \ \ \ x0\ =\ center[0]+int(radius*np.cos(teta))}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00091}00091\ \ \ \ \ y0\ =\ center[1]+int(radius*np.sin(teta))}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00092}00092\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00093}00093\ \ \ \ \ cross1\ =\ \mbox{\hyperlink{classmove__cross_1_1_cross}{Cross}}(window,\ canvas,\ (x0,y0))}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00094}00094\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00096}\mbox{\hyperlink{namespacemove__cross_a8798446249fc251f9bddf7230f5e2711}{00096}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemove__cross_a8798446249fc251f9bddf7230f5e2711}{main}}():}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00097}00097\ \ \ \ \ window\ =\ tk.Tk()}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00098}00098\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00099}00099\ \ \ \ \ width=500}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00100}00100\ \ \ \ \ height=500}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00101}00101\ \ \ \ \ canvas\ =\ tk.Canvas(window,\ width=width,\ height=height)}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00102}00102\ \ \ \ \ canvas.pack()}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{namespacemove__cross_aac6521d6fa2912600ded7ce79b9c5d17}{define\_circular\_pattern}}(window,\ canvas)}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00104}00104\ \ \ \ \ tk.mainloop()}
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00105}00105\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{move__cross_8py_source_l00108}00108\ \mbox{\hyperlink{namespacemove__cross_a8798446249fc251f9bddf7230f5e2711}{main}}()}
+
+\end{DoxyCode}

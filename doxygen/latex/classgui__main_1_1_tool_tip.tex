@@ -1,0 +1,277 @@
+\doxysection{gui\+\_\+main.\+Tool\+Tip Class Reference}
+\hypertarget{classgui__main_1_1_tool_tip}{}\label{classgui__main_1_1_tool_tip}\index{gui\_main.ToolTip@{gui\_main.ToolTip}}
+
+
+Inheritance diagram for gui\+\_\+main.\+Tool\+Tip\+:
+% FIG 0
+
+
+Collaboration diagram for gui\+\_\+main.\+Tool\+Tip\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_afbf4dfee52a34f01c62d015705ac9270}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgui__main_1_1_tool_tip_a5055b6f586d9c1c42b4d41a1471b3790}{wdgt}}, tooltip\+\_\+font, msg=None, \mbox{\hyperlink{classgui__main_1_1_tool_tip_a90925d7f60b26966d80cb29e718c3c63}{msg\+Func}}=None, \mbox{\hyperlink{classgui__main_1_1_tool_tip_a395e0a939ca09a4a12b7ffac7134cf30}{delay}}=1, \mbox{\hyperlink{classgui__main_1_1_tool_tip_a498b3c8d020f089653e36b9b9f83541d}{follow}}=True)
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_aa5dc807efc7dfb5514abfdf9a51f1bee}{spawn}} (self, event=None)
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a59775b1cb76d19db0e304064290151b2}{show}} (self)
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_ac41dce13b26bc1db100e47536d6bfea9}{move}} (self, event)
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_ae178d58cc01e33ecd9a22578c0acea15}{hide}} (self, event=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a5055b6f586d9c1c42b4d41a1471b3790}{wdgt}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a5ff8c6bac86e91804feb1ca23d8a585d}{parent}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a5c01b13584c593ee71494ca7d60216b9}{msg\+Var}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a90925d7f60b26966d80cb29e718c3c63}{msg\+Func}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a395e0a939ca09a4a12b7ffac7134cf30}{delay}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a498b3c8d020f089653e36b9b9f83541d}{follow}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a36798d40c36129d233d822792e6a3e90}{visible}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_ab92ccc1514875044a3bf4b12bd5284f9}{last\+Motion}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_ac2a3b79a529a2a7f1b0e45ffe5b93fb3}{spawn}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_ab2c0894f13179062a967d6869280fc9a}{hide}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_aa9c207d08d2312380be1b6bb24dab843}{move}}
+\item 
+\mbox{\hyperlink{classgui__main_1_1_tool_tip_a65dc0cddc5e1e7798b9ba3dc05813c7c}{show}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Provides a ToolTip widget for Tkinter.
+To apply a ToolTip to any Tkinter widget, simply pass the widget to the
+ToolTip constructor
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00741}{741}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgui__main_1_1_tool_tip_afbf4dfee52a34f01c62d015705ac9270}\label{classgui__main_1_1_tool_tip_afbf4dfee52a34f01c62d015705ac9270} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{wdgt,  }\item[{}]{tooltip\+\_\+font,  }\item[{}]{msg = {\ttfamily None},  }\item[{}]{msg\+Func = {\ttfamily None},  }\item[{}]{delay = {\ttfamily 1},  }\item[{}]{follow = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the ToolTip
+
+Arguments:
+  wdgt: The widget this ToolTip is assigned to
+  tooltip_font: Font to be used
+  msg:  A static string message assigned to the ToolTip
+  msgFunc: A function that retrieves a string to use as the ToolTip text
+  delay:   The delay in seconds before the ToolTip appears(may be float)
+  follow:  If True, the ToolTip follows motion, otherwise hides
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00747}{747}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgui__main_1_1_tool_tip_ae178d58cc01e33ecd9a22578c0acea15}\label{classgui__main_1_1_tool_tip_ae178d58cc01e33ecd9a22578c0acea15} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!hide@{hide}}
+\index{hide@{hide}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{hide()}{hide()}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+hide (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Hides the ToolTip.  Usually this is caused by leaving the widget
+Arguments:
+  event: The event that called this function
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00838}{838}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classgui__main_1_1_tool_tip_ac41dce13b26bc1db100e47536d6bfea9}\label{classgui__main_1_1_tool_tip_ac41dce13b26bc1db100e47536d6bfea9} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!move@{move}}
+\index{move@{move}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+move (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processes motion within the widget.
+Arguments:
+  event: The event that called this function
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00813}{813}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classgui__main_1_1_tool_tip_a59775b1cb76d19db0e304064290151b2}\label{classgui__main_1_1_tool_tip_a59775b1cb76d19db0e304064290151b2} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!show@{show}}
+\index{show@{show}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{show()}{show()}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+show (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Displays the ToolTip if the time delay has been long enough
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00804}{804}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+Here is the caller graph for this function\+:
+% FIG 4
+\Hypertarget{classgui__main_1_1_tool_tip_aa5dc807efc7dfb5514abfdf9a51f1bee}\label{classgui__main_1_1_tool_tip_aa5dc807efc7dfb5514abfdf9a51f1bee} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!spawn@{spawn}}
+\index{spawn@{spawn}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{spawn()}{spawn()}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+spawn (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Spawn the ToolTip.  This simply makes the ToolTip eligible for display.
+Usually this is caused by entering the widget
+
+Arguments:
+  event: The event that called this funciton
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00792}{792}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgui__main_1_1_tool_tip_a395e0a939ca09a4a12b7ffac7134cf30}\label{classgui__main_1_1_tool_tip_a395e0a939ca09a4a12b7ffac7134cf30} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!delay@{delay}}
+\index{delay@{delay}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{delay}{delay}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+delay}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00777}{777}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a498b3c8d020f089653e36b9b9f83541d}\label{classgui__main_1_1_tool_tip_a498b3c8d020f089653e36b9b9f83541d} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!follow@{follow}}
+\index{follow@{follow}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{follow}{follow}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+follow}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00778}{778}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_ab2c0894f13179062a967d6869280fc9a}\label{classgui__main_1_1_tool_tip_ab2c0894f13179062a967d6869280fc9a} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!hide@{hide}}
+\index{hide@{hide}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{hide}{hide}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+hide}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00789}{789}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_ab92ccc1514875044a3bf4b12bd5284f9}\label{classgui__main_1_1_tool_tip_ab92ccc1514875044a3bf4b12bd5284f9} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!lastMotion@{lastMotion}}
+\index{lastMotion@{lastMotion}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{lastMotion}{lastMotion}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+last\+Motion}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00780}{780}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_aa9c207d08d2312380be1b6bb24dab843}\label{classgui__main_1_1_tool_tip_aa9c207d08d2312380be1b6bb24dab843} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!move@{move}}
+\index{move@{move}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{move}{move}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+move}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00790}{790}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a90925d7f60b26966d80cb29e718c3c63}\label{classgui__main_1_1_tool_tip_a90925d7f60b26966d80cb29e718c3c63} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!msgFunc@{msgFunc}}
+\index{msgFunc@{msgFunc}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{msgFunc}{msgFunc}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+msg\+Func}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00776}{776}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a5c01b13584c593ee71494ca7d60216b9}\label{classgui__main_1_1_tool_tip_a5c01b13584c593ee71494ca7d60216b9} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!msgVar@{msgVar}}
+\index{msgVar@{msgVar}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{msgVar}{msgVar}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+msg\+Var}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00771}{771}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a5ff8c6bac86e91804feb1ca23d8a585d}\label{classgui__main_1_1_tool_tip_a5ff8c6bac86e91804feb1ca23d8a585d} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!parent@{parent}}
+\index{parent@{parent}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+parent}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00762}{762}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a65dc0cddc5e1e7798b9ba3dc05813c7c}\label{classgui__main_1_1_tool_tip_a65dc0cddc5e1e7798b9ba3dc05813c7c} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!show@{show}}
+\index{show@{show}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{show}{show}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+show}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00802}{802}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_ac2a3b79a529a2a7f1b0e45ffe5b93fb3}\label{classgui__main_1_1_tool_tip_ac2a3b79a529a2a7f1b0e45ffe5b93fb3} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!spawn@{spawn}}
+\index{spawn@{spawn}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{spawn}{spawn}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+spawn}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00788}{788}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a36798d40c36129d233d822792e6a3e90}\label{classgui__main_1_1_tool_tip_a36798d40c36129d233d822792e6a3e90} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!visible@{visible}}
+\index{visible@{visible}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{visible}{visible}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+visible}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00779}{779}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+\Hypertarget{classgui__main_1_1_tool_tip_a5055b6f586d9c1c42b4d41a1471b3790}\label{classgui__main_1_1_tool_tip_a5055b6f586d9c1c42b4d41a1471b3790} 
+\index{gui\_main.ToolTip@{gui\_main.ToolTip}!wdgt@{wdgt}}
+\index{wdgt@{wdgt}!gui\_main.ToolTip@{gui\_main.ToolTip}}
+\doxysubsubsection{\texorpdfstring{wdgt}{wdgt}}
+{\footnotesize\ttfamily gui\+\_\+main.\+Tool\+Tip.\+wdgt}
+
+
+
+Definition at line \mbox{\hyperlink{gui__main_8py_source_l00760}{760}} of file \mbox{\hyperlink{gui__main_8py_source}{gui\+\_\+main.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+source/\mbox{\hyperlink{gui__main_8py}{gui\+\_\+main.\+py}}\end{DoxyCompactItemize}

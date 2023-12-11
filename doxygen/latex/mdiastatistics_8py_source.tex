@@ -1,0 +1,80 @@
+\doxysection{mdiastatistics.\+py}
+\hypertarget{mdiastatistics_8py_source}{}\label{mdiastatistics_8py_source}\index{source/mdiastatistics.py@{source/mdiastatistics.py}}
+\mbox{\hyperlink{mdiastatistics_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00001}\mbox{\hyperlink{namespacemdiastatistics}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00003}00003\ \textcolor{stringliteral}{UNIVERSIDADE\ FEDERAL\ RURAL\ DE\ PERNAMBUCO\ -\/\ UFRPE}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00004}00004\ \textcolor{stringliteral}{UNIDADE\ ACADÊMICA\ DO\ CABO\ DE\ SANTO\ AGOSTINHO\ -\/\ UACSA}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00005}00005\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00006}00006\ \textcolor{stringliteral}{@author(s):}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ \ \ Rogério\ Soares\ (rogerio.soaress@ufrpe.br)}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00009}00009\ \textcolor{stringliteral}{Created\ on\ Wed\ Apr\ 29\ 00:03:47\ 2020}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00010}00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00013}00013\ \textcolor{keyword}{import}\ tkinter}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00014}00014\ \textcolor{keyword}{from}\ matplotlib.backends.backend\_tkagg\ \textcolor{keyword}{import}\ (FigureCanvasTkAgg,\ NavigationToolbar2Tk)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00015}00015\ \textcolor{comment}{\#\ Implement\ the\ default\ Matplotlib\ key\ bindings.}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00016}00016\ \textcolor{keyword}{from}\ matplotlib.backend\_bases\ \textcolor{keyword}{import}\ key\_press\_handler}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00017}00017\ \textcolor{keyword}{import}\ scipy.stats\ \textcolor{keyword}{as}\ scs}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00018}00018\ \textcolor{keyword}{from}\ matplotlib.figure\ \textcolor{keyword}{import}\ Figure}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00019}00019\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00022}\mbox{\hyperlink{namespacemdiastatistics_ad2e14ef7f2746d6aa6dd66b32ebbbfb0}{00022}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemdiastatistics_ad2e14ef7f2746d6aa6dd66b32ebbbfb0}{on\_key\_press}}(event):}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00023}00023\ \ \ \ \ print(\textcolor{stringliteral}{"{}you\ pressed\ \{\}"{}}.format(event.key))}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00024}00024\ \ \ \ \ key\_press\_handler(event,\ canvas,\ toolbar)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00026}00026\ \textcolor{comment}{\#\ global\ canvas\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00027}00027\ \textcolor{comment}{\#\ canvas.mpl\_connect("{}key\_press\_event"{},\ on\_key\_press)}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00029}00029\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00030}\mbox{\hyperlink{namespacemdiastatistics_a02a8d942567cc066ac0e07e795726c8d}{00030}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemdiastatistics_a02a8d942567cc066ac0e07e795726c8d}{\_quit}}():}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00031}00031\ \ \ \ \ stat\_window.destroy()\ \ \ \textcolor{comment}{\#\ this\ is\ necessary\ on\ Windows\ to\ prevent}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fatal\ Python\ Error:\ PyEval\_RestoreThread:\ NULL\ tstate}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00034}\mbox{\hyperlink{namespacemdiastatistics_a9f97ff3627f3912f6ae0978f5636a9f6}{00034}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacemdiastatistics_a9f97ff3627f3912f6ae0978f5636a9f6}{plot\_stat}}(x,\ window,\ n\_bins\ =\ 12,\ win\_title="{}Statistics"{}):}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00035}00035\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00036}00036\ \ \ \ \ vec\ =\ np.array(x)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{global}\ stat\_window}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00039}00039\ \ \ \ \ stat\_window\ =\ tkinter.Toplevel(window)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00040}00040\ \ \ \ \ stat\_window.wm\_title(win\_title)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00042}00042\ \ \ \ \ fig\ =\ Figure(figsize=(5,\ 4),\ dpi=100)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00043}00043\ \ \ \ \ t\ =\ np.arange(0,\ 3,\ .01)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00044}00044\ \ \ \ \ ax\ =\ fig.add\_subplot(111)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00045}00045\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00047}00047\ \ \ \ \ n,\ bins,\ patches\ \ =\ ax.hist(x,\ bins=n\_bins,\ density=1,\ facecolor=\textcolor{stringliteral}{'blue'},\ alpha=0.5)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00049}00049\ \ \ \ \ \textcolor{comment}{\#\ add\ a\ 'best\ fit'\ line}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00050}00050\ \ \ \ \ mu\ =\ np.mean(x)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00051}00051\ \ \ \ \ sigma\ =\ np.std(x)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00052}00052\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00053}00053\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00054}00054\ \ \ \ \ ax.set\_xlabel(\textcolor{stringliteral}{r'Grain\ area\ distribution\ \$\(\backslash\)left[\(\backslash\)mu\ m\string^2\(\backslash\)right]\$'})}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00055}00055\ \ \ \ \ ax.plot(bins,scs.norm.pdf(bins,\ mu,\ sigma),\ \textcolor{stringliteral}{'-\/-\/'},\ color=\textcolor{stringliteral}{'r'},\ lw=1.4,label=\textcolor{stringliteral}{'\$\(\backslash\)mathcal\{N\}[0,1]\$'})}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00056}00056\ \ \ \ \ ax.set\_ylabel(\textcolor{stringliteral}{'Frequency\ (\%)'})}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00057}00057\ \ \ \ \ fig.tight\_layout()}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00059}00059\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{global}\ canvas}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00061}00061\ \ \ \ \ canvas\ =\ FigureCanvasTkAgg(fig,\ master=stat\_window)\ \ \textcolor{comment}{\#\ A\ tk.DrawingArea.}}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00062}00062\ \ \ \ \ canvas.draw()}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00063}00063\ \ \ \ \ canvas.get\_tk\_widget().pack(side=tkinter.TOP,\ fill=tkinter.BOTH,\ expand=1)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00064}00064\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00065}00065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{global}\ toolbar}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00067}00067\ \ \ \ \ toolbar\ =\ NavigationToolbar2Tk(canvas,\ stat\_window)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00068}00068\ \ \ \ \ toolbar.update()}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00069}00069\ \ \ \ \ canvas.get\_tk\_widget().pack(side=tkinter.TOP,\ fill=tkinter.BOTH,\ expand=1)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00071}00071\ \ \ \ \ button\ =\ tkinter.Button(master=stat\_window,\ text=\textcolor{stringliteral}{"{}Quit"{}},\ command=\_quit)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00072}00072\ \ \ \ \ button.pack(side=tkinter.BOTTOM)}
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00073}00073\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdiastatistics_8py_source_l00074}00074\ \ \ \ \ }
+
+\end{DoxyCode}

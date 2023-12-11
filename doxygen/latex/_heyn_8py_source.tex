@@ -1,0 +1,124 @@
+\doxysection{Heyn.\+py}
+\hypertarget{_heyn_8py_source}{}\label{_heyn_8py_source}\index{source/Heyn.py@{source/Heyn.py}}
+\mbox{\hyperlink{_heyn_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00001}\mbox{\hyperlink{namespace_heyn}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00003}00003\ \textcolor{stringliteral}{UNIVERSIDADE\ FEDERAL\ RURAL\ DE\ PERNAMBUCO\ -\/\ UFRPE}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00004}00004\ \textcolor{stringliteral}{UNIDADE\ ACADÊMICA\ DO\ CABO\ DE\ SANTO\ AGOSTINHO\ -\/\ UACSA}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00005}00005\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00006}00006\ \textcolor{stringliteral}{@author(s):}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ \ \ Rogério\ Soares\ (rogerio.soaress@ufrpe.br)}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00009}00009\ \textcolor{stringliteral}{Created\ on\ Fri\ Apr\ 17\ 21:50:27\ 2020}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00010}00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00012}00012\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00013}00013\ \textcolor{keyword}{from}\ tkinter\ \textcolor{keyword}{import}\ messagebox\ \textcolor{keyword}{as}\ msgbox}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00014}00014\ \textcolor{keyword}{import}\ tkinter\ \textcolor{keyword}{as}\ tk}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00015}00015\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00016}00016\ \textcolor{keyword}{import}\ geometry\ \textcolor{keyword}{as}\ geo}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00019}\mbox{\hyperlink{namespace_heyn_a0f92d47d44f685c0ab36ac7bf330d5db}{00019}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespace_heyn_a0f92d47d44f685c0ab36ac7bf330d5db}{procedure}}(width,\ height,\ image\_analyzer,\ window):}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00020}00020\ \ \ \ \ \textcolor{comment}{\#\ print("{}Heyn\_linear\_Intercept(width,\ height,\ image\_analyzer,\ gs\_procedure,\ window):"{})}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00021}00021\ \ \ \ \ nlines\ =\ int(window.Spinbox\_number\_lines.get())}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00022}00022\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00023}00023\ \ \ \ \ ll\ =\ float(window.Entry\_line\_length.get())\ \textcolor{comment}{\#\ get\ line\ legth}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00024}00024\ \ \ \ \ line\_length\ =\ int(2.83464566929133*ll)\ \ \ \ \ \textcolor{comment}{\#\ convert\ line\ length\ to\ pixels}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00026}00026\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{if}\ line\_length\ >\ width:}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ msgbox.showerror(\textcolor{stringliteral}{"{}Invalid\ Value"{}},\ \textcolor{stringliteral}{"{}Line\ length\ value\ must\ be\ less\ than\ image\ width."{}})}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{else}:\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print("{}Number\ of\ lines:\ \%d\(\backslash\)nLength:\ \%d\ mm"{}\ \%\ (nlines,\ convert\_pixel\_to\_mm(line\_length)))}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ image\_analyzer.find\_grains()}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ image\_analyzer.image\_cv,\ intercepted\_list\ =\ \mbox{\hyperlink{namespace_heyn}{Heyn}}(image\_analyzer.image\_cv,\ image\_analyzer.grains\_contours,\ image\_analyzer.grains\_area,\ width,\ height,\ nlines,\ line\_length)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ image\_analyzer.set\_image\_for\_canvas(image\_analyzer.image\_cv)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ window.Canvas1.create\_image(55,\ 55,\ image=image\_analyzer.image\_canvas,\ anchor=tk.NW)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ start\_points,\ end\_points\ =\ \mbox{\hyperlink{namespace_heyn_a685657be80d2a4c30f9209dde3dc8477}{create\_horizontal\_lines}}(width,\ height,\ nlines,\ line\_length)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ geo.draw\_intercepting\_lines(start\_points,\ end\_points,\ window)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ intercepted\_list}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00040}\mbox{\hyperlink{namespace_heyn_a8f17953ec12a68d9667d187f4bd3f03f}{00040}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespace_heyn}{Heyn}}(image\_cv,\ grains\_contours,\ grains\_area,\ width,\ height,\ nlines,\ line\_length):}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00042}00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Intercept\ Procedure\ —The\ intercept\ method\ involves\ an\ actual\ count\ of\ the\ number\ of\ grains\ intercepted}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00043}00043\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ by\ a\ test\ line\ or\ the\ number\ of\ grain\ boundary\ intersections\ with\ a\ test\ line,\ per\ unit\ length\ of\ test}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00044}00044\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ line,\ used\ to\ calculate\ the\ mean\ lineal\ intercept\ length,\ ℓ¯.\ ℓ¯\ is\ used\ to\ determine\ the\ ASTM\ grain\ }}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00045}00045\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ size\ number,\ G.}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00046}00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ yellow\ =\ (0,\ 255,\ 255)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ blue\ =\ (255,\ 0,\ 0)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ black\ =\ (0,\ 0,\ 0)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ color\ =\ [black,\ blue,\ yellow]}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ List\ of\ grains\ intercepted}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ intercepted\_list\ =\ []}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Draw\ horizontal\ lines\ over\ image}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ h\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ delta\_h\ =\ int(height/(nlines+1))}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ x0\ =\ int(0.5*(width\ -\/\ line\_length))}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ x1\ =\ int(0.5*(width\ +\ line\_length))}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ j=0}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(nlines):}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ h\ +\ delta\_h}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ grains\_counter\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ for\ each\ line,\ check\ which\ grains\ are\ intercepted\ by\ it\ highlight\ them}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Loop\ over\ all\ grains\ and\ find:\ inetrcepted\ and\ inside\ circle}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ area,\ cnt\ \textcolor{keywordflow}{in}\ zip(grains\_area,\ grains\_contours):}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftmost\ =\ tuple(cnt[cnt[:,:,0].argmin()][0])}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightmost\ =\ tuple(cnt[cnt[:,:,0].argmax()][0])}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bottommost\ =\ tuple(cnt[cnt[:,:,1].argmin()][0])}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topmost\ =\ tuple(cnt[cnt[:,:,1].argmax()][0])}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ if\ grain\ is\ completely\ intercepted\ by\ horizontal\ line}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check1\ =\ bottommost[1]\ <=\ h\ <=\ topmost[1]}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check2\ =\ x1\ >=\ rightmost[0]}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ check3\ =\ x0\ <=\ leftmost[0]}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ check1\ \textcolor{keywordflow}{and}\ check2\ \ \textcolor{keywordflow}{and}\ check3:}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j\ =\ 2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ leftmost/right\ end\ of\ straight\ test\ lines\ lies\ inside\ grains}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ check1\ \textcolor{keywordflow}{and}\ leftmost[0]\ <\ x0\ <\ rightmost[0]\ \textcolor{keywordflow}{or}\ check1\ \textcolor{keywordflow}{and}\ leftmost[0]\ <\ x1\ <\ rightmost[0]:}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \#\ check\ if\ grain\ contour\ is\ really\ intercepted\ by\ line}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cv2.pointPolygonTest(cnt,(x0,h),\textcolor{keyword}{False})\ >\ 0:}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j\ =\ 1}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grains\_counter\ +=\ 1}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ intercepted\_list.append(area)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv2.drawContours(image\_cv,\ [cnt],\ 0,\ color[j],\ thickness=cv2.FILLED)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv2.drawContours(image\_cv,\ [cnt],\ 0,\ black,\ thickness=1)}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ image\_cv,\ intercepted\_list}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00099}00099\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00100}00100\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00101}\mbox{\hyperlink{namespace_heyn_a685657be80d2a4c30f9209dde3dc8477}{00101}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespace_heyn_a685657be80d2a4c30f9209dde3dc8477}{create\_horizontal\_lines}}(width,\ height,\ nlines,\ line\_length):}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00102}00102\ \ \ \ \ h\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00103}00103\ \ \ \ \ delta\_h\ =\ int(height/(nlines+1))}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00105}00105\ \ \ \ \ start\_points\ =\ []}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00106}00106\ \ \ \ \ end\_points\ =\ []}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00107}00107\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00108}00108\ \ \ \ \ x0\ =\ int(0.5*(width\ -\/\ line\_length))\ +\ 55}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00109}00109\ \ \ \ \ x1\ =\ x0\ +\ line\_length}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00110}00110\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(nlines):}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ h\ =\ h\ +\ delta\_h}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ y0\ =\ h\ +\ 55}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ y1\ =\ y0}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ start\_points.append((x0,y0))}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ end\_points.append((x1,y1))}
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_heyn_8py_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{return}\ start\_points,\ end\_points}
+
+\end{DoxyCode}

@@ -1,0 +1,277 @@
+\doxysection{threshold\+\_\+gui.\+Tool\+Tip Class Reference}
+\hypertarget{classthreshold__gui_1_1_tool_tip}{}\label{classthreshold__gui_1_1_tool_tip}\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+
+
+Inheritance diagram for threshold\+\_\+gui.\+Tool\+Tip\+:
+% FIG 0
+
+
+Collaboration diagram for threshold\+\_\+gui.\+Tool\+Tip\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a5732ca1a609e269b040e446ca83b02c5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a276c2ddbba6bdff928e6c397959e35dd}{wdgt}}, tooltip\+\_\+font, msg=None, \mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a72101c00a1563cf11292b65ffcc5277e}{msg\+Func}}=None, \mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_aae5928ae6de72fe6b6566d6a17111c3a}{delay}}=1, \mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_affb1de6b7c9d1289865595087215fdcc}{follow}}=True)
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a2cfc0394ffbf607fc66676458aed021a}{spawn}} (self, event=None)
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a873f0e5288d7a9c4f5b99b0f3ddc69c2}{show}} (self)
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a95a1e76e35da50f20649887f1a614abc}{move}} (self, event)
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_aafe9821676b74a21e23021a7ca931f01}{hide}} (self, event=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a276c2ddbba6bdff928e6c397959e35dd}{wdgt}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a3e948b7f86f75012fef4f01b711aaa8e}{parent}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a38c88d107862730a01bc7d8f30bd2d6c}{msg\+Var}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a72101c00a1563cf11292b65ffcc5277e}{msg\+Func}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_aae5928ae6de72fe6b6566d6a17111c3a}{delay}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_affb1de6b7c9d1289865595087215fdcc}{follow}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a3cb0601719197843693c7e2de16c2c6d}{visible}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_aaf2e7a7cead0645b9c060e2ab9449f8e}{last\+Motion}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_ac9e02d379ae3de3336faab2d474c86dc}{spawn}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_af25101c6437f9a12d4630a6a71dcb59c}{hide}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a7d1d40245d5b5c601f5b2774de04a542}{move}}
+\item 
+\mbox{\hyperlink{classthreshold__gui_1_1_tool_tip_a971ca69d183a6fd7a33cef3b794eda2b}{show}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Provides a ToolTip widget for Tkinter.
+To apply a ToolTip to any Tkinter widget, simply pass the widget to the
+ToolTip constructor
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00135}{135}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a5732ca1a609e269b040e446ca83b02c5}\label{classthreshold__gui_1_1_tool_tip_a5732ca1a609e269b040e446ca83b02c5} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{wdgt,  }\item[{}]{tooltip\+\_\+font,  }\item[{}]{msg = {\ttfamily None},  }\item[{}]{msg\+Func = {\ttfamily None},  }\item[{}]{delay = {\ttfamily 1},  }\item[{}]{follow = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the ToolTip
+
+Arguments:
+  wdgt: The widget this ToolTip is assigned to
+  tooltip_font: Font to be used
+  msg:  A static string message assigned to the ToolTip
+  msgFunc: A function that retrieves a string to use as the ToolTip text
+  delay:   The delay in seconds before the ToolTip appears(may be float)
+  follow:  If True, the ToolTip follows motion, otherwise hides
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00141}{141}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classthreshold__gui_1_1_tool_tip_aafe9821676b74a21e23021a7ca931f01}\label{classthreshold__gui_1_1_tool_tip_aafe9821676b74a21e23021a7ca931f01} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!hide@{hide}}
+\index{hide@{hide}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{hide()}{hide()}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+hide (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Hides the ToolTip.  Usually this is caused by leaving the widget
+Arguments:
+  event: The event that called this function
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00232}{232}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a95a1e76e35da50f20649887f1a614abc}\label{classthreshold__gui_1_1_tool_tip_a95a1e76e35da50f20649887f1a614abc} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!move@{move}}
+\index{move@{move}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+move (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processes motion within the widget.
+Arguments:
+  event: The event that called this function
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00207}{207}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a873f0e5288d7a9c4f5b99b0f3ddc69c2}\label{classthreshold__gui_1_1_tool_tip_a873f0e5288d7a9c4f5b99b0f3ddc69c2} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!show@{show}}
+\index{show@{show}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{show()}{show()}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+show (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Displays the ToolTip if the time delay has been long enough
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00198}{198}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+Here is the caller graph for this function\+:
+% FIG 4
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a2cfc0394ffbf607fc66676458aed021a}\label{classthreshold__gui_1_1_tool_tip_a2cfc0394ffbf607fc66676458aed021a} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!spawn@{spawn}}
+\index{spawn@{spawn}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{spawn()}{spawn()}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+spawn (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Spawn the ToolTip.  This simply makes the ToolTip eligible for display.
+Usually this is caused by entering the widget
+
+Arguments:
+  event: The event that called this funciton
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00186}{186}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classthreshold__gui_1_1_tool_tip_aae5928ae6de72fe6b6566d6a17111c3a}\label{classthreshold__gui_1_1_tool_tip_aae5928ae6de72fe6b6566d6a17111c3a} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!delay@{delay}}
+\index{delay@{delay}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{delay}{delay}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+delay}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00171}{171}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_affb1de6b7c9d1289865595087215fdcc}\label{classthreshold__gui_1_1_tool_tip_affb1de6b7c9d1289865595087215fdcc} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!follow@{follow}}
+\index{follow@{follow}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{follow}{follow}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+follow}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00172}{172}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_af25101c6437f9a12d4630a6a71dcb59c}\label{classthreshold__gui_1_1_tool_tip_af25101c6437f9a12d4630a6a71dcb59c} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!hide@{hide}}
+\index{hide@{hide}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{hide}{hide}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+hide}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00183}{183}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_aaf2e7a7cead0645b9c060e2ab9449f8e}\label{classthreshold__gui_1_1_tool_tip_aaf2e7a7cead0645b9c060e2ab9449f8e} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!lastMotion@{lastMotion}}
+\index{lastMotion@{lastMotion}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{lastMotion}{lastMotion}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+last\+Motion}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00174}{174}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a7d1d40245d5b5c601f5b2774de04a542}\label{classthreshold__gui_1_1_tool_tip_a7d1d40245d5b5c601f5b2774de04a542} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!move@{move}}
+\index{move@{move}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{move}{move}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+move}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00184}{184}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a72101c00a1563cf11292b65ffcc5277e}\label{classthreshold__gui_1_1_tool_tip_a72101c00a1563cf11292b65ffcc5277e} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!msgFunc@{msgFunc}}
+\index{msgFunc@{msgFunc}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{msgFunc}{msgFunc}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+msg\+Func}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00170}{170}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a38c88d107862730a01bc7d8f30bd2d6c}\label{classthreshold__gui_1_1_tool_tip_a38c88d107862730a01bc7d8f30bd2d6c} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!msgVar@{msgVar}}
+\index{msgVar@{msgVar}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{msgVar}{msgVar}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+msg\+Var}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00165}{165}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a3e948b7f86f75012fef4f01b711aaa8e}\label{classthreshold__gui_1_1_tool_tip_a3e948b7f86f75012fef4f01b711aaa8e} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!parent@{parent}}
+\index{parent@{parent}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+parent}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00156}{156}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a971ca69d183a6fd7a33cef3b794eda2b}\label{classthreshold__gui_1_1_tool_tip_a971ca69d183a6fd7a33cef3b794eda2b} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!show@{show}}
+\index{show@{show}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{show}{show}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+show}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00196}{196}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_ac9e02d379ae3de3336faab2d474c86dc}\label{classthreshold__gui_1_1_tool_tip_ac9e02d379ae3de3336faab2d474c86dc} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!spawn@{spawn}}
+\index{spawn@{spawn}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{spawn}{spawn}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+spawn}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00182}{182}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a3cb0601719197843693c7e2de16c2c6d}\label{classthreshold__gui_1_1_tool_tip_a3cb0601719197843693c7e2de16c2c6d} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!visible@{visible}}
+\index{visible@{visible}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{visible}{visible}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+visible}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00173}{173}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+\Hypertarget{classthreshold__gui_1_1_tool_tip_a276c2ddbba6bdff928e6c397959e35dd}\label{classthreshold__gui_1_1_tool_tip_a276c2ddbba6bdff928e6c397959e35dd} 
+\index{threshold\_gui.ToolTip@{threshold\_gui.ToolTip}!wdgt@{wdgt}}
+\index{wdgt@{wdgt}!threshold\_gui.ToolTip@{threshold\_gui.ToolTip}}
+\doxysubsubsection{\texorpdfstring{wdgt}{wdgt}}
+{\footnotesize\ttfamily threshold\+\_\+gui.\+Tool\+Tip.\+wdgt}
+
+
+
+Definition at line \mbox{\hyperlink{threshold__gui_8py_source_l00154}{154}} of file \mbox{\hyperlink{threshold__gui_8py_source}{threshold\+\_\+gui.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+source/\mbox{\hyperlink{threshold__gui_8py}{threshold\+\_\+gui.\+py}}\end{DoxyCompactItemize}

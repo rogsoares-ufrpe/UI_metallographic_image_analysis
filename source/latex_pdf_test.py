@@ -1,25 +1,44 @@
-# -*- coding: utf-8 -*-
-"""
-UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO - UFRPE
-UNIDADE ACADÊMICA DO CABO DE SANTO AGOSTINHO - UACSA
-
-@author(s):
-    Rogério Soares (rogerio.soaress@ufrpe.br)
-    
-Created on Thu May 14 00:32:33 2020
-"""
+from pylatex import Document, Section, Subsection, Command
+from pylatex.utils import italic, NoEscape
 
 
-import subprocess, os
+def fill_document(doc):
+    """Add a section, a subsection and some text to the document.
 
-with open('sometexfile.tex','w') as file:
-    file.write('\\documentclass{article}\n')
-    file.write('\\begin{document}\n')
-    file.write('Hello Palo Alto!\n')
-    file.write('\\end{document}\n')
+    :param doc: the document
+    :type doc: :class:`pylatex.document.Document` instance
+    """
+    with doc.create(Section('A section')):
+        doc.append('Some regular text and some ')
+        doc.append(italic('italic text. '))
 
-x = subprocess.call('pdflatex sometexfile.tex')
-if x != 0:
-    print('Exit-code not 0, check result!')
-else:
-    os.system('start sometexfile.pdf')
+        with doc.create(Subsection('A subsection')):
+            doc.append('Also some crazy characters: $&#{}')
+
+
+if __name__ == '__main__':
+    # Basic document
+    doc = Document('basic')
+    fill_document(doc)
+
+    doc.generate_pdf(clean_tex=False)
+    doc.generate_tex()
+
+    # Document with `\maketitle` command activated
+    doc = Document()
+
+    doc.preamble.append(Command('title', 'Awesome Title'))
+    doc.preamble.append(Command('author', 'Anonymous author'))
+    doc.preamble.append(Command('date', NoEscape(r'\today')))
+    doc.append(NoEscape(r'\maketitle'))
+
+    fill_document(doc)
+
+    doc.generate_pdf('basic_maketitle', clean_tex=False)
+
+    # Add stuff to the document
+    with doc.create(Section('A second section')):
+        doc.append('Some text.')
+
+    doc.generate_pdf('basic_maketitle2', clean_tex=False)
+    tex = doc.dumps()  # The document as string in LaTeX syntax

@@ -1,0 +1,60 @@
+\doxysection{rotate\+\_\+canvas.\+py}
+\hypertarget{rotate__canvas_8py_source}{}\label{rotate__canvas_8py_source}\index{source/rotate\_canvas.py@{source/rotate\_canvas.py}}
+\mbox{\hyperlink{rotate__canvas_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00001}\mbox{\hyperlink{namespacerotate__canvas}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Sat\ May\ 23\ 14:10:00\ 2020}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ roger}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00009}00009\ \textcolor{keyword}{import}\ tkinter\ \textcolor{keyword}{as}\ tk}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00010}00010\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00011}00011\ \textcolor{keyword}{import}\ math}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00015}\mbox{\hyperlink{namespacerotate__canvas_a87a2aab3677d8121a6378728454c0f72}{00015}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerotate__canvas_a87a2aab3677d8121a6378728454c0f72}{draw\_cross}}(c,\ center,\ delta):}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00016}00016\ \ \ \ \ x1\ =\ center[0]}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00017}00017\ \ \ \ \ y1\ =\ center[1]}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00018}00018\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00019}00019\ \ \ \ \ c.create\_line(x1,\ y1+delta,\ x1,\ y1-\/delta,\ width=2,\ fill=\textcolor{stringliteral}{'blue'})}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00020}00020\ \ \ \ \ c.create\_line(x1+delta,\ y1,\ x1-\/delta,\ y1,\ width=2,\ fill=\textcolor{stringliteral}{'blue'})}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00021}00021\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00022}\mbox{\hyperlink{namespacerotate__canvas_a38cc830ac483d89b0c8e3d652ebe3e17}{00022}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerotate__canvas_a38cc830ac483d89b0c8e3d652ebe3e17}{define\_circular\_pattern}}(canvas):}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00023}00023\ \ \ \ \ width=500}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00024}00024\ \ \ \ \ height=500}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00025}00025\ \ \ \ \ radius\ =\ 100}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00026}00026\ \ \ \ \ center\ =\ (int(width/2),\ int(height/2))}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00027}00027\ \ \ \ \ num\_points\ =\ 8}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00029}00029\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{for}\ k\ \textcolor{keywordflow}{in}\ range(1,3):}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ radius\ *=\ k}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ canvas.create\_oval(center[0]-\/radius,center[1]-\/radius,center[0]+radius,center[1]+radius)}}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00033}00033\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ num\_points\ *=\ k}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ delta\_teta\ =\ 2*np.pi/num\_points}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(num\_points):}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ teta\ =\ delta\_teta*i}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacerotate__canvas_a87a2aab3677d8121a6378728454c0f72}{draw\_cross}}(canvas,\ (center[0]+int(radius*np.cos(teta)),\ center[1]+int(radius*np.sin(teta))),\ 10)}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00041}\mbox{\hyperlink{namespacerotate__canvas_ad73b8ab3fa9c09c3584b902a9ff675a2}{00041}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerotate__canvas_ad73b8ab3fa9c09c3584b902a9ff675a2}{main}}():}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00042}00042\ \ \ \ \ window\ =\ tk.Tk()}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00043}00043\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00044}00044\ \ \ \ \ width=500}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00045}00045\ \ \ \ \ height=500}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00046}00046\ \ \ \ \ canvas\ =\ tk.Canvas(window,\ width=width,\ height=height)}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00047}00047\ \ \ \ \ canvas.pack()}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00049}00049\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{namespacerotate__canvas_a38cc830ac483d89b0c8e3d652ebe3e17}{define\_circular\_pattern}}(canvas)}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00051}00051\ \ \ \ \ tk.mainloop()}
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00052}00052\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{rotate__canvas_8py_source_l00054}00054\ }
+
+\end{DoxyCode}

@@ -1,0 +1,343 @@
+\doxysection{mdia.\+py}
+\hypertarget{mdia_8py_source}{}\label{mdia_8py_source}\index{source/mdia.py@{source/mdia.py}}
+\mbox{\hyperlink{mdia_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00001}\mbox{\hyperlink{namespacemdia}{00001}}\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00002}00002\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00003}00003\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ Image}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00004}00004\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ ImageTk}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00005}00005\ \textcolor{keyword}{from}\ tkinter\ \textcolor{keyword}{import}\ messagebox\ \textcolor{keyword}{as}\ msgbox}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00006}00006\ \textcolor{keyword}{import}\ h5py}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00009}00009\ \textcolor{keyword}{from}\ cv2.ximgproc\ \textcolor{keyword}{import}\ THINNING\_ZHANGSUEN}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00010}00010\ \textcolor{keyword}{from}\ cv2.ximgproc\ \textcolor{keyword}{import}\ THINNING\_GUOHALL}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00012}00012\ \textcolor{keyword}{import}\ matplotlib.pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00015}\mbox{\hyperlink{classmdia_1_1_colors}{00015}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmdia_1_1_colors}{Colors}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00016}\mbox{\hyperlink{classmdia_1_1_colors_aa9cc8d51bbc232409eccfe0c51d15ee4}{00016}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_colors_aa9cc8d51bbc232409eccfe0c51d15ee4}{\_\_init\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00017}\mbox{\hyperlink{classmdia_1_1_colors_a8845033888db88510ba170a3570de715}{00017}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_a8845033888db88510ba170a3570de715}{red}}\ =\ (0,\ 0,\ 255)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00018}\mbox{\hyperlink{classmdia_1_1_colors_af7b7803493acde03089cb37db7b169f6}{00018}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_af7b7803493acde03089cb37db7b169f6}{yellow}}\ =\ (0,\ 255,\ 255)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00019}\mbox{\hyperlink{classmdia_1_1_colors_ae26242ddb1aef0a09a2d6e848bdc2bfd}{00019}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_ae26242ddb1aef0a09a2d6e848bdc2bfd}{white}}\ =\ (255,\ 255,\ 255)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00020}\mbox{\hyperlink{classmdia_1_1_colors_a31719cb0a8cbb10cb2cbfc07dbdb4e7d}{00020}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_a31719cb0a8cbb10cb2cbfc07dbdb4e7d}{cian}}\ =\ \ (255,\ 255,\ 0)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00021}\mbox{\hyperlink{classmdia_1_1_colors_ac934d88d779d8f8289c64a3c8ec2825a}{00021}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_ac934d88d779d8f8289c64a3c8ec2825a}{blue}}\ =\ (255,\ 0,\ 0)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00022}\mbox{\hyperlink{classmdia_1_1_colors_a95d2a6d6e388c5993ff1027aeab1fa45}{00022}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_a95d2a6d6e388c5993ff1027aeab1fa45}{magenta}}\ =\ (255,\ 0,\ 255)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00023}\mbox{\hyperlink{classmdia_1_1_colors_a49c8bd7c4d57a4aeba154ebe29874d7c}{00023}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_a49c8bd7c4d57a4aeba154ebe29874d7c}{green}}\ =\ (0,\ 255,\ 0)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00024}\mbox{\hyperlink{classmdia_1_1_colors_a49097580bf56c24c0d0a59851618c02f}{00024}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_colors_a49097580bf56c24c0d0a59851618c02f}{black}}\ =\ (0,\ 0,\ 0)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00027}\mbox{\hyperlink{classmdia_1_1_m_d_i_a}{00027}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a}{MDIA}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00028}00028\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ MDIA:\ digital\ metallographic\ image\ analyzer\ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00030}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5d4ac95e30ebb3bfee35a542787b684e}{00030}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5d4ac95e30ebb3bfee35a542787b684e}{\_\_init\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00031}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af6d5849f99a06876389587730fd4482a}{00031}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af6d5849f99a06876389587730fd4482a}{image\_cv}}\ =\ \textcolor{keywordtype}{None}\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ segmentation\ over\ original\ image}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00032}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{00032}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}}\ =\ \textcolor{keywordtype}{None}\ \ \ \ \textcolor{comment}{\#\ segmentation\ over\ original\ image\ to\ be\ displayed\ on\ canvas\ window}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00033}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{00033}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}\ =\ \textcolor{keywordtype}{None}\ \ \ \ \ \ \textcolor{comment}{\#\ Image\ to\ be\ segmented}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00034}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{00034}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ \textcolor{keywordtype}{None}\ \ \ \ \ \ \textcolor{comment}{\#\ Image\ to\ be\ segmented}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00035}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{00035}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00036}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad63518c25dc520693d8b4cb86dbe6598}{00036}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad63518c25dc520693d8b4cb86dbe6598}{binary\_image}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00037}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4bfdc7f721f48ba4ada4fef281b0a551}{00037}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4bfdc7f721f48ba4ada4fef281b0a551}{original\_image\_one\_quarter}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00038}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5d45f80bb3c35f46905ea90fd9c1b281}{00038}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5d45f80bb3c35f46905ea90fd9c1b281}{path}}\ =\ \textcolor{keywordtype}{None}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ path\ for\ image\ file}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ image\ dimensions}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00041}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{00041}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{height}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00042}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{00042}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{width}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00043}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abe4b698c74a3f4883a8b8ca281ed2832}{00043}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abe4b698c74a3f4883a8b8ca281ed2832}{no\_channels}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00045}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5a0143f3d4e559b85c3d385f7eb7002e}{00045}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5a0143f3d4e559b85c3d385f7eb7002e}{img\_loaded}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00046}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad30813c1cf13e0421a3a0874d195a55d}{00046}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad30813c1cf13e0421a3a0874d195a55d}{grains\_already\_segmented}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ filter/smoothing\ algorithm}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ self.filter\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00050}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{00050}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ =\ \textcolor{stringliteral}{"{}None"{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00051}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac4bfb5e5eecefb4c4be73769fa8259c6}{00051}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac4bfb5e5eecefb4c4be73769fa8259c6}{last\_filer\_applyed}}\ =\ \textcolor{stringliteral}{"{}None"{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00052}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a2f46e54379adaecc19f21e251504bad1}{00052}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a2f46e54379adaecc19f21e251504bad1}{image\_gray\_exists}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Canny\ parameters}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00055}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac0ac325946818bfb2fcb3fa103d1f1f1}{00055}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac0ac325946818bfb2fcb3fa103d1f1f1}{threshold\_one}}\ =\ 125}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00056}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a950ff1c38df41f7de62ac015359a35f3}{00056}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a950ff1c38df41f7de62ac015359a35f3}{threshold\_two}}\ =\ 150}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00057}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a230f642134af8dfe30802a5af6e25146}{00057}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a230f642134af8dfe30802a5af6e25146}{l2grad}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00059}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{00059}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}\ =\ \mbox{\hyperlink{classmdia_1_1_colors}{Colors}}()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ grains}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00062}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{00062}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{grains\_area}}\ =\ []}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00063}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{00063}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{grains\_contours}}\ =\ []}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00066}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a0a0076d2f8562fbf1b6a21c83f794305}{00066}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a0a0076d2f8562fbf1b6a21c83f794305}{get\_image\_dimensions}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Return\ a\ tuple:\ width,\ height"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{width}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{height}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00071}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a1cdc5051016ab604559180978cba2229}{00071}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a1cdc5051016ab604559180978cba2229}{load\_image}}(self,\ path\_to\_image,\ loaded\_from\_analysis=False,\ img=None):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ store\ image\ path}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5d45f80bb3c35f46905ea90fd9c1b281}{path}}\ =\ path\_to\_image}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ loaded\_from\_analysis:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}\ =\ cv2.imread(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5d45f80bb3c35f46905ea90fd9c1b281}{path}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}\ =\ img}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ the\ image\ dimensions\ (OpenCV\ stores\ image\ data\ as\ NumPy\ ndarray)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{height}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{width}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abe4b698c74a3f4883a8b8ca281ed2832}{no\_channels}}\ =\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}.shape}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac748c52d6598e909d2c3bd3cfca89cd7}{resize}}()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{height}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{width}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abe4b698c74a3f4883a8b8ca281ed2832}{no\_channels}}\ =\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}.shape}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ convert\ resized\ original\ image\ to\ gray\ scale}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}\ =\ cv2.cvtColor(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}},\ cv2.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ set\ to\ canvas\ only\ gray\ image}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5c90dd5c8a4dfdf67006f05081a19b17}{set\_image\_for\_canvas}}(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ initialize}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}.copy()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5a0143f3d4e559b85c3d385f7eb7002e}{img\_loaded}}\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad30813c1cf13e0421a3a0874d195a55d}{grains\_already\_segmented}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00098}00098\ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00099}00099\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00100}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac748c52d6598e909d2c3bd3cfca89cd7}{00100}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac748c52d6598e909d2c3bd3cfca89cd7}{resize}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ ratio\ =\ float(810/self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{width}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{height}}*ratio\ >\ 550:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ ratio\ =\ float(550/self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae199214392856a0a6d01c7c2518265d6}{height}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ shrink\ to\ width}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a9668b612cd3188fafc0539d40beb14f6}{width}}\ >=\ 810:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}\ =\ cv2.resize(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}},\ \textcolor{keywordtype}{None},\ fx=ratio,\ fy=ratio,\ interpolation=cv2.INTER\_AREA)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}}\ =\ cv2.resize(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}},\ \textcolor{keywordtype}{None},\ fx=ratio,\ fy=ratio,\ interpolation=cv2.INTER\_CUBIC)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00113}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5c90dd5c8a4dfdf67006f05081a19b17}{00113}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5c90dd5c8a4dfdf67006f05081a19b17}{set\_image\_for\_canvas}}(self,\ img):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ OpenCV\ represents\ images\ in\ BGR\ order;\ however\ PIL\ represents}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ images\ in\ RGB\ order,\ so\ we\ need\ to\ swap\ the\ channels}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}}\ =\ cv2.cvtColor(img,\ cv2.COLOR\_BGR2RGB)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ convert\ the\ images\ to\ PIL\ format...}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}}\ =\ Image.fromarray(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ ...and\ then\ to\ ImageTk\ format}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00123}00123\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}}\ =\ ImageTk.PhotoImage(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aefe93d73eec5152f1b3b319f8772e1d4}{image\_canvas}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00126}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a742a930babd0f1242dfc304858778cfc}{00126}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a742a930babd0f1242dfc304858778cfc}{get\_orinal\_image\_grayscale}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cv2.cvtColor(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}},\ cv2.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00130}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a0ec9bbfe54772045f0243b2050b4be87}{00130}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a0ec9bbfe54772045f0243b2050b4be87}{find\_grains}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Perform\ Canny\ algorithm\ to\ find\ edges\ segmentation.}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00132}00132\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Gray\ image\ scale\ is\ created\ during\ loading\ image\ process\ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a5a0143f3d4e559b85c3d385f7eb7002e}{img\_loaded}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ msgbox.showerror(\textcolor{stringliteral}{"{}Error"{}},\textcolor{stringliteral}{"{}Image\ file\ not\ openned."{}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ab39808ffe26e647ceb8e4911b7da0aaa}{is\_segmented}}()\ \textcolor{keywordflow}{or}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac4bfb5e5eecefb4c4be73769fa8259c6}{last\_filer\_applyed}}\ !=\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac4bfb5e5eecefb4c4be73769fa8259c6}{last\_filer\_applyed}}\ =\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Remove\ noise}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ self.apply\_filter\_smooth\_algorithms()}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ print(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}.shape)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}\ =\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}.copy()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}[:,\ 0]\ =\ 255}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}[0,\ :]\ =\ 255}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}[:,\ -\/1]\ =\ 255}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}[-\/1,\ :]\ =\ 255}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Edge\ segmentation}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ edges\ =\ cv2.Canny(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}},}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ threshold1=self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac0ac325946818bfb2fcb3fa103d1f1f1}{threshold\_one}},}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ threshold2=self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a950ff1c38df41f7de62ac015359a35f3}{threshold\_two}},}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L2gradient=self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a230f642134af8dfe30802a5af6e25146}{l2grad}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ removing\ undersireble\ edges}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ edges\ =\ cv2.morphologyEx(edges,\ cv2.MORPH\_CLOSE,\ \textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ edges\ =\ cv2.morphologyEx(edges,\ cv2.MORPH\_CLOSE,\ None)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ edges\ =\ cv2.ximgproc.thinning(edges,\ thinningType=THINNING\_ZHANGSUEN)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ edges\ =\ cv2.ximgproc.thinning(edges,\ thinningType=THINNING\_GUOHALL)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ realiza\ a\ poda\ dos\ contornos}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ edges\ =\ np.uint8(edges\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ 0}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ count\ !=\ np.sum(edges):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ non-\/zero\ pixel\ count}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ np.sum(edges)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ examine\ 3x3\ neighborhood\ of\ each\ pixel}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ filt\ =\ cv2.boxFilter(edges,\ -\/1,\ (3,\ 3),\ normalize=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ if\ the\ center\ pixel\ of\ 3x3\ neighborhood\ is\ zero,\ we\ are\ not\ interested\ in\ it}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edges\ =\ edges\ *\ filt}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ now\ we\ have\ pixels\ where\ the\ center\ pixel\ of\ 3x3\ neighborhood\ is\ non-\/zero}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ if\ a\ pixels'\ 8-\/connectivity\ is\ less\ than\ 2\ we\ can\ remove\ it}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ threshold\ is\ 3\ here\ because\ the\ boxfilter\ also\ counted\ the\ center\ pixel}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edges[edges\ <\ 3]\ =\ 0}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ set\ max\ pixel\ value\ to\ 1}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edges[edges\ >\ 0]\ =\ 1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ num\_rows\ =\ len(edges)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ num\_cols\ =\ len(edges[0])}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(num\_rows):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ j\ \textcolor{keywordflow}{in}\ range(num\_cols):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ edges[i][j]\ ==\ 1:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ edges[i][j]\ =\ 255}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print('find\ contours')}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ contours,\ hierarchy\ =\ cv2.findContours(edges,\ cv2.RETR\_TREE,\ cv2.CHAIN\_APPROX\_SIMPLE)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ length\ =\ len(contours)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ minarea\ =\ 5}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{grains\_contours}}.clear()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{grains\_area}}.clear()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ max\_area\ =\ -\/1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ pos\ =\ -\/1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ counter\ =\ 0}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ k\ \textcolor{keywordflow}{in}\ range(length):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ area\ =\ cv2.contourArea(contours[k])}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ area\ >\ minarea:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{grains\_contours}}.append(contours[k])}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{grains\_area}}.append(area)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ counter\ +=\ 1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ area\ >\ max\_area:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_area\ =\ area}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos\ =\ counter}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{grains\_area}}.pop(pos)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{grains\_contours}}.pop(pos)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad30813c1cf13e0421a3a0874d195a55d}{grains\_already\_segmented}}\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Guarrantees\ correct\ image\ update\ everytime\ some\ modification\ is\ required."{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00220}00220\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af6d5849f99a06876389587730fd4482a}{image\_cv}}\ =\ np.copy(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00223}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ab39808ffe26e647ceb8e4911b7da0aaa}{00223}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ab39808ffe26e647ceb8e4911b7da0aaa}{is\_segmented}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Returns\ true\ if\ image\ grains\ have\ already\ been\ segmented."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad30813c1cf13e0421a3a0874d195a55d}{grains\_already\_segmented}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00228}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a7969313e11816e3dc2ddd7a77e797679}{00228}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a7969313e11816e3dc2ddd7a77e797679}{draw\_contours}}(self,\ isFilled):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ color\ list}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ color\_list\ =\ [self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.blue,\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.red,\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.yellow,\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.magenta,\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.cian,\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.green]}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ fill\ or\ not\ contours}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ filled\ =\ 1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isFilled==1:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ filled\ =\ cv2.FILLED}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00238}00238\ \ \ \ \ \ \ \ \ k\ =\ 0}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00239}00239\ \ \ \ \ \ \ \ \ counter\ =\ 1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00240}00240\ \ \ \ \ \ \ \ \ font\ =\ cv2.FONT\_HERSHEY\_SIMPLEX}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00241}00241\ \ \ \ \ \ \ \ \ mask\ =\ np.zeros(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}.shape,\ np.uint8)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ area,\ cnt\ \textcolor{keywordflow}{in}\ zip(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{grains\_area}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{grains\_contours}}):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ if\ area>400:}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ print(area)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ x,\ y,\ w,\ h\ =\ cv2.boundingRect(cnt)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ pos\ =\ (int(x+w/2),\ int(y+h/2))}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ cv2.putText(self.image\_cv,str(counter),pos,\ font,\ 0.5,\ (0,255,255),\ 1,\ cv2.LINE\_AA)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ cv2.drawContours(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af6d5849f99a06876389587730fd4482a}{image\_cv}},\ [cnt],\ 0,\ color\_list[k],\ thickness=filled)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ extract\ pixels\ from\ countour's\ interior}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ mask[::]\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ cv2.drawContours(mask,[cnt],\ 0,\ 255,\ -\/1)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ pixelpoints\ =\ np.transpose(np.nonzero(mask))}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ if\ len(pixelpoints)\ !=\ 0:}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ \#\ calculate\ average\ mean\ pixel}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ px\_values\_sum\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ for\ px\ in\ pixelpoints:}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ px\_values\_sum\ +=\ int(self.image\_gray[px[0],\ px[1]])}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ px\_mean\ =\ px\_values\_sum/len(pixelpoints)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ \#\ print("{}mean[\%d]:\ \%f"{}\ \%\ (counter,\ px\_mean)\ )}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ for\ px\ in\ pixelpoints:}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \ \ \ \ \ \ \ \ self.image\_cv[px[0],\ px[1]]\ =\ int(px\_mean)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ counter\ +=\ 1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ k\ +=\ 1}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ k==6:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 0}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Highlight\ grains\ contours}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/\ -\/}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00275}00275\ \ \ \ \ \ \ \ \ cv2.drawContours(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af6d5849f99a06876389587730fd4482a}{image\_cv}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_af1c39cdb580111d3c7e17bb39a2b2559}{grains\_contours}},\ -\/1,\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4dd4bf109511ea9360f991c98b2e4dd0}{colors}}.red,\ thickness=1)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00277}00277\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ cv2.imwrite("{}Fig2b-\/cut-\/filtered.jpg"{},\ self.image\_cv)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00278}00278\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ plt.imshow(self.image\_cv)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ plt.show()}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00281}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a1a068b5b27fbd6108937152b9e59f372}{00281}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a1a068b5b27fbd6108937152b9e59f372}{grains\_histogram}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00282}00282\ \ \ \ \ \ \ \ \ num\_bins\ =\ 50}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00283}00283\ \ \ \ \ \ \ \ \ n,\ bins,\ patches\ =\ plt.hist(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_abb4c72d6cd05e1e102b35e76ec283283}{grains\_area}},\ num\_bins,\ facecolor=\textcolor{stringliteral}{'blue'},\ alpha=0.5)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00284}00284\ \ \ \ \ \ \ \ \ plt.show()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00287}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a12f06ed524fe4bd8f6327fb2b66299b2}{00287}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a12f06ed524fe4bd8f6327fb2b66299b2}{apply\_filter\_smooth\_algorithms}}(self):\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00288}00288\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00289}00289\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Filter\ applied:\ "{}},\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ ==\ \textcolor{stringliteral}{"{}Gaussian\ blur"{}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ cv2.GaussianBlur(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}},\ (15,15),\ 0)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ ==\ \textcolor{stringliteral}{"{}2D\ convolution"{}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ kernel\ =\ np.ones((5,\ 5),\ np.float32)\ /\ 25}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ cv2.filter2D(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}},\ -\/1,\ kernel)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00295}00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ ==\ \textcolor{stringliteral}{"{}Median\ Blurring"{}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ cv2.medianBlur(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}},\ 7)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ ==\ \textcolor{stringliteral}{"{}Bilateral\ Filter"{}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ cv2.bilateralFilter(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}},\ 9,\ 75,\ 75)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ ==\ \textcolor{stringliteral}{"{}Averaging"{}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ cv2.blur(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}},\ (5,\ 5))}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00301}00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ ==\ \textcolor{stringliteral}{"{}HistogramEqualization"{}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}}\ =\ cv2.cvtColor(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}},\ cv2.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ cv2.equalizeHist(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a3d305e7e6637ec34759d618bf29cbe5a}{image\_gray}});}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00304}00304\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aac91f3c9f99f56eae3a7f644442d874d}{image\_filtered}}\ =\ np.copy(self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a4705d78bea42f6096f09b841605de9ae}{image\_original}})}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00308}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a97f0f796b2ec2757ab97ec1371edf499}{00308}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a97f0f796b2ec2757ab97ec1371edf499}{set\_parameters}}(self,\ param):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00309}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae382f8a87567ee53314508b7ca457189}{00309}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ae382f8a87567ee53314508b7ca457189}{filter}}\ =\ param[0]}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00310}00310\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a230f642134af8dfe30802a5af6e25146}{l2grad}}\ =\ param[1]}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00311}00311\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac0ac325946818bfb2fcb3fa103d1f1f1}{threshold\_one}}\ =\ param[2]}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00312}00312\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a950ff1c38df41f7de62ac015359a35f3}{threshold\_two}}\ =\ param[3]}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print(param)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00315}00315\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00316}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a40a75325d7a67309e4977f8a5acadc0b}{00316}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a40a75325d7a67309e4977f8a5acadc0b}{get\_filter\_name}}(self):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00317}00317\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00319}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a79f955267714fceb1905333a600b2b1e}{00319}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a79f955267714fceb1905333a600b2b1e}{set\_image\_filter}}(self,\ the\_filter):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00320}00320\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}\ =\ the\_filter}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00321}00321\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Filter:\ "{}},\ the\_filter)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00324}\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aaec0d07ec2ba9d9d3b28bbc19f906a84}{00324}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmdia_1_1_m_d_i_a_aaec0d07ec2ba9d9d3b28bbc19f906a84}{create\_binary\_image}}(self,\ img\_gray,\ thresh=150,\ maxval=255):}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00326}00326\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac4bfb5e5eecefb4c4be73769fa8259c6}{last\_filer\_applyed}}\ !=\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}:}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ac4bfb5e5eecefb4c4be73769fa8259c6}{last\_filer\_applyed}}\ =\ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a21ae07c09fa39b0d6ba70b4d3dfad344}{filter\_name}}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_a12f06ed524fe4bd8f6327fb2b66299b2}{apply\_filter\_smooth\_algorithms}}()}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00330}00330\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ \#\ calculate\ histogram\ of\ original\ gray\ scaled\ image\ before\ and\ after\ noise\ reduction}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00331}00331\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ hist\_img\ =\ cv.calcHist([img],[0],None,[256],[0,256])}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00332}00332\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ hist\_median\ =\ cv.calcHist([median],[0],None,[256],[0,256])}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00334}00334\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ apply\ threshold\ over\ filtered\ image}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ ret,\ self.binary\_image\ =\ cv2.threshold(img\_gray,\ thresh,\ maxval,\ cv2.THRESH\_BINARY)}}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00336}00336\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmdia_1_1_m_d_i_a_ad63518c25dc520693d8b4cb86dbe6598}{binary\_image}}\ =\ \ cv2.adaptiveThreshold(img\_gray,\ 255,\ cv2.ADAPTIVE\_THRESH\_GAUSSIAN\_C,\ cv2.THRESH\_BINARY,11,2)}
+\DoxyCodeLine{\Hypertarget{mdia_8py_source_l00337}00337\ }
+
+\end{DoxyCode}

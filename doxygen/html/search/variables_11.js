@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['s_0',['s',['../namespacesliders.html#a20149a09b1609e9548c728c431f05e20',1,'sliders']]],
+  ['samp_1',['samp',['../namespacesliders.html#aeadab8f82ed474ab5cbe87d299c2930e',1,'sliders']]],
+  ['scale_2',['scale',['../class_scale_win_dialog_1_1_s_w_d.html#aa019261351c4a20a2a315eb0f1ba00e0',1,'ScaleWinDialog.SWD.scale'],['../classstraight__line_1_1_g_f_g.html#ae12ef5ba6f7f76acc1ff66596ce82b1d',1,'straight_line.GFG.scale']]],
+  ['scale_5fmaxvalue_3',['Scale_Maxvalue',['../classthreshold__gui_1_1_toplevel1.html#ab56bd60af57c8b130cb3c50b220e9102',1,'threshold_gui::Toplevel1']]],
+  ['scale_5fthreshold_4',['Scale_Threshold',['../classthreshold__gui_1_1_toplevel1.html#aad6372823aa62114aeb7ac62d4c2e6c8',1,'threshold_gui::Toplevel1']]],
+  ['second_5fclick_5',['second_click',['../class_scale_win_dialog_1_1_s_w_d.html#a3d5aff146ea5900ca7fec82c3b95bab1',1,'ScaleWinDialog.SWD.second_click'],['../classstraight__line_1_1_g_f_g.html#a8371306bc2139ee56472fbb7556811bb',1,'straight_line.GFG.second_click']]],
+  ['sfreq_6',['sfreq',['../namespacesliders.html#a013fb8e333eacae634999c7374a0195a',1,'sliders']]],
+  ['sharp_7',['sharp',['../namespacewatershed.html#a51c24365accd44d20b736ce785c416ac',1,'watershed']]],
+  ['show_8',['show',['../classgui___h_s_c_i_1_1_tool_tip.html#a27327b0f4c5e0594f58bb9663e261caa',1,'gui_HSCI.ToolTip.show'],['../classgui__main-bak_1_1_tool_tip.html#a2bb856d954287890a4e6a985e2e613e4',1,'gui_main-bak.ToolTip.show'],['../classgui__main_1_1_tool_tip.html#a65dc0cddc5e1e7798b9ba3dc05813c7c',1,'gui_main.ToolTip.show'],['../classscale__entry__window_1_1_tool_tip.html#a2d7aedd32db0b38d7b04c53b8884e6e3',1,'scale_entry_window.ToolTip.show'],['../classthreshold__gui_1_1_tool_tip.html#a971ca69d183a6fd7a33cef3b794eda2b',1,'threshold_gui.ToolTip.show']]],
+  ['si_5fpixel_5fratio_9',['SI_pixel_ratio',['../classstraight__line_1_1_g_f_g.html#a489384276d908686e0fd318946f4903e',1,'straight_line::GFG']]],
+  ['sm_5fimage_5ffilters_10',['SM_Image_Filters',['../classgui__main_1_1_main_window.html#ad2072132e582af78dedf7cc7aa31cc34',1,'gui_main::MainWindow']]],
+  ['spawn_11',['spawn',['../classgui___h_s_c_i_1_1_tool_tip.html#a877d4cec29b636e118456007985685d0',1,'gui_HSCI.ToolTip.spawn'],['../classgui__main-bak_1_1_tool_tip.html#a13c91cfd88602498ad7202fb145b37fa',1,'gui_main-bak.ToolTip.spawn'],['../classgui__main_1_1_tool_tip.html#ac2a3b79a529a2a7f1b0e45ffe5b93fb3',1,'gui_main.ToolTip.spawn'],['../classscale__entry__window_1_1_tool_tip.html#a669d3e0fa0802ea1ddb35f38f6426962',1,'scale_entry_window.ToolTip.spawn'],['../classthreshold__gui_1_1_tool_tip.html#ac9e02d379ae3de3336faab2d474c86dc',1,'threshold_gui.ToolTip.spawn']]],
+  ['spinbox_5fnumber_5flines_12',['spinbox_number_lines',['../classgui__main-bak_1_1_main_window.html#a8b47526607e25de52424eb1e4d54405f',1,'gui_main-bak.MainWindow.Spinbox_number_lines'],['../classgui__main_1_1_main_window.html#ac748baf2551571483531c24d5cd49dfa',1,'gui_main.MainWindow.Spinbox_number_lines']]],
+  ['src_13',['src',['../namespacewatershed.html#ad7cd07b1b516ecc6e4249fcada99438e',1,'watershed']]],
+  ['start_14',['start',['../namespaceteste__threshold.html#ac0b3f1a96f6707e1265946d1c507d62f',1,'teste_threshold']]],
+  ['stop_5fmove_15',['stop_move',['../classmoving_1_1_g_f_g.html#a90c13cd0da4f4dfb4724598f2703ce84',1,'moving.GFG.stop_move'],['../classmoving__circle_1_1_m_c_a_i.html#a34caf14c6df2fecbcf74108bc9af47e3',1,'moving_circle.MCAI.stop_move']]],
+  ['style_16',['style',['../classgui__main-bak_1_1_main_window.html#a7101d9294006b4ce430e9dc392a23fc6',1,'gui_main-bak.MainWindow.style'],['../classgui__main_1_1_main_window.html#a694f032079d75c9617ad971640e90f42',1,'gui_main.MainWindow.style']]],
+  ['sub_5fmenu_17',['sub_menu',['../classgui__main-bak_1_1_main_window.html#a3c3c1d63e1eeaabc0e11f6ea11f8d034',1,'gui_main-bak.MainWindow.sub_menu'],['../classgui__main_1_1_main_window.html#af5713f846b53f8cecaac17042c7b0cdc',1,'gui_main.MainWindow.sub_menu']]],
+  ['sub_5fmenu1_18',['sub_menu1',['../classgui__main-bak_1_1_main_window.html#aec52fbb933c04912551ec93bf3e2c3c1',1,'gui_main-bak.MainWindow.sub_menu1'],['../classgui__main_1_1_main_window.html#a509498eda441e19b93d52ec9e29f6658',1,'gui_main.MainWindow.sub_menu1']]],
+  ['sub_5fmenu12_19',['sub_menu12',['../classgui__main-bak_1_1_main_window.html#a07258e9532d5fec9b87e74596c3a0a5c',1,'gui_main-bak.MainWindow.sub_menu12'],['../classgui__main_1_1_main_window.html#a34cd7bb6d493e344bc976aeae002464a',1,'gui_main.MainWindow.sub_menu12']]],
+  ['sub_5fmenu123_20',['sub_menu123',['../classgui__main-bak_1_1_main_window.html#a5267943c9782a074d449177f91ceed12',1,'gui_main-bak.MainWindow.sub_menu123'],['../classgui__main_1_1_main_window.html#afdbb0912f23fa9924766b3ec974c2e9b',1,'gui_main.MainWindow.sub_menu123']]]
+];

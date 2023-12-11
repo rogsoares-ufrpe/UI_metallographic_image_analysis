@@ -1,0 +1,91 @@
+\doxysection{moving\+\_\+circle.\+py}
+\hypertarget{moving__circle_8py_source}{}\label{moving__circle_8py_source}\index{source/moving\_circle.py@{source/moving\_circle.py}}
+\mbox{\hyperlink{moving__circle_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00001}\mbox{\hyperlink{namespacemoving__circle}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Wed\ Apr\ 22\ 21:25:06\ 2020}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ Rogerio}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00009}00009\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00010}00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00011}00011\ \textcolor{stringliteral}{Created\ on\ Tue\ Apr\ 21\ 21:53:06\ 2020}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00012}00012\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00013}00013\ \textcolor{stringliteral}{@author:\ roger\_000}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00014}00014\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00015}00015\ \textcolor{keyword}{import}\ threading}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00018}00018\ \textcolor{comment}{\#\ Canvas\ class\ of\ Tkinter\ supports\ a\ functions\ which\ is\ used\ to\ move\ objects\ }}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00019}00019\ \textcolor{comment}{\#\ from\ one\ position\ to\ another\ in\ any\ canvas\ or\ tkinter\ toplevel.}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00020}00020\ \textcolor{comment}{\#\ Syntax:\ Canvas.move(canvas\_object,\ x,\ y)}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00022}00022\ \textcolor{comment}{\#\ imports\ every\ file\ form\ tkinter\ and\ tkinter.ttk\ }}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00023}00023\ \textcolor{keyword}{from}\ tkinter\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00024}00024\ \textcolor{comment}{\#\ import\ tkinter\ as\ tk}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00025}00025\ \textcolor{keyword}{from}\ \mbox{\hyperlink{namespacetkinter_1_1ttk}{tkinter.ttk}}\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00026}00026\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ ImageTk,\ Image}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00027}00027\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00029}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i}{00029}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i}{MCAI}}:}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00030}00030\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Moving\ Circle\ Around\ Image"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00031}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a5008d69635301ce5918912bcdb799bdb}{00031}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a5008d69635301ce5918912bcdb799bdb}{\_\_init\_\_}}(self,\ radius,\ width,\ height,\ canvas,\ master):\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00032}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_afce4280a135a991fb68b28e4957d5448}{00032}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_afce4280a135a991fb68b28e4957d5448}{master}}\ =\ master}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00033}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ac37cef6d68377b196263b1ab3bd55379}{00033}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ac37cef6d68377b196263b1ab3bd55379}{var}}\ =\ BooleanVar()}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ac37cef6d68377b196263b1ab3bd55379}{var}}.set(\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00035}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ae8d6c0bf0150492e777b9998ea730c9b}{00035}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ae8d6c0bf0150492e777b9998ea730c9b}{width}}\ =\ width}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00036}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a8fc61499d51ca84ff5480af9f217d522}{00036}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a8fc61499d51ca84ff5480af9f217d522}{height}}\ =\ height}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_afce4280a135a991fb68b28e4957d5448}{master}}.bind(\textcolor{stringliteral}{"{}<Motion>"{}},\ \textcolor{keyword}{lambda}\ e:\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_aefaa7ed78ef3265e9ab30d7b5748d2e8}{callback}}(e))}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_afce4280a135a991fb68b28e4957d5448}{master}}.bind(\textcolor{stringliteral}{"{}<ButtonRelease-\/1>"{}},\ \textcolor{keyword}{lambda}\ e:\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_acc6f3aa2b7d30e4d10ded6a89ebadedf}{callback2}}(e))}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00041}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a62536ce79609967aed6535e3e2f2fc03}{00041}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a62536ce79609967aed6535e3e2f2fc03}{radius}}\ =\ radius}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00042}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{00042}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{x}}\ =\ 5}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00043}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{00043}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{y}}\ =\ 5}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00044}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ada4127efecfa5ed795fe0d81500a1262}{00044}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ada4127efecfa5ed795fe0d81500a1262}{x\_old}}\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{x}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00045}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a6324af1bbd0f8d7c2a7f31c4bfa50561}{00045}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a6324af1bbd0f8d7c2a7f31c4bfa50561}{y\_old}}\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{y}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00047}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a34caf14c6df2fecbcf74108bc9af47e3}{00047}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a34caf14c6df2fecbcf74108bc9af47e3}{stop\_move}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00048}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a30bf6853d2ac3b2f91d6bf75c6b25e40}{00048}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a30bf6853d2ac3b2f91d6bf75c6b25e40}{canvas}}\ =\ canvas\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00049}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ab96de4ee07605828a1409892be5e35b9}{00049}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ab96de4ee07605828a1409892be5e35b9}{circle}}\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a30bf6853d2ac3b2f91d6bf75c6b25e40}{canvas}}.create\_oval(5,5,2*radius,2*radius,\ width=2,\ outline=\textcolor{stringliteral}{"{}red"{}})}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00051}00051\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00052}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a35d540bd4135d5258bc6fe29b3429c53}{00052}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a35d540bd4135d5258bc6fe29b3429c53}{movement}}(self):}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ check1\ =\ \textcolor{keyword}{True}\ \textcolor{comment}{\#self.x\ >=\ 55\ and\ self.x+2*self.radius\ <=\ self.width+55}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ check2\ =\ \textcolor{keyword}{True}\ \textcolor{comment}{\#self.y\ >=\ 55\ and\ self.y+2*self.radius\ <=\ self.height+55}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ do\ not\ allow\ any\ movement\ after\ mouse\ click}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a34caf14c6df2fecbcf74108bc9af47e3}{stop\_move}}:}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{x}}\ -\/\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ada4127efecfa5ed795fe0d81500a1262}{x\_old}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{y}}\ -\/\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a6324af1bbd0f8d7c2a7f31c4bfa50561}{y\_old}}\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a30bf6853d2ac3b2f91d6bf75c6b25e40}{canvas}}.move(self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ab96de4ee07605828a1409892be5e35b9}{circle}},\ x,\ y)\ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print("{}\%d,\ \%d"{}\ \%\ (self.x,\ self.y))}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ada4127efecfa5ed795fe0d81500a1262}{x\_old}}\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{x}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a6324af1bbd0f8d7c2a7f31c4bfa50561}{y\_old}}\ =\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{y}}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ self.canvas.update()}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00068}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_aefaa7ed78ef3265e9ab30d7b5748d2e8}{00068}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_aefaa7ed78ef3265e9ab30d7b5748d2e8}{callback}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{x}}\ =\ event.x}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{y}}\ =\ event.y}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a35d540bd4135d5258bc6fe29b3429c53}{movement}}()}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00073}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_acc6f3aa2b7d30e4d10ded6a89ebadedf}{00073}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_acc6f3aa2b7d30e4d10ded6a89ebadedf}{callback2}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print("{}The\ last\ position\ was:\ (\%d,\%d)"{}\ \%\ (self.x,\ self.y))}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ self.released\ =\ True}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a34caf14c6df2fecbcf74108bc9af47e3}{stop\_move}}\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ac37cef6d68377b196263b1ab3bd55379}{var}}.set(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00079}\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a8ae302ffc4fc683c020da068648e1178}{00079}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a8ae302ffc4fc683c020da068648e1178}{get\_center}}(self):}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a35d540bd4135d5258bc6fe29b3429c53}{movement}}()}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_afce4280a135a991fb68b28e4957d5448}{master}}.wait\_variable(self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_ac37cef6d68377b196263b1ab3bd55379}{var}})}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ print("{}You've\ got\ the\ center:\ (\%d,\ \%d)"{}\ \%\ (self.x+self.radius,\ self.y+self.radius))}}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a3a46948bc62168036b51faddd82d6f05}{x}}+self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a62536ce79609967aed6535e3e2f2fc03}{radius}},\ self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a95d322afa7a7fd5740c5f8a2afca8d30}{y}}+self.\mbox{\hyperlink{classmoving__circle_1_1_m_c_a_i_a62536ce79609967aed6535e3e2f2fc03}{radius}})}
+\DoxyCodeLine{\Hypertarget{moving__circle_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ }
+
+\end{DoxyCode}

@@ -1,0 +1,64 @@
+\doxysection{statistics.\+py}
+\hypertarget{statistics_8py_source}{}\label{statistics_8py_source}\index{source/statistics.py@{source/statistics.py}}
+\mbox{\hyperlink{statistics_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00001}\mbox{\hyperlink{namespacestatistics}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00003}00003\ \textcolor{stringliteral}{UNIVERSIDADE\ FEDERAL\ RURAL\ DE\ PERNAMBUCO\ -\/\ UFRPE}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00004}00004\ \textcolor{stringliteral}{UNIDADE\ ACADÊMICA\ DO\ CABO\ DE\ SANTO\ AGOSTINHO\ -\/\ UACSA}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00005}00005\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00006}00006\ \textcolor{stringliteral}{@author(s):}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ \ \ Rogério\ Soares\ (rogerio.soaress@ufrpe.br)}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00009}00009\ \textcolor{stringliteral}{Created\ on\ Wed\ Apr\ 29\ 00:03:47\ 2020}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00010}00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00013}00013\ \textcolor{keyword}{import}\ tkinter}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00014}00014\ \textcolor{keyword}{from}\ matplotlib.backends.backend\_tkagg\ \textcolor{keyword}{import}\ (FigureCanvasTkAgg,\ NavigationToolbar2Tk)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00015}00015\ \textcolor{comment}{\#\ Implement\ the\ default\ Matplotlib\ key\ bindings.}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00016}00016\ \textcolor{keyword}{from}\ matplotlib.backend\_bases\ \textcolor{keyword}{import}\ key\_press\_handler}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00017}00017\ \textcolor{keyword}{from}\ matplotlib.figure\ \textcolor{keyword}{import}\ Figure}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00018}00018\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00021}\mbox{\hyperlink{namespacestatistics_af25c5e25dd007d21bad4b4ea16f70fc8}{00021}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacestatistics_af25c5e25dd007d21bad4b4ea16f70fc8}{on\_key\_press}}(event):}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00022}00022\ \ \ \ \ print(\textcolor{stringliteral}{"{}you\ pressed\ \{\}"{}}.format(event.key))}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00023}00023\ \ \ \ \ key\_press\_handler(event,\ canvas,\ toolbar)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00024}00024\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00026}00026\ canvas.mpl\_connect(\textcolor{stringliteral}{"{}key\_press\_event"{}},\ on\_key\_press)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00027}00027\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00029}\mbox{\hyperlink{namespacestatistics_a1b71b9696dd3d33687c9edabca5a8451}{00029}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacestatistics_a1b71b9696dd3d33687c9edabca5a8451}{\_quit}}():}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00030}00030\ \ \ \ \ root.quit()\ \ \ \ \ \textcolor{comment}{\#\ stops\ mainloop}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00031}00031\ \ \ \ \ root.destroy()\ \ \textcolor{comment}{\#\ this\ is\ necessary\ on\ Windows\ to\ prevent}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fatal\ Python\ Error:\ PyEval\_RestoreThread:\ NULL\ tstate}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00034}\mbox{\hyperlink{namespacestatistics_a7342ebbeb19f67fc82697d2433481489}{00034}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacestatistics_a7342ebbeb19f67fc82697d2433481489}{plot\_stat}}(window):}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{global}\ root}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00037}00037\ \ \ \ \ root\ =\ tkinter.Toplevel(window)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00038}00038\ \ \ \ \ root.wm\_title(\textcolor{stringliteral}{"{}Embedding\ in\ Tk"{}})}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00039}00039\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00040}00040\ \ \ \ \ fig\ =\ Figure(figsize=(5,\ 4),\ dpi=100)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00041}00041\ \ \ \ \ t\ =\ np.arange(0,\ 3,\ .01)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00042}00042\ \ \ \ \ fig.add\_subplot(111).plot(t,\ 2\ *\ np.sin(2\ *\ np.pi\ *\ t))}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00043}00043\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{global}\ canvas}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00045}00045\ \ \ \ \ canvas\ =\ FigureCanvasTkAgg(fig,\ master=root)\ \ \textcolor{comment}{\#\ A\ tk.DrawingArea.}}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00046}00046\ \ \ \ \ canvas.draw()}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00047}00047\ \ \ \ \ canvas.get\_tk\_widget().pack(side=tkinter.TOP,\ fill=tkinter.BOTH,\ expand=1)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00048}00048\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00049}00049\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{global}\ toolbar}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00051}00051\ \ \ \ \ toolbar\ =\ NavigationToolbar2Tk(canvas,\ root)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00052}00052\ \ \ \ \ toolbar.update()}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00053}00053\ \ \ \ \ canvas.get\_tk\_widget().pack(side=tkinter.TOP,\ fill=tkinter.BOTH,\ expand=1)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00054}00054\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00055}00055\ \ \ \ \ button\ =\ tkinter.Button(master=root,\ text=\textcolor{stringliteral}{"{}Quit"{}},\ command=\_quit)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00056}00056\ \ \ \ \ button.pack(side=tkinter.BOTTOM)}
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00057}00057\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{statistics_8py_source_l00058}00058\ \ \ \ \ }
+
+\end{DoxyCode}

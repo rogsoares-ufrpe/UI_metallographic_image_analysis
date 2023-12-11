@@ -1,0 +1,73 @@
+\doxysection{moving.\+py}
+\hypertarget{moving_8py_source}{}\label{moving_8py_source}\index{source/moving.py@{source/moving.py}}
+\mbox{\hyperlink{moving_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00001}\mbox{\hyperlink{namespacemoving}{00001}}\ \textcolor{comment}{\#\ -\/*-\/\ coding:\ utf-\/8\ -\/*-\/}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00002}00002\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00003}00003\ \textcolor{stringliteral}{Created\ on\ Tue\ Apr\ 21\ 21:53:06\ 2020}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00004}00004\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00005}00005\ \textcolor{stringliteral}{@author:\ roger\_000}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00008}00008\ \textcolor{comment}{\#\ Canvas\ class\ of\ Tkinter\ supports\ a\ functions\ which\ is\ used\ to\ move\ objects\ }}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00009}00009\ \textcolor{comment}{\#\ from\ one\ position\ to\ another\ in\ any\ canvas\ or\ tkinter\ toplevel.}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00010}00010\ \textcolor{comment}{\#\ Syntax:\ Canvas.move(canvas\_object,\ x,\ y)}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00012}00012\ \textcolor{comment}{\#\ imports\ every\ file\ form\ tkinter\ and\ tkinter.ttk\ }}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00013}00013\ \textcolor{keyword}{from}\ tkinter\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00014}00014\ \textcolor{comment}{\#\ import\ tkinter\ as\ tk}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00015}00015\ \textcolor{keyword}{from}\ \mbox{\hyperlink{namespacetkinter_1_1ttk}{tkinter.ttk}}\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00016}00016\ \textcolor{keyword}{from}\ PIL\ \textcolor{keyword}{import}\ ImageTk,\ Image}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00017}00017\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00019}\mbox{\hyperlink{classmoving_1_1_g_f_g}{00019}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmoving_1_1_g_f_g}{GFG}}:\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00020}\mbox{\hyperlink{classmoving_1_1_g_f_g_adf40d8bd0f8348f94de4c7d14deabe28}{00020}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving_1_1_g_f_g_adf40d8bd0f8348f94de4c7d14deabe28}{\_\_init\_\_}}(self,\ master\ =\ None):\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00021}\mbox{\hyperlink{classmoving_1_1_g_f_g_a3159efbe255acd05bb359d198c845b44}{00021}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a3159efbe255acd05bb359d198c845b44}{master}}\ =\ master\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00022}\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{00022}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}}\ =\ 5}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00023}\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{00023}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}\ =\ 5}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00024}\mbox{\hyperlink{classmoving_1_1_g_f_g_a9cc1102ad6e2fe53b4a3ce1d776d2af4}{00024}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a9cc1102ad6e2fe53b4a3ce1d776d2af4}{x\_old}}\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00025}\mbox{\hyperlink{classmoving_1_1_g_f_g_af8d7cbb5d95428703d2d4f52f24c91d3}{00025}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_af8d7cbb5d95428703d2d4f52f24c91d3}{y\_old}}\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00027}\mbox{\hyperlink{classmoving_1_1_g_f_g_a822ba592ac7d0a128b9bae66abe8da04}{00027}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a822ba592ac7d0a128b9bae66abe8da04}{canvas}}\ =\ Canvas(master)\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00028}\mbox{\hyperlink{classmoving_1_1_g_f_g_a54468b059c72957afa945826a446b72b}{00028}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a54468b059c72957afa945826a446b72b}{image\_original}}\ =\ cv2.imread(\textcolor{stringliteral}{"{}images/microstructure-\/02.jpg"{}})\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00029}\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{00029}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{image\_canvas}}\ =\ cv2.cvtColor(self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a54468b059c72957afa945826a446b72b}{image\_original}},\ cv2.COLOR\_BGR2RGB)}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{image\_canvas}}\ =\ Image.fromarray(self.\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{image\_canvas}})}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{image\_canvas}}\ =\ ImageTk.PhotoImage(self.\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{image\_canvas}})}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a822ba592ac7d0a128b9bae66abe8da04}{canvas}}.create\_image(0,0,\ image=self.\mbox{\hyperlink{classmoving_1_1_g_f_g_ae82211b8924e8a27182245e888f1e7fb}{image\_canvas}},\ anchor=NW)}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00034}\mbox{\hyperlink{classmoving_1_1_g_f_g_af8c38ecbe05b7f9eec2d3b099f40fe0d}{00034}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_af8c38ecbe05b7f9eec2d3b099f40fe0d}{circle}}\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a822ba592ac7d0a128b9bae66abe8da04}{canvas}}.create\_oval(5,5,100,100,\ outline=\textcolor{stringliteral}{"{}red"{}})}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a822ba592ac7d0a128b9bae66abe8da04}{canvas}}.pack()}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00037}\mbox{\hyperlink{classmoving_1_1_g_f_g_a90c13cd0da4f4dfb4724598f2703ce84}{00037}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a90c13cd0da4f4dfb4724598f2703ce84}{stop\_move}}\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a2c358c3faee72007422e079b969bfd12}{movement}}()\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00039}00039\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00040}\mbox{\hyperlink{classmoving_1_1_g_f_g_a2c358c3faee72007422e079b969bfd12}{00040}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving_1_1_g_f_g_a2c358c3faee72007422e079b969bfd12}{movement}}(self):}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a90c13cd0da4f4dfb4724598f2703ce84}{stop\_move}}:}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}}\ -\/\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a9cc1102ad6e2fe53b4a3ce1d776d2af4}{x\_old}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}\ -\/\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_af8d7cbb5d95428703d2d4f52f24c91d3}{y\_old}}\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a822ba592ac7d0a128b9bae66abe8da04}{canvas}}.move(self.\mbox{\hyperlink{classmoving_1_1_g_f_g_af8c38ecbe05b7f9eec2d3b099f40fe0d}{circle}},\ x,\ y)\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\%d,\ \%d"{}}\ \%\ (self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}},\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}))}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a9cc1102ad6e2fe53b4a3ce1d776d2af4}{x\_old}}\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_af8d7cbb5d95428703d2d4f52f24c91d3}{y\_old}}\ =\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00049}\mbox{\hyperlink{classmoving_1_1_g_f_g_a231eaaee77b91dd885cacb9e5d892bc9}{00049}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving_1_1_g_f_g_a231eaaee77b91dd885cacb9e5d892bc9}{callback}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}}\ =\ event.x}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}\ =\ event.y}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a2c358c3faee72007422e079b969bfd12}{movement}}()}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00054}\mbox{\hyperlink{classmoving_1_1_g_f_g_aab0cd0949b3ef3e95739504911ad3260}{00054}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classmoving_1_1_g_f_g_aab0cd0949b3ef3e95739504911ad3260}{callback2}}(self,\ event):}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a90c13cd0da4f4dfb4724598f2703ce84}{stop\_move}}\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}The\ last\ position\ was:\ (\%d,\%d)"{}}\ \%\ (self.\mbox{\hyperlink{classmoving_1_1_g_f_g_aba49854a00462af2cc5aad6dc8b77825}{x}},\ self.\mbox{\hyperlink{classmoving_1_1_g_f_g_a5ef78408a099d0e6acc67fd3aa7fd22a}{y}}))}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00057}00057\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00058}00058\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00059}00059\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00060}00060\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00061}\mbox{\hyperlink{namespacemoving_a554ed2b5a63c445eaf62ffc2aa767e1e}{00061}}\ \ \ \ \ master\ =\ Tk()\ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00062}\mbox{\hyperlink{namespacemoving_a704f584e6835a8fc9049e5d862f11279}{00062}}\ \ \ \ \ gfg\ =\ \mbox{\hyperlink{classmoving_1_1_g_f_g}{GFG}}(master)}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00063}00063\ \ \ \ \ master.bind(\textcolor{stringliteral}{"{}<Motion>"{}},\ \textcolor{keyword}{lambda}\ e:\ gfg.callback(e))}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00064}00064\ \ \ \ \ master.bind(\textcolor{stringliteral}{"{}<ButtonRelease-\/1>"{}},\ \textcolor{keyword}{lambda}\ e:\ gfg.callback2(e))}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00065}00065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00066}00066\ \ \ \ \ mainloop()}
+\DoxyCodeLine{\Hypertarget{moving_8py_source_l00067}00067\ \ \ \ \ }
+
+\end{DoxyCode}
