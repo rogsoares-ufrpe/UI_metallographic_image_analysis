@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Silva
+    given-names: Rogério S. da
+    orcid: https://orcid.org/0000-0002-0040-7359
+title: "MEDIA - Metallographic Digital Image Analyzer"
+version: 1.0
+identifiers:
+  - type: 
+    value:
+date-released: 2024-02-12

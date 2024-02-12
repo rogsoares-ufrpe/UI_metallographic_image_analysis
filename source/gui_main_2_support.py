@@ -12,30 +12,25 @@
 
 import inspect
 import os
-import cv2
-import tkinter as tk
-import numpy as np
-import matplotlib.pyplot as plt
-# import tkinter.ttk as ttk
-# from tkinter.constants import *
+import xlsxwriter
 
+# Image/plot modules
+import matplotlib.pyplot as plt
+from PIL import Image,ImageTk
+
+# TKinter modules
+import tkinter as tk
 from tkinter.messagebox import showerror, showwarning, showinfo
+from tkinter import filedialog
 
 # from tabulate import tabulate
 from prettytable import PrettyTable
-from tkinter import filedialog as fd
 
+# project modules
 import gui_main_2
-
 import canvas_manager as canvasmanager
 import media
-
-
-
-# Import module to get scale hoving cursor on image
 import ScaleWinDialog as swd
-
-image_analyzer = media.MEDIA()    # object for Metallographic Image Analysis class
 
 
 _debug = True # False to eliminate debug printing from callback functions.
@@ -50,53 +45,80 @@ def main(*args):
     root = tk.Tk()
     root.protocol( 'WM_DELETE_WINDOW' , root.destroy)
     # Creates a toplevel widget.
-    global _top1, _w1
+    global _top1, MainWindow
     _top1 = root
-    _w1 = gui_main_2.Toplevel_MainWindow(_top1)
+    MainWindow = gui_main_2.Toplevel_MainWindow(_top1)
+    
+    global image_analyzer
+    image_analyzer = media.MEDIA()    # object for Metallographic Image Analysis class
     
     global cmanager
-    cmanager = canvasmanager.CanvasManager(_w1.MainCanvas)
-    
-    
-    _w1.MainCanvas.bind("<Motion>", lambda e: callback_movement(e))
+    cmanager = canvasmanager.CanvasManager(MainWindow.MainCanvas)  
     
     root.mainloop()
     
-def callback_movement(event):
-    """Captura as coordenadas do cursor sobre a tela de canvas"""
+    # h = MainWindow.CanvasHistogram.winfo_height()
     
-    x = (event.x-55)/image_analyzer.image_prop.ratio
-    y = (event.y-55)/image_analyzer.image_prop.ratio
-    str = "x = {:.2f}, y = {:.2f}".format(x,y)    
-    _w1.Label_coords.config(text=str)
+# def callback_movement(event):
+#     """Captura as coordenadas do cursor sobre a tela de canvas"""
+    
+#     x = (event.x-55)/image_analyzer.image_prop.ratio
+#     y = (event.y-55)/image_analyzer.image_prop.ratio
+#     str = "x = {:.2f}, y = {:.2f}".format(x,y)    
+#     MainWindow.Label_coords.config(text=str)
     
         
 def open_segmentation_panel():
-    
+    """Open segmentation window settings"""
     global child
-    child_root = tk.Toplevel(root)
-    child = gui_main_2.TopLevel_SegmentationWindow(child_root)
+    child_root_segmentation = tk.Toplevel(root)
+    child = gui_main_2.TopLevel_SegmentationWindow(child_root_segmentation)
+    child_root_segmentation.attributes('-topmost',True)
     
-    
-def apply_procedure_button():
 
-    print_message_on_TextBoard("Void function!")
+def open_procedure_panel():
+    """Open segmentation window settings"""
+    global child_procedure
+    child_root_procedure = tk.Toplevel(root)
+    child_procedure = gui_main_2.TopLevel_MeasuringProcedure(child_root_procedure)
+    child_root_procedure.attributes('-topmost',True)
+    
+
+
+    
+# def apply_procedure_button():
+#     print_message_on_TextBoard("Void function!")
+
 
 def print_message_on_TextBoard(msg):
-    # _w1.TextBox_output.tag_add("message", '10.10')
-    _w1.TextBox_output.insert('end',msg+'\n', ("centered"))
-    _w1.TextBox_output.tag_configure("centered", justify='center')
+    MainWindow.TextBox_output.insert('end',msg+'\n', ("centered"))
+    MainWindow.TextBox_output.tag_configure("centered", justify='center')
 
-def print_table_on_TextBoard(title, header, rows):
+
+def createPrettyTable():
+    """
+    Creates a table structure to be displayed as a PrettyTable. 
+    It can be exported as well 
+    """
+    title, header, rows_analysis = image_analyzer.get_report_analysis()            
+    rows_imgprop = image_analyzer.image_prop.get_report_analysis()            
+    rows = rows_analysis + rows_imgprop 
+    
     table = PrettyTable()
     table.title = title
     table.field_names = header
     table.add_rows(rows)
-    table.align = "l"  
-    _w1.TextBox_output.insert(tk.END, table)
-    _w1.TextBox_output.insert('end','\n\n')
+    table.align = "l"
+    return table
+
+
+def print_table_on_TextBoard(table):    
+    MainWindow.TextBox_output.insert(tk.END, table)
+    MainWindow.TextBox_output.insert('end','\n\n')
+    
     
 def apply_image_filter(the_filter):
+    """Applies image filter selected on TopLevel_SegmentationWindow"""
     image_analyzer.set_image_filter(the_filter)
     image_analyzer.apply_filter_smooth_algorithms()
     
@@ -124,9 +146,10 @@ def select_filter():
     if image_analyzer.is_image_loaded():
         apply_image_filter(filter_name[i-1])
     elif not(filter_name[i-1] == 'None'):
-        print_message_on_TextBoard('Warning! Image file not loaded.')       
+        print_message_on_TextBoard('Warning! Image file not loaded.')  
+        
 
-def select_structure_type():
+def start_grains_segmentation():
     """Defines if the user wants to detect grain/porous structure or phases through
     the group of radio buttons. The action is performed pressing <detect structure>
     button."""
@@ -154,17 +177,14 @@ def select_structure_type():
             else:
                 
                 msg=image_analyzer.find_grains(gsp)
-                CHKMSG(msg)
-                
+                CHKMSG(msg)                
                 
                 #Convert grains areas in pixels to micrometers
                 image_analyzer.convert_grains_pixel2micro()
                
-                # after analysis, display report on text box
-                title, header, rows_analysis = image_analyzer.get_report_analysis()            
-                rows_imgprop = image_analyzer.image_prop.get_report_analysis()            
-                rows = rows_analysis + rows_imgprop                      
-                print_table_on_TextBoard(title, header, rows)           
+                # after analysis, display report on text box                
+                table = createPrettyTable()
+                print_table_on_TextBoard(table)           
                 
             
                 # setup canvas for image display
@@ -176,14 +196,16 @@ def select_structure_type():
                 cimg = image_analyzer.set_image_for_canvas(image_analyzer.image_cv)
                 
                 # cimg = image_analyzer.get_image_for_canvas()
-                cmanager.display_image_on_canvas(cimg)  
+                cmanager.display_image_on_canvas(cimg)
                 
-                counts, bins = np.histogram(image_analyzer.grains_area)
-                plt.hist(bins[:-1], bins, weights=counts)
+                image_analyzer.save_analysis_image_files("sample")
                 
+                plot()
+            
                 
         else:
             showerror('Error','Phases detection not implemented yet.')       
+
 
 def display_options():
     """
@@ -204,7 +226,8 @@ def display_options():
     if child.minmax_var.get()==1:
         image_analyzer.draw_minmax_grains_area()
         
-def select_procedure_type():
+        
+def select_measuring_procedure():
     """Defines which of the ASTM procedures to use"""
     var = child.rb_procedure_var.get()
     if var==1:
@@ -216,14 +239,15 @@ def select_procedure_type():
     elif var==4:
         print("Abram")
 
+
 def close_application(): 
     msg_box = tk.messagebox.askquestion('Exit Application', 
                                         'Are you sure you want to exit the application?',
                                         icon='warning')
     if msg_box == 'yes':
         root.destroy()
-    
-    
+
+        
 def open_image_file():
     
     filetypes = (
@@ -232,14 +256,14 @@ def open_image_file():
         ('All files', '*.*')
     )
     
-    filename = fd.askopenfilename(
+    filename = filedialog.askopenfilename(
         title='Open a file',
         initialdir='/Users/roger/OneDrive/UFRPE/PESQUISA/Projeto - Analise de imagens metalograficas/Git/gui/UI_metallographic_image_analysis/images',
         filetypes=filetypes)
 
     if filename == '':        
         showinfo(title='Selected File',  
-                 message="Nenhum arquivo aberto.")
+                 message="No image file opened.")
     else:
         
         # load image file: it just creates a cv2 object
@@ -249,68 +273,162 @@ def open_image_file():
         setup_canvas()
         
         # Display directory path and file name on MainWindow
-        _w1.LabelDirectoryPathName.configure(text=filename)
+        MainWindow.LabelDirectoryPathName.configure(text=filename)
         
         
 def setup_canvas():
-    # set loaded image to be displayed on canvas
-    oimg = image_analyzer.get_image_original()
     
-    # set loaded image to be displayed on canvas
-    cimg = image_analyzer.set_image_for_canvas(oimg)
-    
-    # remove all previous graphics from previous image analysis
-    cmanager.cleanup()
-    
-    # cimg = image_analyzer.get_image_for_canvas()
-    cmanager.display_image_on_canvas(cimg)
-    
-    # set x-y scales on canvas 
-    width, height = image_analyzer.get_image_dimensions() 
-    cmanager.draw_xy_axis(width, height, image_analyzer.image_prop)    
-    
+    if not image_analyzer.is_image_loaded():
+        showerror("Error","Image not loaded! ")
+    else:
+        # set loaded image to be displayed on canvas
+        oimg = image_analyzer.get_image_original()
         
-def image_data_set():
-    """Take parameters for correct analysis: Magnification, scale, units"""
+        # set loaded image to be displayed on canvas
+        cimg = image_analyzer.set_image_for_canvas(oimg)
+        
+        # remove all previous graphics from previous image analysis
+        cmanager.cleanup()
+        
+        # cimg = image_analyzer.get_image_for_canvas()
+        cmanager.display_image_on_canvas(cimg)
+        
+        # set x-y scales on canvas 
+        width, height = image_analyzer.get_image_dimensions() 
+        cmanager.draw_xy_axis(width, height, image_analyzer.image_prop)
+        
 
-    # read data from Scale Window Dialog
-    scale_win = swd.SWD(root, _w1.MainCanvas)
-    root.bind("<Motion>", lambda e: scale_win.callback_movement(e))
-    root.bind("<Button-1>", lambda e: scale_win.callback_click(e))
+def open_data_image_window():
+    """It just opens the Data Image Window and start event"""
+
+    if not image_analyzer.is_image_loaded():
+        showerror("Error", "Image not loaded!")
+    else:
+        global child_dataimage, child_root
+        child_root = tk.Toplevel(root)
+        child_dataimage = gui_main_2.ImageDataWindow(child_root)
+        child_root.attributes('-topmost',True)
+        
+        global scale_win
+        scale_win = swd.SWD(root, MainWindow.MainCanvas)
+        root.bind("<Motion>", lambda e: scale_win.callback_movement(e))
+        root.bind("<Button-1>", lambda e: scale_win.callback_click(e)) 
     
-    if _w1.Entry_magnification.get() == "":
+    
+def conclude_data_image_collect():
+    
+    """
+    Set image parameters (magnification and scale).
+    Update image scale rulers (x-y): pixels to micrometers
+    Closes window
+    """   
+
+    if child_dataimage.EntryMagnification.get() == "":
         showwarning('Warning:','Image magnification unknow.')
+        return 1
+    
+    if child_dataimage.EntryScale.get() == "":
+        showwarning('Warning:','Scale value unknow.')
         return 1
     
     # From scale window, get: 
     # 1. image magnification      (Entry box widget), 
     # 2. scale length             (pixels: from the red ruler plotted over drawing)
     # 3. scale taken from picture (micrometers: Entry box widget)
-    magnification = float(_w1.Entry_magnification.get())
+    magnification = float(child_dataimage.EntryMagnification.get())    
+    scale_micrometers = float(child_dataimage.EntryScale.get())
     
-    scale_micrometers, scale_pixels = scale_win.get()    
+    # info = 'Magnification: ' + str(magnification) + '\n Scale (um):' + str(scale_micrometers)
+    # showinfo("Data image info", info)
+    
+    scale_pixels = scale_win.get()    
+    info = 'scale_pixels = ' + str(scale_pixels)
+    showinfo("Data image info: ", info)
+    
     width, height = image_analyzer.get_image_dimensions()
-    image_analyzer.image_prop.convertion_scale_settings(scale_micrometers, scale_pixels, magnification, width, height)
+    image_analyzer.image_prop.convertion_scale_settings(scale_micrometers, 
+                                                        scale_pixels, 
+                                                        magnification, 
+                                                        width, 
+                                                        height)
     
     # apague a marcação da régua usada para capturar a escala da imagem e
     # redesenhe os valores das escalas vertical e horizontal (pixel -> um)
     setup_canvas()
-    
-def zoom_image():
-    """Abre uma janela para a visualização de uma área ampliada
-       da imagem carregada
-    """
-    
-    global child_zoom
-    child_root = tk.Toplevel(root)
-    child_zoom = gui_main_2.DisplayZoomWindow(child_root)
-    
-    img = image_analyzer.image_canvas
-    
-    resized_img = cv2.resize(img,None, fx=2, fy=2, interpolation=cv2.INTER_AREA)
-    child_zoom.ZoomCanvas.create_image(0, 0, image=resized_img, anchor=tk.NW) 
+
+    # close data image window    
+    child_root.destroy()
     
        
+def plot():  
+    """
+    Plots on canvas the histogram of grains areas
+    """
+
+    x = image_analyzer.grains_area
+    
+    num_bins = 42
+    
+    fig, ax = plt.subplots(figsize=(6.9, 4.6))
+    
+    # the histogram of the data
+    n, bins, patches = ax.hist(x, num_bins, density=True)
+    
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Probability density')
+    ax.set_title('Histogram of grains areas')   
+    plt.savefig("hist.png", bbox_inches='tight')
+    
+    
+    one = ImageTk.PhotoImage(Image.open("hist.png"))
+    root.one = one
+    MainWindow.CanvasHistogram.create_image(0,0,image=one, anchor=tk.NW)
+    
+  
+
+def exporttoxlxs():
+    """
+    Description:
+        
+        Export the last data analysis to a .xlxs file.
+    """
+    
+    filename = filedialog.asksaveasfilename(initialfile = 'Untitled.xlsx',
+                                            defaultextension=".xlsx",
+                                            filetypes=[("Excel file","*.xlsx")])
+    
+    print('filename = ', filename)
+    print('filename type = ', type(filename) )
+    
+    # get data to be written to file
+    title, header, data_rows = image_analyzer.get_report_analysis()
+    
+    # Create a workbook and add a worksheet.
+    workbook = xlsxwriter.Workbook(filename)
+    worksheet = workbook.add_worksheet()
+    
+    # Start from the first cell. Rows and columns are zero indexed.
+    row = 1
+    col = 1
+    
+    # # print title
+    # print('TITLE = ', title)
+    worksheet.write(row, col, title)
+    
+    # # print headers
+    row += 2
+    worksheet.write(row, col, str(header[0]))
+    worksheet.write(row, col+1, str(header[1]))
+    
+    # Iterate over the data and write it out row by row.
+    row += 1
+    for r in data_rows:
+        worksheet.write(row, col,     r[0])
+        worksheet.write(row, col + 1, r[1])
+        row += 1
+    
+    workbook.close()
+    
 def about():
     showinfo('About MEDIA:',
                     'The Metallographic Digital Image Analyzer:\n\n'

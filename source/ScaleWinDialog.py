@@ -1,10 +1,10 @@
 
-from tkinter import *
-import tkinter as tk
-from tkinter.ttk import *
-from PIL import ImageTk, Image
-import cv2
-import scale_entry_window as sew
+# from tkinter import *
+# import tkinter as tk
+# from tkinter.ttk import *
+# from PIL import ImageTk, Image
+# import cv2
+# import scale_entry_window as sew
 
 
 class SWD: 
@@ -18,8 +18,8 @@ class SWD:
         self.first_click = False
         self.second_click = False
         
-        self.wait_variable = BooleanVar()
-        self.wait_variable.set(False)
+        # self.wait_variable = BooleanVar()
+        # self.wait_variable.set(False)
     
         self.x1 = 0
         self.y1 = 0
@@ -43,20 +43,20 @@ class SWD:
             self.canvas.coords(self.line, self.x0, self.y0, self.x1, self.y0)
         
     
-    def set_and_close(self):
-        s = self.Entry.get()
-        self.scale = float(s)
-        self.wait_variable.set(True)
-        self.Window.destroy()
-        self.Window = None
+    # def set_and_close(self):
+    #     # s = self.Entry.get()
+    #     # self.scale = float(s)
+    #     self.wait_variable.set(True)
+    #     self.Window.destroy()
+    #     self.Window = None
         
         
     def get(self):
         """Hold on program while data is obtained. self.scale and self.pixel_length
         are not availabel when this function is called"""
-        self.root.wait_variable(self.wait_variable)
+        # self.root.wait_variable(self.wait_variable)
         
-        return self.scale, self.pixel_length
+        return self.pixel_length
     
         
     def callback_click(self, event):
@@ -71,27 +71,27 @@ class SWD:
             self.canvas.coords(self.right_tick, self.x0, self.y0-12, self.x0, self.y0+12)
         elif self.count==2:
             self.second_click = True
-            self.pixel_length = self.x1 - self.x0
-            self.open_dialog()
+            self.pixel_length = abs(self.x1 - self.x0)
+            # self.open_dialog()
        
         
-    def open_dialog(self):
-        # win, top = sew.create_EntryWindows(self.root)
-        # top.Button.configure(command=lambda: self.get_and_close(top))
-        # global win
+    # def open_dialog(self):
+    #     # win, top = sew.create_EntryWindows(self.root)
+    #     # top.Button.configure(command=lambda: self.get_and_close(top))
+    #     # global win
         
-        self.Window = tk.Toplevel(self.root)
-        self.Window.title("Set scale")
-        self.Window.geometry("234x85+679+310")
-        self.Window.minsize(120, 1)
-        self.Window.maxsize(1924, 1061)
-        self.Window.resizable(1, 1)
-        label1 = tk.Label(self.Window, text="Value = ").grid(row=0, padx=10, pady=10)
-        self.Entry = tk.Entry(self.Window, width=12)
-        self.Entry.grid(row=0, column=1, sticky=W)
-        label2 = tk.Label(self.Window, text= u'''\u03BC'''+'''m''').grid(row=0, column=2, padx=10, pady=10, sticky=E)
-        btn = tk.Button(self.Window, text="OK", command=self.set_and_close)
-        btn.grid(row=2, column=1, padx=0, pady=5)
+    #     self.Window = tk.Toplevel(self.root)
+    #     self.Window.title("Set scale")
+    #     self.Window.geometry("234x85+679+310")
+    #     self.Window.minsize(120, 1)
+    #     self.Window.maxsize(1924, 1061)
+    #     self.Window.resizable(1, 1)
+    #     label1 = tk.Label(self.Window, text="Value = ").grid(row=0, padx=10, pady=10)
+    #     self.Entry = tk.Entry(self.Window, width=12)
+    #     self.Entry.grid(row=0, column=1, sticky=W)
+    #     label2 = tk.Label(self.Window, text= u'''\u03BC'''+'''m''').grid(row=0, column=2, padx=10, pady=10, sticky=E)
+    #     btn = tk.Button(self.Window, text="OK", command=self.set_and_close)
+    #     btn.grid(row=2, column=1, padx=0, pady=5)
             
             
     

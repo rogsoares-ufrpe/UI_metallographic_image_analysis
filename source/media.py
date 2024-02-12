@@ -268,9 +268,7 @@ class MEDIA:
             #                                             11,
             #                                             2)                                                        
             
-            ret, self.image_filtered = cv2.threshold(gray_img,0,255,
-                                                    cv2.THRESH_BINARY + 
-                                                    cv2.THRESH_OTSU)
+            ret, self.image_filtered = cv2.threshold(gray_img,0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
             
         else:
             self.image_filtered = np.copy(self.image_original)
@@ -337,7 +335,7 @@ class MEDIA:
             edges = self.edges_trim(edges)        
     
             # Use edges detected on image connecting each them to form grains contours
-            self.contours, h  = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+            self.contours, h  = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
         
         # Some contours are really useless
         self.remove_unnecessary_grains_contours(gsp)
@@ -552,12 +550,17 @@ class MEDIA:
         self.grains_area_percenage = 100*self.grains_total_area/self.image_area_converted
         
     
+    def save_analysis_image_files(self, filename):
+        """Saves to file the original and the analyzed images. Two .png files"""
+        cv2.imwrite(filename+"_analized.png", self.image_cv)
+        cv2.imwrite(filename+"_original.png", self.image_original)
+        
     
     def get_report_analysis(self):        
         
         title = "Grain alloy microstructure analysis report"
         header = ["Item", "Results"]
-        rows = [
+        data_rows = [
             ["Sample: ", os.path.basename(self.path)],
             ["Number of grains ", len(self.grains_area)],
             ["Average grain size (um)", "{:.2f}".format( np.mean(self.grains_area)) ],
@@ -570,7 +573,7 @@ class MEDIA:
             ["Edge detection:", "Canny"]
             ]
         
-        return title, header, rows        
+        return title, header, data_rows        
         
         
         
