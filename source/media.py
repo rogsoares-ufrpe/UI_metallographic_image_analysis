@@ -6,7 +6,7 @@ from PIL import ImageTk
 # import h5py
 import os
 
-import ImageAnalysisManeger as iam
+import ImageAnalysisManager as iam
 
 from cv2.ximgproc import THINNING_ZHANGSUEN
 from cv2.ximgproc import THINNING_GUOHALL
@@ -22,7 +22,9 @@ class Colors:
         self.cian =  (255, 255, 0)
         self.blue = (255, 0, 0)
         self.magenta = (255, 0, 255)
+        self.magenta_light = (255, 200, 255)
         self.green = (0, 255, 0)
+        self.green_light = (200, 255, 100)
         self.black = (0, 0, 0)
 
 
@@ -113,189 +115,6 @@ class MEDIA:
         # object for Image dimension properties
         self.image_prop = iam.IAM()          
 
-
-    def get_image_dimensions(self):
-        """Return a tuple: width, height"""
-        return (self.width, self.height)
-
-    def is_image_loaded(self):
-        return self.img_loaded
-
-    '''
-    It only initialize the object <self.image_original> from OpenCV using the
-    filename path
-    '''
-    def load_image(self, path_to_image, loaded_from_analysis=False, img=None):
-
-        # store image path
-        self.path = path_to_image
-
-        if loaded_from_analysis:
-            self.image_original = img
-        else:
-            self.image_original = cv2.imread(self.path)
-
-        self.adjust_image_dimensions()
-
-        self.img_loaded = True
-        self.segmented_image = False
-    
-    '''
-    Modify, if necessary, image dimensions (height and width) to fit to canvas 
-    area and turn it into gray scale for appropriated analysis
-    '''
-    def adjust_image_dimensions(self):
-        
-        self.resize()        
-        
-        # convert resized original image to gray scale
-        self.image_gray = cv2.cvtColor(self.image_original, cv2.COLOR_BGR2GRAY)
-
-        # initialize
-        self.image_filtered = self.image_original.copy()
- 
-    '''
-    Let's suppose Canvas has 800x600 pixel of resolution'. It fits image to 
-    Canvas area using OpenCV algorithms
-    '''
-    def resize(self):
-        
-        # Get imagem dimensions from the loaded image
-        self.height, self.width, self.no_channels = self.image_original.shape
-        
-        # Start resizing procedures
-        ratio = float(720/self.width)
-        if self.height*ratio > 520:
-            ratio = float(520/self.height)
-
-        # shrink to width
-        if self.width >= 720:
-            self.image_original = cv2.resize(self.image_original, 
-                                             None, 
-                                             fx=ratio, fy=ratio, 
-                                             interpolation=cv2.INTER_AREA)
-        else:
-            self.image_original = cv2.resize(self.image_original, 
-                                             None, 
-                                             fx=ratio, fy=ratio, 
-                                             interpolation=cv2.INTER_CUBIC)
-
-        # Get imagem dimensions from the resized loaded image
-        self.height, self.width, self.no_channels = self.image_original.shape
-        
-    '''
-    Defines an image object to be used with canvas. So everytime any modification
-    is made to the original greyscale image, <set_image_for_canvas> must be called
-    to display it.
-    '''
-    def set_image_for_canvas(self, img):
-        # OpenCV represents images in BGR order; however PIL represents
-        # images in RGB order, so we need to swap the channels
-        # self.image_canvas = None
-        self.image_canvas = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)            
-
-        # convert the images to PIL format...
-        self.image_canvas = Image.fromarray(self.image_canvas)
-
-        # ...and then to ImageTk format
-        self.image_canvas = ImageTk.PhotoImage(self.image_canvas)
-        
-        return self.image_canvas
-        
-    def get_image_for_canvas(self):
-        return self.image_canvas
-
-    '''
-    If a new analysis must be done over the same image, previous modifications
-    like edge countors segmentation or areas filling will be present. So, get
-    a brand new image.
-    '''
-    def get_image_grayscale(self):
-        return cv2.cvtColor(self.image_original, cv2.COLOR_BGR2GRAY)
-
-    def get_image_original(self):
-        return self.image_original
-    
-
-    def grains_histogram(self):
-        num_bins = 50
-        n, bins, patches = plt.hist(self.grains_area, num_bins, facecolor='blue', alpha=0.5)
-        plt.show()
-
-    '''
-    Applies an image filtering or smoothing algorithm which probably will lead
-    to more effective edge detection results.
-    '''
-    def apply_filter_smooth_algorithms(self):
- 
-        # print("Filter applied: ", self.filter_name)
-        if self.filter_name == "Gaussian blur":
-            self.image_filtered = cv2.GaussianBlur(self.image_original, (15,15), 0)
-        elif self.filter_name == "2D convolution":
-            kernel = np.ones((5, 5), np.float32) / 25
-            self.image_filtered = cv2.filter2D(self.image_original, -1, kernel)
-        elif self.filter_name == "Median Blurring":
-            self.image_filtered = cv2.medianBlur(self.image_original, 7)
-        elif self.filter_name == "Bilateral Filter":
-            self.image_filtered = cv2.bilateralFilter(self.image_original, 9, 75, 75)
-        elif self.filter_name == "Averaging":
-            self.image_filtered = cv2.blur(self.image_original, (5, 5))
-        elif self.filter_name == "Laplacian":            
-            """
-            The function can process the image in-place.
-            cv.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst]	) ->	dst
-            
-            Parameters:
-            * src	          Source 8-bit single-channel image.
-            * dst	          Destination image of the same size and the same 
-                              type as src.
-            * maxValue	      Non-zero value assigned to the pixels for which the
-                              condition is satisfied
-            * adaptiveMethod  Adaptive thresholding algorithm to use, see 
-                              AdaptiveThresholdTypes. The BORDER_REPLICATE | 
-                              BORDER_ISOLATED is used to process boundaries.
-            * thresholdType	  Thresholding type that must be either THRESH_BINARY
-                              or THRESH_BINARY_INV, see ThresholdTypes.
-            * blockSize	      Size of a pixel neighborhood that is used to cal-
-                              culate a threshold value for the pixel: 3, 5, 7, 
-                              and so on.
-            """
-            gray_img = self.get_image_grayscale()            
-            # self.image_filtered = cv2.adaptiveThreshold(gray_img,
-            #                                             127,
-            #                                             cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-            #                                             cv2.THRESH_BINARY,
-            #                                             11,
-            #                                             2)                                                        
-            
-            ret, self.image_filtered = cv2.threshold(gray_img,0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-            
-        else:
-            self.image_filtered = np.copy(self.image_original)
-
-    def get_filtered_image(self):
-        return self.image_filtered
-    
-    def set_parameters(self, param):
-        self.filter = param[0]
-        self.l2grad = param[1]
-        self.threshold_one = param[2]
-        self.threshold_two = param[3]
-        # print(param)
-
-
-    def is_image_segmented(self):
-        """Returns true if image grains have already been segmented."""
-        return self.segmented_image
-
-    def get_filter_name(self):
-        return self.filter_name
-
-    def set_image_filter(self, the_filter):
-        self.filter_name = the_filter
-        # print("Filter: ", the_filter)
-
-    
     def find_grains(self, gsp):
         """
         Perform Canny algorithm to find edges segmentation.
@@ -309,14 +128,14 @@ class MEDIA:
 
         if not self.is_image_segmented():
             # Edge segmentation
-            '''
+            """
             Finds edges in an image using the Canny algorithm [45] .
             The function finds edges in the input image and marks them in the 
             output map edges using the Canny algorithm. The smallest value 
             between threshold1 and threshold2 is used for edge linking. The 
             largest value is used to find initial segments of strong edges. 
             See http://en.wikipedia.org/wiki/Canny_edge_detector
-            '''
+            """
             edges = cv2.Canny(self.image_gray,
                               threshold1=self.threshold_one,
                               threshold2=self.threshold_two,
@@ -325,15 +144,23 @@ class MEDIA:
             # As duas próximas funções são de extrema importância na qualidade da de-
             # finição dos contornos dos grãos removendo aresas desnecessárias.
             
+            # Morphological closing, 
+        	# Morphological dilation, 
+        	# Image removal of small black patches, 
+        	# Image thinning
+            
             # removing undersireble edges
             edges = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, None)
+            
+            # removing undersireble edges
+            # edges = cv2.morphologyEx(edges, cv2.MORPH_DILATE, None)
             
             # edges = cv2.ximgproc.thinning(edges, thinningType=THINNING_ZHANGSUEN)
             edges = cv2.ximgproc.thinning(edges, thinningType=THINNING_GUOHALL)
     
             # remove unnecessary edges 
-            edges = self.edges_trim(edges)        
-    
+            edges = self.edges_trim(edges) 
+            
             # Use edges detected on image connecting each them to form grains contours
             self.contours, h  = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
         
@@ -473,11 +300,20 @@ class MEDIA:
 
     
 
-    def draw_contours(self):
-        for cnt in self.grains_contours:
-            # print("cnt:", cnt)
-            cv2.drawContours(self.image_cv, [cnt], -1, self.colors.blue, thickness=1)
+    def draw_contours(self, contours=None, contour_color=None, area_color=None):
+        
+        if contours==None:
+            contours = self.grains_contours
+            
+        if contour_color==None:
+           contour_color = self.colors.blue        
+        
+        if not area_color==None:
+            for cnt in contours:
+                cv2.drawContours(self.image_cv, [cnt], -1, area_color, thickness=cv2.FILLED)
 
+        for cnt in contours:
+            cv2.drawContours(self.image_cv, [cnt], -1, contour_color, thickness=1)
             
     def fill_contours(self):
         """Preenche a area dos graos com uma cor"""
@@ -576,4 +412,189 @@ class MEDIA:
         return title, header, data_rows        
         
         
+    def get_image_dimensions(self):
+        """Return a tuple: width, height"""
+        return (self.width, self.height)
+
+    def is_image_loaded(self):
+        return self.img_loaded
+
+    
+    def load_image(self, path_to_image, loaded_from_analysis=False, img=None):
+        """
+        It only initialize the object <self.image_original> from OpenCV using the
+        filename path
+        """
+        # store image path
+        self.path = path_to_image
+
+        if loaded_from_analysis:
+            self.image_original = img
+        else:
+            self.image_original = cv2.imread(self.path)
+
+        self.adjust_image_dimensions()
+
+        self.img_loaded = True
+        self.segmented_image = False
+    
+    
+    def adjust_image_dimensions(self):
+        """
+        Modify, if necessary, image dimensions (height and width) to fit to canvas 
+        area and turn it into gray scale for appropriated analysis
+        """    
+        self.resize()        
         
+        # convert resized original image to gray scale
+        self.image_gray = cv2.cvtColor(self.image_original, cv2.COLOR_BGR2GRAY)
+
+        # initialize
+        self.image_filtered = self.image_original.copy()
+ 
+   
+    def resize(self):
+        """
+        Let's suppose Canvas has 800x600 pixel of resolution'. It fits image to 
+        Canvas area using OpenCV algorithms
+        """
+        
+        # Get imagem dimensions from the loaded image
+        self.height, self.width, self.no_channels = self.image_original.shape
+        
+        # Start resizing procedures
+        ratio = float(720/self.width)
+        if self.height*ratio > 520:
+            ratio = float(520/self.height)
+
+        # shrink to width
+        if self.width >= 720:
+            self.image_original = cv2.resize(self.image_original, 
+                                             None, 
+                                             fx=ratio, fy=ratio, 
+                                             interpolation=cv2.INTER_AREA)
+        else:
+            self.image_original = cv2.resize(self.image_original, 
+                                             None, 
+                                             fx=ratio, fy=ratio, 
+                                             interpolation=cv2.INTER_CUBIC)
+
+        # Get imagem dimensions from the resized loaded image
+        self.height, self.width, self.no_channels = self.image_original.shape
+        
+    
+    def set_image_for_canvas(self, img):
+        """
+        Defines an image object to be used with canvas. So everytime any modification
+        is made to the original greyscale image, <set_image_for_canvas> must be called
+        to display it.
+        """
+        # OpenCV represents images in BGR order; however PIL represents
+        # images in RGB order, so we need to swap the channels
+        # self.image_canvas = None
+        self.image_canvas = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)            
+
+        # convert the images to PIL format...
+        self.image_canvas = Image.fromarray(self.image_canvas)
+
+        # ...and then to ImageTk format
+        self.image_canvas = ImageTk.PhotoImage(self.image_canvas)
+        
+        return self.image_canvas
+        
+    def get_image_for_canvas(self):
+        return self.image_canvas
+
+    
+    def get_image_grayscale(self):
+        """
+        If a new analysis must be done over the same image, previous modifications
+        like edge countors segmentation or areas filling will be present. So, get
+        a brand new image.
+        """
+        return cv2.cvtColor(self.image_original, cv2.COLOR_BGR2GRAY)
+
+    def get_image_original(self):
+        return self.image_original
+    
+
+    def grains_histogram(self):
+        num_bins = 50
+        n, bins, patches = plt.hist(self.grains_area, num_bins, facecolor='blue', alpha=0.5)
+        plt.show()
+
+    
+    def apply_filter_smooth_algorithms(self):
+        """
+        Applies an image filtering or smoothing algorithm which probably will lead
+        to more effective edge detection results.
+        """
+ 
+        # print("Filter applied: ", self.filter_name)
+        if self.filter_name == "Gaussian blur":
+            self.image_filtered = cv2.GaussianBlur(self.image_original, (15,15), 0)
+        elif self.filter_name == "2D convolution":
+            kernel = np.ones((5, 5), np.float32) / 25
+            self.image_filtered = cv2.filter2D(self.image_original, -1, kernel)
+        elif self.filter_name == "Median Blurring":
+            self.image_filtered = cv2.medianBlur(self.image_original, 7)
+        elif self.filter_name == "Bilateral Filter":
+            self.image_filtered = cv2.bilateralFilter(self.image_original, 9, 75, 75)
+        elif self.filter_name == "Averaging":
+            self.image_filtered = cv2.blur(self.image_original, (5, 5))
+        elif self.filter_name == "Laplacian":            
+            """
+            The function can process the image in-place.
+            cv.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst]	) ->	dst
+            
+            Parameters:
+            * src	          Source 8-bit single-channel image.
+            * dst	          Destination image of the same size and the same 
+                              type as src.
+            * maxValue	      Non-zero value assigned to the pixels for which the
+                              condition is satisfied
+            * adaptiveMethod  Adaptive thresholding algorithm to use, see 
+                              AdaptiveThresholdTypes. The BORDER_REPLICATE | 
+                              BORDER_ISOLATED is used to process boundaries.
+            * thresholdType	  Thresholding type that must be either THRESH_BINARY
+                              or THRESH_BINARY_INV, see ThresholdTypes.
+            * blockSize	      Size of a pixel neighborhood that is used to cal-
+                              culate a threshold value for the pixel: 3, 5, 7, 
+                              and so on.
+            """
+            gray_img = self.get_image_grayscale()            
+            # self.image_filtered = cv2.adaptiveThreshold(gray_img,
+            #                                             127,
+            #                                             cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+            #                                             cv2.THRESH_BINARY,
+            #                                             11,
+            #                                             2)                                                        
+            
+            ret, self.image_filtered = cv2.threshold(gray_img,0,255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+            
+        else:
+            self.image_filtered = np.copy(self.image_original)
+
+    def get_filtered_image(self):
+        return self.image_filtered
+    
+    def set_parameters(self, param):
+        self.filter = param[0]
+        self.l2grad = param[1]
+        self.threshold_one = param[2]
+        self.threshold_two = param[3]
+        # print(param)
+
+
+    def is_image_segmented(self):
+        """Returns true if image grains have already been segmented."""
+        return self.segmented_image
+
+    def get_filter_name(self):
+        return self.filter_name
+
+    def set_image_filter(self, the_filter):
+        self.filter_name = the_filter
+        # print("Filter: ", the_filter)
+
+            

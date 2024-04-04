@@ -5,10 +5,6 @@
 #  in conjunction with Tcl version 8.6
 #    Oct 18, 2023 04:33:30 PM -03  platform: Windows NT
 
-# self.edge_detection_var.set("Canny")
-# self.meanSTD_var.set("1")
-# self.rb_filter.set(1)
-# self.drawcnt_var.set(1)
 
 import inspect
 import os
@@ -31,6 +27,12 @@ import gui_main_2
 import canvas_manager as canvasmanager
 import media
 import ScaleWinDialog as swd
+
+import sys
+sys.path.append('procedures')
+from Jeffries import jeffries_procedure
+from Heyns import heyns_procedure
+import procedures_support as ps
 
 
 _debug = True # False to eliminate debug printing from callback functions.
@@ -75,19 +77,106 @@ def open_segmentation_panel():
     child = gui_main_2.TopLevel_SegmentationWindow(child_root_segmentation)
     child_root_segmentation.attributes('-topmost',True)
     
+    child.edge_detection_var.set("Canny")
+    child.meanSTD_var.set("1")
+    child.rb_filter.set(1)
+    child.drawcnt_var.set(1)
+    
 
 def open_procedure_panel():
-    """Open segmentation window settings"""
+    """Open the ASTM procedures window"""
+
+    # if not image_analyzer.is_image_segmented():
+    #     showwarning("Warning","Procedures can not be applied until grains segmentation has been performed.")
+    #     return 
+    
     global child_procedure
     child_root_procedure = tk.Toplevel(root)
     child_procedure = gui_main_2.TopLevel_MeasuringProcedure(child_root_procedure)
     child_root_procedure.attributes('-topmost',True)
     
-
-
+    child_procedure.LineLength.insert(0, "0 um")
+    child_procedure.NumLinesHeyns.insert(0,"1 line")
+    child_procedure.CircunferenceJeffriesArea.insert(0,"5000 mm^2")
+    child_procedure.RB_procedure.set(1)
     
-# def apply_procedure_button():
-#     print_message_on_TextBoard("Void function!")
+def apply_procedure_button():
+    """Apply ASTM procedure choose by user"""
+    
+    var = int(child_procedure.RB_procedure.get())
+    procedures = ["Jeffries", "Heyns"]
+    print("Procedure: ", procedures[var-1])
+    
+    canvas = MainWindow.MainCanvas
+    colors = image_analyzer.colors
+    width, height = image_analyzer.get_image_dimensions()
+    
+    
+    print("Por aqui passa: 01")
+    image_analyzer.image_cv = None
+    image_analyzer.image_cv = image_analyzer.image_original.copy()
+    print("Por aqui passa: 02")
+    
+    if procedures[var-1]=="Jeffries":
+        radius = image_analyzer.image_prop.Jeffrie_radius()        
+        circunference = [radius, ((int(width/2), int(height/2)))]
+        
+        
+        intcpd_area, inside_area, intcpd_contours, inside_contours = jeffries_procedure(circunference, 
+                                                                                        image_analyzer.grains_area, 
+                                                                                        image_analyzer.grains_contours)
+        num_intcp = len(intcpd_contours)
+        num_inside = len(inside_contours)
+        
+        
+        if len(intcpd_area)==0:
+            showerror("Planimetric Jeffries procedure error", "No intercepted grains found")
+        if len(inside_area)==0:
+            showerror("Planimetric Jeffries procedure error", "No inside grains found")        
+        
+        image_analyzer.draw_contours(contours=inside_contours, contour_color=colors.black, area_color = colors.magenta_light)        
+        image_analyzer.draw_contours(contours=intcpd_contours, contour_color=colors.black, area_color = colors.green_light)
+        cmanager.update(image_analyzer)
+        
+        # calculate grain size number
+        G = ps.get_G_number("Jeffries", num_intcp, N_inside=num_inside)
+        print("Grain size number: %f  (Jeffries procedure)" % G)
+        
+        # draw circunference only after canvas update or it will overlap the circunference       
+        ps.draw_circunference(canvas, circunference)   
+    elif procedures[var-1] =="Heyns":
+        
+        # take the image width to lines length
+        # line_length = width
+        
+        # check entry box for length. It is initialized with 0um
+        # micrometer -> milimeter
+        line_length = float(child_procedure.LineLength.get())
+        var_nlines = int(child_procedure.NumLinesHeyns.get())
+        
+        linelength_px = image_analyzer.image_prop.um_to_px(line_length)
+        full_intercpt, half_intercpt = heyns_procedure(image_analyzer.grains_area, 
+                                          image_analyzer.grains_contours, 
+                                          width, height, linelength_px, num_lines=var_nlines)
+        
+        num_intcp = len(full_intercpt) + 0.5*len(half_intercpt)
+        print("len(full_intercpt) = ",len(full_intercpt))
+        print("len(half_intercpt) = ",len(half_intercpt))
+        print("num_intcp = ",num_intcp)
+        
+        image_analyzer.draw_contours(contours=full_intercpt, contour_color=colors.black, area_color = colors.magenta_light)
+        image_analyzer.draw_contours(contours=half_intercpt, contour_color=colors.black, area_color = colors.green_light)
+        # update canvas
+        cmanager.update(image_analyzer)        
+        ps.draw_lines(canvas, width, height, linelength_px, nlines=var_nlines)
+      
+        # calculate grain size number
+        G = ps.get_G_number("Heyns", num_intcp, length=0.001*line_length*var_nlines)
+        print("Grain size number: %f  (Heyns procedure)" % G)
+    else:
+        showerror("Error", "Only Jeffries and Heyn procedures are available.")
+        
+    
 
 
 def print_message_on_TextBoard(msg):
@@ -101,7 +190,7 @@ def createPrettyTable():
     It can be exported as well 
     """
     title, header, rows_analysis = image_analyzer.get_report_analysis()            
-    rows_imgprop = image_analyzer.image_prop.get_report_analysis()            
+    rows_imgprop =                 image_analyzer.image_prop.get_report_analysis()            
     rows = rows_analysis + rows_imgprop 
     
     table = PrettyTable()
@@ -184,8 +273,7 @@ def start_grains_segmentation():
                
                 # after analysis, display report on text box                
                 table = createPrettyTable()
-                print_table_on_TextBoard(table)           
-                
+                print_table_on_TextBoard(table)                
             
                 # setup canvas for image display
                 setup_canvas()
@@ -281,14 +369,15 @@ def setup_canvas():
     if not image_analyzer.is_image_loaded():
         showerror("Error","Image not loaded! ")
     else:
+        
+        # remove all previous graphics from previous image analysis
+        cmanager.cleanup()
+        
         # set loaded image to be displayed on canvas
         oimg = image_analyzer.get_image_original()
         
         # set loaded image to be displayed on canvas
         cimg = image_analyzer.set_image_for_canvas(oimg)
-        
-        # remove all previous graphics from previous image analysis
-        cmanager.cleanup()
         
         # cimg = image_analyzer.get_image_for_canvas()
         cmanager.display_image_on_canvas(cimg)
@@ -316,39 +405,43 @@ def open_data_image_window():
     
     
 def conclude_data_image_collect():
-    
+    print("conclude_data_image_collect():")
     """
     Set image parameters (magnification and scale).
     Update image scale rulers (x-y): pixels to micrometers
     Closes window
     """   
 
-    if child_dataimage.EntryMagnification.get() == "":
-        showwarning('Warning:','Image magnification unknow.')
-        return 1
+    # if child_dataimage.EntryMagnification.get() == "":
+    #     showwarning('Warning:','Image magnification unknow.')
+    #     return 1
     
-    if child_dataimage.EntryScale.get() == "":
-        showwarning('Warning:','Scale value unknow.')
-        return 1
+    # if child_dataimage.EntryScale.get() == "":
+    #     showwarning('Warning:','Scale value unknow.')
+    #     return 1
     
     # From scale window, get: 
     # 1. image magnification      (Entry box widget), 
     # 2. scale length             (pixels: from the red ruler plotted over drawing)
     # 3. scale taken from picture (micrometers: Entry box widget)
-    magnification = float(child_dataimage.EntryMagnification.get())    
-    scale_micrometers = float(child_dataimage.EntryScale.get())
+    M = 100 #float(child_dataimage.EntryMagnification.get())    
+    scale_micrometers = 100 #float(child_dataimage.EntryScale.get())
     
-    # info = 'Magnification: ' + str(magnification) + '\n Scale (um):' + str(scale_micrometers)
+    image_analyzer.image_prop.Magnification = M
+    image_analyzer.image_prop.scale_micrometers = scale_micrometers
+    
+    
+    info = 'Magnification: ' + str(M) + '\n Scale (um):' + str(scale_micrometers)
     # showinfo("Data image info", info)
     
-    scale_pixels = scale_win.get()    
+    scale_pixels = 60 #scale_win.get()    
     info = 'scale_pixels = ' + str(scale_pixels)
-    showinfo("Data image info: ", info)
+    # showinfo("Data image info: ", info)
     
     width, height = image_analyzer.get_image_dimensions()
     image_analyzer.image_prop.convertion_scale_settings(scale_micrometers, 
                                                         scale_pixels, 
-                                                        magnification, 
+                                                        M, 
                                                         width, 
                                                         height)
     

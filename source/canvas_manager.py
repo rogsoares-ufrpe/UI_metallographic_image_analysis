@@ -14,15 +14,24 @@ class CanvasManager:
     def __init__(self, canvas):
         # print("Construtor vazio")
         self.canvas = canvas
+        self.canvas_id = None
+        
+    def update(self, image_analyzer):
+        # update canvas
+        
+        cv_img = image_analyzer.image_cv            
+        cimg = image_analyzer.set_image_for_canvas(cv_img)
+        self.display_image_on_canvas(cimg)
 
     def display_image_on_canvas(self, img):
         """Called everytime image displayed on canvas is modified."""
-        self.canvas.create_image(55, 55, image=img, anchor=tk.NW)
+        self.canvas_id = self.canvas.create_image(55, 55, image=img, anchor=tk.NW)
         
     '''
     Remove all graphical material from canvas. Make it new.
     '''
     def cleanup(self):
+        print("Cleaning image...")
         self.canvas.delete('all')
         self.canvas.configure(background="#ffffd9")
     

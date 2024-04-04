@@ -28,12 +28,11 @@ class IAM:
         
         self.ratio_area = 1
         
-        self.ratio = 1
+        self.pixels_per_um_ratio = 1
         """ratio says how many pixels represent 1 micrometer"""
     
-    def set_ratio(self):
-        
-        self.ratio = self.scale_pixels/self.scale_micrometers
+    def set_ratio(self):    
+        self.pixels_per_um_ratio = self.scale_pixels/self.scale_micrometers
     
     
     def convertion_scale_settings(self, scale_micrometers, scale_pixels, M, w, h):
@@ -45,9 +44,9 @@ class IAM:
         
         self.scale_micrometers = scale_micrometers
         self.scale_pixels = scale_pixels        
-        self.ratio = self.scale_pixels / self.scale_micrometers
+        self.pixels_per_um_ratio = self.scale_pixels / self.scale_micrometers
         
-        # self.ha = (self.height/self.ratio)*self.Magnification
+        # self.ha = (self.height/self.pixels_per_um_ratio)*self.Magnification
         # self.hr = self.ha / self.Magnification
         
         self.ratio_area = self.scale_micrometers**2/self.scale_pixels**2
@@ -137,3 +136,27 @@ class IAM:
             ]
         
         return rows
+
+    
+    def Jeffrie_radius(self):
+        """
+        Retorna o raio (ampliado) em pixels correspondente a circunferencia de 
+        5000mm^2 (área ampliada) adotada pelo procedimento de Jeffries.
+        
+            r = sqrt(5000/pi) 
+              = 39.89422804014327(mm)
+        onde r é um valor ampliado
+        
+        r_real = 39.89422804014327/M, onde M = ampliação
+                                             
+        valor ampliado (um): val_Magnif_um = 39.89422804014327(mm)
+                                           = 0.03989422804014327(um)
+        valor real: val_Real_um  = val_Magnif_um / M
+        """
+        
+        M = self.Magnification
+        px_per_um__ratio = self.pixels_per_um_ratio
+        val_Magnif_um = 3.989422804014327e-2
+        
+        val_Magnif_px = px_per_um__ratio * M**2 * val_Magnif_um
+        return val_Magnif_px
