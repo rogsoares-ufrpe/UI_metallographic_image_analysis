@@ -156,7 +156,45 @@ class IAM:
         
         M = self.Magnification
         px_per_um__ratio = self.pixels_per_um_ratio
-        val_Magnif_um = 3.989422804014327e-2
-        
+        val_Magnif_um = 3.989422804014327e-2        
         val_Magnif_px = px_per_um__ratio * M**2 * val_Magnif_um
         return val_Magnif_px
+    
+    
+    def Abrams_radius(self):
+        """
+        Circles are: Circumference, mm, Diameter, mm
+                        250.0           79.58
+                        166.7           53.05
+                         83.3           26.53
+                         
+        Retorna o raio (ampliado) em pixels correspondente as circunferencias de 
+        diametros 79.58mm, 53.05mm e 26.53mm.
+        
+        Valores ampliados:
+        r = [39.79mm, 26.525mm, 13,265mm]
+        
+        Valores reais
+        r_real_mm = [39.79mm, 26.525mm, 13,265mm]/M, onde M = ampliação
+        """
+        
+        M = self.Magnification
+        px_per_um__ratio = self.pixels_per_um_ratio
+        val_Magnif_um = np.array([39.79, 26.525, 13.265])*1e-3
+        val_Magnif_px = px_per_um__ratio * M**2 * val_Magnif_um
+        return val_Magnif_px
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

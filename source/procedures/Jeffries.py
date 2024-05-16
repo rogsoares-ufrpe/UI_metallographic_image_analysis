@@ -10,14 +10,8 @@ UNIDADE ACADÊMICA DO CABO DE SANTO AGOSTINHO - UACSA
 Created on Fri Apr 17 21:39:12 2020
 """
 
-import numpy as np
-import cv2
 
-import sys
-sys.path.append('../source')
-import geometry as geo
-
-def jeffries_procedure(circunference, grains_area, grains_contours):
+def procedure(image_analyzer, cmanager, canvas, ps):
     """
     Planimetric Procedure—The planimetric method involves an actual count
     of the number of grains within a known area. The number of  grains per
@@ -30,9 +24,11 @@ def jeffries_procedure(circunference, grains_area, grains_contours):
     Determining Average Grain Size
     """
     
-    intcpd_area = []
+    width, height = image_analyzer.get_image_dimensions()
+    radius = image_analyzer.image_prop.Jeffrie_radius()        
+    circunference = [radius, ((int(width/2), int(height/2)))]
+    
     intcpd_contours = []
-    inside_area = []    
     inside_contours = []
     
     # First of all, inscribe a circle (or rectangle) of known area 
@@ -40,78 +36,61 @@ def jeffries_procedure(circunference, grains_area, grains_contours):
     radius = circunference[0]
     center = circunference[1]       # center coordinates
     
-    # check = np.array([False, False, False, False])
-    
     
     # Loop over all grains and find:
         # 1. the intercepted by the circunference
         # 2. grains inside inside the circunference        
-    for area, cnt in zip(grains_area, grains_contours):
+    for cnt in image_analyzer.grains_contours:
 
         # STEP 1: Highlight grains contours intercepted by the cicle
-        ret = geo.circunference_contour_test(cnt, center, radius)
-        # print('ret = ', ret)
-        
+        ret = ps.circunference_contour_test(cnt, center, radius)
         
         if ret==-1:
             continue
         
         if ret==0:
-            # over line circunference
-            # color = geo.blue
-            intcpd_area.append(area)
             intcpd_contours.append(cnt)
         else:
-            inside_area.append(area)
             inside_contours.append(cnt)
     
-    # print('Procedimento de Jeffries:')
-    # print('Graos interceptados: ', len(intcpd_area))
-    # print('Graos internos: ', len(inside_area))
-    
-    return intcpd_area, inside_area, intcpd_contours, inside_contours
-    
-def draw_Jeffries_grains(intercepted_grains_list, inside_grains_list, image_cv):
-    """After the intercepted and inside grains have been detected, fill them with colors."""
-    
-    yellow = (0, 255, 255)
-    for i in range(len(intercepted_grains_list)):
-        cv2.drawContours(image_cv, 
-                         [intercepted_grains_list[i]], 
-                         -1, 
-                         yellow, 
-                         thickness = cv2.FILLED)
-    cian =  (255, 255, 0)    
-    for i in range(len(inside_grains_list)):
-        cv2.drawContours(image_cv, 
-                         [inside_grains_list[i]], 
-                         -1, 
-                         cian, 
-                         thickness = cv2.FILLED)
-    
-    # image_analyzer.set_image_for_canvas(image_analyzer.image_cv)
-    # window.Canvas1.create_image(55, 55, image=image_analyzer.image_canvas, anchor=tk.NW)
-    # geo.draw_circle2(circunference, window)
 
-def get_grain_size_related_parameters(N_inside, N_intercepted, M):
-    """
-    N_inside      - Number of grains inside circunferene
-    N_intercepted - NUmber of grains intercepted by circunference
+    num_intcp = len(intcpd_contours)
+    num_inside = len(inside_contours)
     
-    Returns:
-        Na      - number of grains per mm2
-        A_mean  - mean grain area
-        d       - mean grain diamenter
-        G       - ASTM grain size number
-    """
+    colors = image_analyzer.colors
+    image_analyzer.draw_contours(contours=inside_contours, contour_color=colors.black, area_color = colors.magenta_light)        
+    image_analyzer.draw_contours(contours=intcpd_contours, contour_color=colors.black, area_color = colors.green_light)
+    cmanager.update(image_analyzer)
+    
+    # calculate grain size number
+    G = ps.get_G_number("Jeffries", num_intcp, N_inside=num_inside)
+    print("Grain size number: %f  (Jeffries procedure)" % G)
+    
+    # draw circunference only after canvas update or it will overlap the circunference       
+    ps.draw_circunference(canvas, circunference)
+    
+    return inside_contours+intcpd_contours
+    
 
-    f = 0.0002*M                            # Jeffries multiplier
-    Na = f*(N_inside + 0.5*N_intercepted)    # Number of grains per square millimetre
-    A_mean = 1/Na
-    d_mean = np.sqrt(A_mean)
-    G = 3.321928*np.log10(Na) - 2.954
+# def get_grain_size_related_parameters(N_inside, N_intercepted, M):
+#     """
+#     N_inside      - Number of grains inside circunferene
+#     N_intercepted - NUmber of grains intercepted by circunference
     
-    return Na, A_mean, d_mean, G
+#     Returns:
+#         Na      - number of grains per mm2
+#         A_mean  - mean grain area
+#         d       - mean grain diamenter
+#         G       - ASTM grain size number
+#     """
+
+#     f = 0.0002*M                            # Jeffries multiplier
+#     Na = f*(N_inside + 0.5*N_intercepted)    # Number of grains per square millimetre
+#     A_mean = 1/Na
+#     d_mean = np.sqrt(A_mean)
+#     G = 3.321928*np.log10(Na) - 2.954
+    
+#     return Na, A_mean, d_mean, G
     
 
 # def run_jeffries_analysis(image_analyzer, window, image_prop):
@@ -160,7 +139,7 @@ def get_grain_size_related_parameters(N_inside, N_intercepted, M):
 #         # print(G)
 #         G_arr[i] = G
 
-#         geo.draw_circle((x,y), R, window)
+#         ps.draw_circle((x,y), R, window)
 #         in_list.clear()
 #         inter_list.clear()
         

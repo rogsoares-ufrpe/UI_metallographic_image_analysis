@@ -9,166 +9,85 @@ UNIDADE ACADÊMICA DO CABO DE SANTO AGOSTINHO - UACSA
     
 Created on Fri Apr 17 21:50:27 2020
 """
-
-from tkinter import messagebox as msgbox
-import tkinter as tk
 import cv2
-import geometry as geo
 
-
-def heyns_procedure(grains_area, grains_contours, width, height, line_length, 
-                    num_lines=1):
+def procedure(image_analyzer, child_procedure, cmanager, canvas, ps):
     """
     Estimate the average grain size by counting (on the ground-glass screen, on
     a photomicrograph of a representative field of the specimen, a monitor or on
     the specimen itself) the number of grains intercepted by one or more straight
     lines sufficiently long to yield at least 50 intercepts.
     """
-
     
-    # List of grains intercepted
-    intercepted_cnt = []
+    # check entry box for length. It is initialized with 0um
+    # micrometer -> milimeter
+    line_length = float(child_procedure.LineLength.get())
+    num_lines = int(child_procedure.NumLinesHeyns.get())
+    
+    linelength_px = image_analyzer.image_prop.um_to_px(line_length)
     
     # Draw horizontal lines over image
-    h = 0
-    delta_h = int(height/(num_lines+1))
-    x0 = int(0.5*(width - line_length))
-    x1 = int(0.5*(width + line_length))  
+    width, height = image_analyzer.get_image_dimensions()
     
+    delta_h = int(height/(num_lines+1))
+    x_left = int(0.5*(width - linelength_px))
+    x_right = int(0.5*(width + linelength_px))  
+    
+    h = 0
     full_intercpt = []
     half_intercpt = []
+   
+    # k=0
+    # stop = False
     for i in range(num_lines):
         h = h + delta_h
         
-        # grains_counter = 0
-        # for each line, check which grains are intercepted by it highlight them
-        # Loop over all grains and find: inetrcepted and inside circle
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        for area, cnt in zip(grains_area, grains_contours):
+        for cnt in image_analyzer.grains_contours:
+            x_box, y_box, w_box, h_box = cv2.boundingRect(cnt)
+            x, y, w, hl = cv2.boundingRect(cnt)
             
-            leftmost = tuple(cnt[cnt[:,:,0].argmin()][0])
-            rightmost = tuple(cnt[cnt[:,:,0].argmax()][0])
-            bottommost = tuple(cnt[cnt[:,:,1].argmin()][0])
-            topmost = tuple(cnt[cnt[:,:,1].argmax()][0])
-           
+            # k += 1
+            # if k==369 and not stop:
+            #     bbox.append( (x,y,w,hl) )
+            #     stop=True
             
-           # Check if grain is completely intercepted by horizontal line
-            check1 = bottommost[1] <= h <= topmost[1]
-            check2 = x1 >= rightmost[0]
-            check3 = x0 <= leftmost[0]
-            if check1 and check2  and check3:
-                full_intercpt.append(cnt)
-            # The leftmost/right end of straight test lines lies inside grains
-            elif check1 and leftmost[0] < x0 < rightmost[0] or check1 and leftmost[0] < x1 < rightmost[0]:
-                # # check if grain contour is really intercepted by line
-                if cv2.pointPolygonTest(cnt,(x0,h),False) > 0 or cv2.pointPolygonTest(cnt,(x1,h),False) > 0:
-                    half_intercpt.append(cnt)
-                else:
-                    continue
-            else:
-                continue
-               
-            
-    return full_intercpt, half_intercpt
-
-    
-def procedure(width, height, image_analyzer, window):
-    # print("Heyn_linear_Intercept(width, height, image_analyzer, gs_procedure, window):")
-    nlines = int(window.Spinbox_number_lines.get())
-    
-    ll = float(window.Entry_line_length.get()) # get line legth
-    line_length = int(2.83464566929133*ll)     # convert line length to pixels
-    
-    
-    if line_length > width:
-        msgbox.showerror("Invalid Value", "Line length value must be less than image width.")
-    else:        
-        # print("Number of lines: %d\nLength: %d mm" % (nlines, convert_pixel_to_mm(line_length)))
-        image_analyzer.find_grains()
-        image_analyzer.image_cv, intercepted_list = Heyn(image_analyzer.image_cv, image_analyzer.grains_contours, image_analyzer.grains_area, width, height, nlines, line_length)
-        image_analyzer.set_image_for_canvas(image_analyzer.image_cv)
-        window.Canvas1.create_image(55, 55, image=image_analyzer.image_canvas, anchor=tk.NW)
-        start_points, end_points = create_horizontal_lines(width, height, nlines, line_length)
-        geo.draw_intercepting_lines(start_points, end_points, window)
-        return intercepted_list
-        
-        
-def Heyn(image_cv, grains_contours, grains_area, width, height, nlines, line_length):
-        """
-        Intercept Procedure —The intercept method involves an actual count of the number of grains intercepted
-        by a test line or the number of grain boundary intersections with a test line, per unit length of test
-        line, used to calculate the mean lineal intercept length, ℓ¯. ℓ¯ is used to determine the ASTM grain 
-        size number, G.
-        """
-        
-        yellow = (0, 255, 255)
-        blue = (255, 0, 0)
-        black = (0, 0, 0)
-        color = [black, blue, yellow]
-        
-        # List of grains intercepted
-        intercepted_list = []
-        
-        # Draw horizontal lines over image
-        h = 0
-        delta_h = int(height/(nlines+1))
-        x0 = int(0.5*(width - line_length))
-        x1 = int(0.5*(width + line_length))
-        j=0
-        for i in range(nlines):
-            h = h + delta_h
-            
-            grains_counter = 0
-            # for each line, check which grains are intercepted by it highlight them
-            # Loop over all grains and find: inetrcepted and inside circle
-            # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            for area, cnt in zip(grains_area, grains_contours):
+            # Grão na linha de ação da interceptação
+            if y_box < h < y_box+h_box:
                 
-                leftmost = tuple(cnt[cnt[:,:,0].argmin()][0])
-                rightmost = tuple(cnt[cnt[:,:,0].argmax()][0])
-                bottommost = tuple(cnt[cnt[:,:,1].argmin()][0])
-                topmost = tuple(cnt[cnt[:,:,1].argmax()][0])
-               
-                
-               # Check if grain is completely intercepted by horizontal line
-                check1 = bottommost[1] <= h <= topmost[1]
-                check2 = x1 >= rightmost[0]
-                check3 = x0 <= leftmost[0]
-                if check1 and check2  and check3:
-                    j = 2                
-                # The leftmost/right end of straight test lines lies inside grains
-                elif check1 and leftmost[0] < x0 < rightmost[0] or check1 and leftmost[0] < x1 < rightmost[0]:
-                    # # check if grain contour is really intercepted by line
-                    if cv2.pointPolygonTest(cnt,(x0,h),False) > 0:
-                        j = 1
-                    else:
-                        continue
-                else:
-                    continue
+                # Verifique se o grao foi completamente interceptado
+                if x_box >= x_left and x_box+w_box <= x_right:
+                    full_intercpt.append(cnt)
                     
-                grains_counter += 1
-                intercepted_list.append(area)
-                cv2.drawContours(image_cv, [cnt], 0, color[j], thickness=cv2.FILLED)
-                cv2.drawContours(image_cv, [cnt], 0, black, thickness=1)
-            
-        return image_cv, intercepted_list
+                # Verifique se o grão foi parcialmente interceptado
+                # Não permita que mais de um grão seja considerado 1/2
+                # interceptado pela ponta da mesma reta tanto a esquerda quando
+                # a direita
+                
+                #                        -1: fora
+                # cv2.pointPolygonTest =  0: em cima
+                #                         1: dentro
+                
+                if x_box < x_left < x_box+w_box:
+                    if cv2.pointPolygonTest(cnt, (x_left,h), False) >= 0:
+                        half_intercpt.append(cnt)
+                    
+                if x_box < x_right < x_box+w_box:
+                    if cv2.pointPolygonTest(cnt, (x_right,h), False) >= 0:
+                        half_intercpt.append(cnt)
+   
+    colors = image_analyzer.colors
+    image_analyzer.draw_contours(contours=full_intercpt, contour_color=colors.black, area_color = colors.magenta_light)
+    image_analyzer.draw_contours(contours=half_intercpt, contour_color=colors.black, area_color = colors.green_light)
     
-    
-def create_horizontal_lines(width, height, nlines, line_length):
-    h = 0
-    delta_h = int(height/(nlines+1))
+    # update canvas
+    cmanager.update(image_analyzer)
 
-    start_points = []
-    end_points = []
+    ps.draw_lines(canvas, width, height, linelength_px, nlines=num_lines)
+
+    # calculate grain size number
+    num_intcp = .5*len(half_intercpt) + len(full_intercpt)
+    G = ps.get_G_number("Heyns", num_intcp, length=0.001*line_length*num_lines)
+    print("Grain size number: %f  (Heyns procedure)" % G)
     
-    x0 = int(0.5*(width - line_length)) + 55
-    x1 = x0 + line_length
-    
-    for i in range(nlines):
-        h = h + delta_h
-        y0 = h + 55
-        y1 = y0
-        start_points.append((x0,y0))
-        end_points.append((x1,y1))
-        
-    return start_points, end_points
+    return full_intercpt+half_intercpt
+

@@ -1,9 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO - UFRPE
+UNIDADE ACADÊMICA DO CABO DE SANTO AGOSTINHO - UACSA
+
+@author(s):
+    Rogério Soares (rogerio.soaress@ufrpe.br)
+    
+Created on Sun Apr 19 12:14:33 2020
+"""
+
 import numpy as np
 import cv2
 from PIL import Image
 from PIL import ImageTk
-# from tkinter import messagebox as msgbox
-# import h5py
 import os
 
 import ImageAnalysisManager as iam
@@ -21,8 +30,13 @@ class Colors:
         self.white = (255, 255, 255)
         self.cian =  (255, 255, 0)
         self.blue = (255, 0, 0)
+        
         self.magenta = (255, 0, 255)
         self.magenta_light = (255, 200, 255)
+        self.magenta_light1 = (255, 150, 255)
+        self.magenta_light2 = (255, 180, 255)
+        self.magenta_light3 = (255, 220, 255)
+        
         self.green = (0, 255, 0)
         self.green_light = (200, 255, 100)
         self.black = (0, 0, 0)
@@ -332,7 +346,7 @@ class MEDIA:
         cv2.rectangle(self.image_cv,(x,y),(x+w,y+h), self.colors.cian,1)
         
         # Desenha caixa de fundo (Ponto incial da caica: 30 pixels a direita da quina Leste para o mesmo y)
-        cv2.rectangle(self.image_cv,      (x+w+15,y-4), (x+w+65, y+18), self.colors.cian, -1)
+        cv2.rectangle(self.image_cv,(x+w+15,y-4), (x+w+65, y+18), self.colors.cian, -1)
         
         # Desenha texto sobre caixa
         text = "Max" # (tag:" + str(self.tag_max) + ")"

@@ -1,12 +1,3 @@
-
-# from tkinter import *
-# import tkinter as tk
-# from tkinter.ttk import *
-# from PIL import ImageTk, Image
-# import cv2
-# import scale_entry_window as sew
-
-
 class SWD: 
     """ SWD: sacle Window Dialog"""
     def __init__(self, root, canvas): 

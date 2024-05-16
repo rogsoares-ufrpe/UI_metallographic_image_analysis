@@ -5,6 +5,16 @@
 #  in conjunction with Tcl version 8.6
 #    Oct 18, 2023 04:33:30 PM -03  platform: Windows NT
 
+# -*- coding: utf-8 -*-
+"""
+UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO - UFRPE
+UNIDADE ACADÊMICA DO CABO DE SANTO AGOSTINHO - UACSA
+
+@author(s):
+    Rogério Soares (rogerio.soaress@ufrpe.br)
+    
+Created on Sun Apr 19 12:14:33 2020
+"""
 
 import inspect
 import os
@@ -27,12 +37,10 @@ import gui_main_2
 import canvas_manager as canvasmanager
 import media
 import ScaleWinDialog as swd
+import cv2
 
 import sys
 sys.path.append('procedures')
-from Jeffries import jeffries_procedure
-from Heyns import heyns_procedure
-import procedures_support as ps
 
 
 _debug = True # False to eliminate debug printing from callback functions.
@@ -50,24 +58,14 @@ def main(*args):
     global _top1, MainWindow
     _top1 = root
     MainWindow = gui_main_2.Toplevel_MainWindow(_top1)
+    MainWindow.top.geometry("1290x690")
     
     global image_analyzer
     image_analyzer = media.MEDIA()    # object for Metallographic Image Analysis class
     
     global cmanager
-    cmanager = canvasmanager.CanvasManager(MainWindow.MainCanvas)  
-    
+    cmanager = canvasmanager.CanvasManager(MainWindow.MainCanvas)
     root.mainloop()
-    
-    # h = MainWindow.CanvasHistogram.winfo_height()
-    
-# def callback_movement(event):
-#     """Captura as coordenadas do cursor sobre a tela de canvas"""
-    
-#     x = (event.x-55)/image_analyzer.image_prop.ratio
-#     y = (event.y-55)/image_analyzer.image_prop.ratio
-#     str = "x = {:.2f}, y = {:.2f}".format(x,y)    
-#     MainWindow.Label_coords.config(text=str)
     
         
 def open_segmentation_panel():
@@ -80,7 +78,7 @@ def open_segmentation_panel():
     child.edge_detection_var.set("Canny")
     child.meanSTD_var.set("1")
     child.rb_filter.set(1)
-    child.drawcnt_var.set(1)
+    child.drawcnt_var.set(1)     
     
 
 def open_procedure_panel():
@@ -95,88 +93,67 @@ def open_procedure_panel():
     child_procedure = gui_main_2.TopLevel_MeasuringProcedure(child_root_procedure)
     child_root_procedure.attributes('-topmost',True)
     
-    child_procedure.LineLength.insert(0, "0 um")
-    child_procedure.NumLinesHeyns.insert(0,"1 line")
-    child_procedure.CircunferenceJeffriesArea.insert(0,"5000 mm^2")
-    child_procedure.RB_procedure.set(1)
     
+    child_procedure.LineLength.insert(0, "400")
+    child_procedure.NumLinesHeyns.insert(0,"1")
+    child_procedure.CircunferenceJeffriesArea.insert(0,"5000")
+    child_procedure.RB_procedure.set(1)
+    child_procedure.HilliardCircunferenceDiameterEntry.insert(0,"400")
+    # child_procedure.AbramsNumberInterceptsEntry.insert(0,"500")
+    
+
+import Jeffries, Heyns, Hilliard, Abrams
+import procedures_support as ps
+
 def apply_procedure_button():
+    # procedures.apply(MainWindow, root, child_procedure, cmanager, image_analyzer) 
     """Apply ASTM procedure choose by user"""
     
+    print("Apply ASTM procedure choose by user")
+    
     var = int(child_procedure.RB_procedure.get())
-    procedures = ["Jeffries", "Heyns"]
-    print("Procedure: ", procedures[var-1])
+    procedures = ["None", "Jeffries", "Heyns", "Hilliard", "Abrams"]
+    print("Procedure: ", procedures[var])
     
-    canvas = MainWindow.MainCanvas
-    colors = image_analyzer.colors
-    width, height = image_analyzer.get_image_dimensions()
-    
-    
-    print("Por aqui passa: 01")
+    canvas = MainWindow.MainCanvas    
     image_analyzer.image_cv = None
     image_analyzer.image_cv = image_analyzer.image_original.copy()
-    print("Por aqui passa: 02")
     
-    if procedures[var-1]=="Jeffries":
-        radius = image_analyzer.image_prop.Jeffrie_radius()        
-        circunference = [radius, ((int(width/2), int(height/2)))]
-        
-        
-        intcpd_area, inside_area, intcpd_contours, inside_contours = jeffries_procedure(circunference, 
-                                                                                        image_analyzer.grains_area, 
-                                                                                        image_analyzer.grains_contours)
-        num_intcp = len(intcpd_contours)
-        num_inside = len(inside_contours)
-        
-        
-        if len(intcpd_area)==0:
-            showerror("Planimetric Jeffries procedure error", "No intercepted grains found")
-        if len(inside_area)==0:
-            showerror("Planimetric Jeffries procedure error", "No inside grains found")        
-        
-        image_analyzer.draw_contours(contours=inside_contours, contour_color=colors.black, area_color = colors.magenta_light)        
-        image_analyzer.draw_contours(contours=intcpd_contours, contour_color=colors.black, area_color = colors.green_light)
-        cmanager.update(image_analyzer)
-        
-        # calculate grain size number
-        G = ps.get_G_number("Jeffries", num_intcp, N_inside=num_inside)
-        print("Grain size number: %f  (Jeffries procedure)" % G)
-        
-        # draw circunference only after canvas update or it will overlap the circunference       
-        ps.draw_circunference(canvas, circunference)   
-    elif procedures[var-1] =="Heyns":
-        
-        # take the image width to lines length
-        # line_length = width
-        
-        # check entry box for length. It is initialized with 0um
-        # micrometer -> milimeter
-        line_length = float(child_procedure.LineLength.get())
-        var_nlines = int(child_procedure.NumLinesHeyns.get())
-        
-        linelength_px = image_analyzer.image_prop.um_to_px(line_length)
-        full_intercpt, half_intercpt = heyns_procedure(image_analyzer.grains_area, 
-                                          image_analyzer.grains_contours, 
-                                          width, height, linelength_px, num_lines=var_nlines)
-        
-        num_intcp = len(full_intercpt) + 0.5*len(half_intercpt)
-        print("len(full_intercpt) = ",len(full_intercpt))
-        print("len(half_intercpt) = ",len(half_intercpt))
-        print("num_intcp = ",num_intcp)
-        
-        image_analyzer.draw_contours(contours=full_intercpt, contour_color=colors.black, area_color = colors.magenta_light)
-        image_analyzer.draw_contours(contours=half_intercpt, contour_color=colors.black, area_color = colors.green_light)
-        # update canvas
-        cmanager.update(image_analyzer)        
-        ps.draw_lines(canvas, width, height, linelength_px, nlines=var_nlines)
-      
-        # calculate grain size number
-        G = ps.get_G_number("Heyns", num_intcp, length=0.001*line_length*var_nlines)
-        print("Grain size number: %f  (Heyns procedure)" % G)
-    else:
-        showerror("Error", "Only Jeffries and Heyn procedures are available.")
-        
+    grains_contours = []
     
+    if procedures[var] == "Jeffries":
+       grains_contours = Jeffries.procedure(image_analyzer, cmanager, canvas, ps)
+       
+    elif procedures[var] == "Heyns":
+        grains_contours = Heyns.procedure(image_analyzer, child_procedure, cmanager, canvas, ps)
+        
+    elif procedures[var] == "Hilliard":
+        grains_contours = Hilliard.procedure(MainWindow, child_procedure, image_analyzer, cmanager, ps)
+    
+    elif procedures[var] == "Abrams":
+        grains_contours = Abrams.procedure(image_analyzer, cmanager, canvas, ps)
+    
+    draw_bbox = False
+    number_grains = False   
+    
+    if child_procedure.boundbox_var.get()==1:
+        draw_bbox = True
+        
+    if child_procedure.numbergrains_var.get()==1:
+        number_grains = True
+        
+    if draw_bbox:
+        for cnt in grains_contours:
+            x, y, w, h = cv2.boundingRect(cnt)
+            canvas.create_rectangle((x+55,y+55),(x+w+55,y+h+55), outline="yellow", width=1)
+            
+    if number_grains:
+        for counter, cnt in enumerate(grains_contours):
+            counter += 1
+            x, y, w, h = cv2.boundingRect(cnt)
+            canvas.create_text((int(x+w/2)+55, int(y+h/2)+55), text=str(counter+1))
+            
+
 
 
 def print_message_on_TextBoard(msg):
@@ -313,19 +290,6 @@ def display_options():
         
     if child.minmax_var.get()==1:
         image_analyzer.draw_minmax_grains_area()
-        
-        
-def select_measuring_procedure():
-    """Defines which of the ASTM procedures to use"""
-    var = child.rb_procedure_var.get()
-    if var==1:
-        print("Jeffries")
-    elif var==2:
-        print("Heyn")
-    elif var==3:
-        print("Hilliard")
-    elif var==4:
-        print("Abram")
 
 
 def close_application(): 
@@ -458,10 +422,8 @@ def plot():
     Plots on canvas the histogram of grains areas
     """
 
-    x = image_analyzer.grains_area
-    
-    num_bins = 42
-    
+    x = image_analyzer.grains_area    
+    num_bins = 42    
     fig, ax = plt.subplots(figsize=(6.9, 4.6))
     
     # the histogram of the data
@@ -470,13 +432,11 @@ def plot():
     ax.set_xlabel('Value')
     ax.set_ylabel('Probability density')
     ax.set_title('Histogram of grains areas')   
-    plt.savefig("hist.png", bbox_inches='tight')
-    
+    plt.savefig("hist.png", bbox_inches='tight')    
     
     one = ImageTk.PhotoImage(Image.open("hist.png"))
     root.one = one
-    MainWindow.CanvasHistogram.create_image(0,0,image=one, anchor=tk.NW)
-    
+    MainWindow.CanvasHistogram.create_image(0,0,image=one, anchor=tk.NW)   
   
 
 def exporttoxlxs():
@@ -484,8 +444,7 @@ def exporttoxlxs():
     Description:
         
         Export the last data analysis to a .xlxs file.
-    """
-    
+    """   
     filename = filedialog.asksaveasfilename(initialfile = 'Untitled.xlsx',
                                             defaultextension=".xlsx",
                                             filetypes=[("Excel file","*.xlsx")])
@@ -549,7 +508,4 @@ def CHKMSG(msg):
     
 if __name__ == '__main__':
     gui_main_2.start_up()
-
-
-
 
